@@ -1,0 +1,58 @@
+<div class="container jumbotron">
+  <form #registerForm="ngForm" name="form" (ngSubmit)="registerForm.form.valid && registerUser(registerForm)" novalidate>
+    <div class="form-group row">
+        <label for="registerAmka" class="col-sm-2 col-form-label" required >AMKA</label>
+        <input name="registerAmka" type="text" class="form-control" #registerAmka= "ngModel" 
+        [ngClass]="{'is-invalid': registerForm.submitted && registerAmka.invalid}" required ngModel>
+        <div class="invalid-feedback">Το ΑΜΚΑ είναι υποχρεώτικο</div>  
+    </div>
+    <div class="form-group row">
+        <label for="registerfname" class="col-sm-2 col-form-label">Όνομα</label>
+        <input name = "registerfName" type="text" class="form-control"  #registerfName= "ngModel" 
+        [ngClass]="{'is-invalid': registerForm.submitted && registerfName.invalid}" required ngModel>
+        <div class="invalid-feedback">Το όνομα είναι υποχρεώτικο</div>  
+    </div>
+    <div class="form-group row">
+        <label for="registerlName" class="col-sm-2 col-form-label">Επίθετο</label>
+        <input name="registerlName" type="text" class="form-control" #registerlName="ngModel"
+        [ngClass]="{'is-invalid': registerForm.submitted && registerlName.invalid}" required ngModel>
+        <div class="invalid-feedback">Το επίθετο είναι υποχρεώτικο</div>
+    </div>
+    <div class="form-group row">
+        <label for="registerEmail" name = "registerEmail" class="col-sm-2 col-form-label">Email</label>
+        <input name="registerEmail" type="text" class="form-control" #registerEmail="ngModel" 
+        [ngClass]="{'is-invalid': registerForm.submitted && registerEmail.invalid}" required email ngModel>
+        <div *ngIf="registerForm.submitted && registerEmail.invalid" class="invalid-feedback">
+            <div *ngIf="registerEmail.errors.required">Το email είναι υποχρεώτικο</div>
+            <div *ngIf="registerEmail.errors.email">Πρέπει να έχει μορφή email</div>
+        </div>
+    </div>  
+    <div class="form-group row">
+        <label for="registerUsername" class="col-sm-2 col-form-label">Username</label>
+        <input name="registerUsername" type="text" class="form-control" #registerUsername="ngModel" 
+        [ngClass]="{'is-invalid': registerForm.submitted && registerUsername.invalid}" required ngModel>
+        <div class="invalid-feedback">Το username είναι υποχρεώτικο</div>  
+    </div>
+    <div class="form-group row">
+        <label for="registerPassword" class="col-sm-2 col-form-label">Password</label>
+        <input name="registerPassword" type="password" class="form-control" #registerPassword="ngModel" 
+        [ngClass]="{'is-invalid': registerForm.submitted && registerPassword.invalid }" required minlength="7" ngModel>
+        <div *ngIf="registerForm.submitted && registerPassword.invalid" class="invalid-feedback">
+            <div *ngIf="registerPassword.errors.required">Το password είναι υποχρεώτικο</div>
+            <div *ngIf="registerPassword.errors.minlength">Το password πρέπει να έχει τουλάχιστον 7 χαρακτήρες</div>
+        </div> 
+    </div>
+    <div class="form-group row">
+        <label for="registerPhone" class="col-sm-2 col-form-label">Κινητό τηλέφωνο</label>
+        <input name="registerPhone" type="text" class="form-control" #registerPhone="ngModel" 
+        [ngClass]="{'is-invalid': registerForm.submitted && registerPhone.invalid}" pattern="[0-9]*" minlength="7" required ngModel>
+        <div *ngIf="registerForm.submitted && registerPhone.invalid" class="invalid-feedback">
+            <div *ngIf="registerPhone.errors.required">Το τηλέφωνο είναι υποχρεώτικο</div>
+            <div *ngIf="registerPhone.errors.minlength">Το τηλέφωνο πρέπει να έχει τουλάχιστον 7 χαρακτήρες</div>
+            <div *ngIf="registerPhone.errors.pattern">Το τηλέφωνο πρέπει να έχει μόνο αριθμούς</div>
+        </div> 
+      </div>
+      <button id="submit" type="submit" class="btn btn-primary" >Submit</button>
+    </form>
+    <a [routerLink]="['/home']" class="btn btn-link">Cancel</a>
+</div>

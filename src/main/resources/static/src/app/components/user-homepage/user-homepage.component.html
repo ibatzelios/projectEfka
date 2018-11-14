@@ -1,0 +1,168 @@
+<nav class="navbar navbar-dark bg-info container-fluid">
+  <div class="row container-fluid">
+      <div class="col-sm-7 ">
+        <a class="navbar-brand">
+            <img src="../../../assets/images/efka_logo.jpg" width="200" height="90" alt="">
+        </a>
+      </div>
+      <div class="col-sm-3 ">
+        <span id="navtext" class="navbar-text">
+            Welcome to EFKA , Mr Premtsis
+        </span>
+      </div>
+      <div class="col-sm-2 ">
+        <span><button id="navbtn" type="submit" class="btn btn-info" (click)="logout()">Logout</button>
+        </span> 
+      </div>
+  </div> 
+</nav>
+<div class="container">
+   <img id="bodyimg" src="../../../assets/images/cover.jpg" class="img-fluid">
+</div>
+<div class="row container-fluid">
+    <div class="col-md-4 add">
+           <img id="icons" src="../../../assets/images/add.svg" class="img-fluid">
+           <br>
+           <button class="btn btn-info btn-lg" (click)="openModal(addAppointmentModal)">New Appointment</button>
+    </div>
+    <div class="col-md-4 search">
+           <img id="icons" src="../../../assets/images/search_icon.svg" class="img-fluid">
+           <br>
+           <button class="btn btn-info btn-lg" (click)="openModal(searchAppointmentModal)">My Appointments</button>
+    </div>
+    <div class="col-md-4 edit">
+           <img id="icons" src="../../../assets/images/settings_icon.svg" class="img-fluid">
+           <br>
+           <button class="btn btn-info btn-lg">Edit Appointments</button>
+    </div>
+</div>
+<!-- ----------------------------------------------------NEW APPOINTMENT MODAL----------------------------------------------------- -->
+<ng-template #addAppointmentModal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="registerModalLabel">New Appointment</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+   <form #newAppointmentForm="ngForm" name="form" (ngSubmit)="newAppointmentForm.form.valid && newAppointment(newAppointmentForm)" novalidate> 
+        <div class="form-group">
+            <label for="doctorSpecialty">
+                Doctor's Specialty
+            </label>
+            <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" (change)="selectedDoctorSpecialty($event)" #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorSpecialty.invalid}" ngModel required>
+                <option *ngFor="let spe of docSpecialty">{{spe.name}}</option>
+            </select>
+            <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+        </div>
+        <div class="form-group">
+            <label for="doctorName">
+                Doctor's Name
+            </label>
+            <select class="form-control" id="doctorName" name="doctorName" #doctorName="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorName.invalid}" ngModel required>
+                <option *ngFor="let doc of docName">{{doc.name}}</option>
+            </select>
+            <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+        </div>
+        <div class="form-group">
+            <label for="appointmentDate">
+                Appointment Date
+            </label>
+            <input class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig" name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentDate.invalid}" ngModel required/>
+            <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+        </div>
+
+        <div class="form-group">
+            <label for="appointmentTime">
+                Appointment Time
+            </label>
+            <timepicker id="appointmentTime" name="appointmentTime" #appointmentTime="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentTime.invalid}" ngModel required></timepicker>
+            <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+        </div>
+        <div class="form-group">
+          <label for="description">Short Description of Illness</label>
+          <textarea class="form-control" rows="5" id="description" name="description" #description="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && description.invalid}" ngModel required></textarea>
+          <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+        </div>
+        <div class="form-group">
+          <label for="remarks">Other Remarks</label>
+          <textarea class="form-control" rows="5" id="remarks" name="remarks" ngModel></textarea>
+        </div>
+        <button id="submit" type="submit" class="btn btn-primary" >Submit</button>
+    </form>
+  </div>
+</ng-template>
+<!-- -------------------------------------------------------------SEARCH APPOINTMENT MODAL------------------------------------------------------------>
+<ng-template #searchAppointmentModal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="registerModalLabel">Search Appointment</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+   <form #searchAppointmentForm="ngForm" name="form" (ngSubmit)="searchAppointmentForm.form.valid && searchAppointment(searchAppointmentForm)" novalidate>
+       <div class="row">
+            <div class="form-group col-md-6">
+                <label for="doctorSpecialty">
+                    Doctor's Specialty
+                </label>
+                <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" (change)="selectedDoctorSpecialty($event)" #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': searchAppointmentForm.submitted && doctorSpecialty.invalid}" ngModel required>
+                    <option *ngFor="let spe of docSpecialty">{{spe.name}}</option>
+                </select>
+                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="appointmentDate">
+                    Appointment Date
+                </label>
+                <input class="form-control" id="appointmentDate" type="text" bsDaterangepicker [bsConfig]="datePickerConfig" name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': searchAppointmentForm.submitted && appointmentDate.invalid}" ngModel required/>
+                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+            </div>
+        </div>
+        <div class="container">
+                <button id="submit" type="submit" class="btn btn-info" >Submit</button>
+        </div>
+    </form>
+    <table class="table table-striped table-responsive">
+  <thead>
+    <tr>
+      <th scope="col">Doctor's Specialty</th>
+      <th scope="col">Doctor's Name</th>
+      <th scope="col">Appointment Date</th>
+      <th scope="col">Appointment Time</th>
+      <th scope="col">Short Description of Illness</th>
+      <th scope="col">Other Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let app of appointments">
+      <td>{{app.docSpe}}</td>
+      <td>{{app.docName}}</td>
+      <td>{{app.appDate}}</td>
+      <td>{{app.appTime}}</td>
+      <td>
+        <ng-template #popContentDescr>{{app.des}}</ng-template>
+        <ng-template #popDescr>Description</ng-template>
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContentDescr" [popoverTitle]="popDescr">
+            Click in..
+        </button>
+      </td>
+      <td>
+      <ng-template #popContentOther>{{app.other}}</ng-template>
+        <ng-template #popOther>Other Remarks</ng-template>
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContentOther" [popoverTitle]="popOther">
+            Click in..
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+        
+  </div>
+</ng-template>
+
+
+
+

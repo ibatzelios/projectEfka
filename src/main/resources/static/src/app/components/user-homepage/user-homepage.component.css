@@ -1,0 +1,28 @@
+
+#navtext{
+	color: white;
+	text-align: right;
+
+}
+#navbtn{
+	text-align: right;
+}
+.navbar-brand{
+	padding: 0;
+	margin: 0;
+}
+.add{
+	text-align: right;
+}
+.search{
+	text-align: center;
+}
+.edit{
+	text-align: left;
+}
+#icons{
+	width: 80px; 
+	height: 80px;
+}
+#submit{
+}
