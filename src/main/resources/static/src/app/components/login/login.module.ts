@@ -13,9 +13,9 @@ import { UserHomepageComponent } from '../user-homepage/user-homepage.component'
     FormsModule,
     RouterModule.forChild([
       {
-	      path: '',
+        path: '',
         component: LoginComponent
-      }  
+      }
     ])
   ],
   declarations: [LoginComponent]

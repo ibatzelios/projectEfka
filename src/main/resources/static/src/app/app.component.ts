@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
-
-import { user } from './models/userModel';
-import { from } from 'rxjs';
 
 
 @Component({
@@ -10,9 +6,9 @@ import { from } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
-  ngOnInit(){
+  ngOnInit() {
     //localStorage.clear();
   }
 }

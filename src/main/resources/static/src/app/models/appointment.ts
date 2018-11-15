@@ -1,4 +1,4 @@
-export class appointment{
+export class appointment {
     doctorSpecialty: string;
     doctorName: string;
     appointmentDate: string;
