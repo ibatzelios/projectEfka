@@ -1,3 +1,4 @@
+<router-outlet name="edit"></router-outlet>
 <nav class="navbar navbar-dark bg-info container-fluid">
     <div class="row container-fluid">
         <div class="col-sm-7 ">
@@ -20,20 +21,20 @@
     <img id="bodyimg" src="../../../assets/images/cover.jpg" class="img-fluid">
 </div>
 <div class="row container-fluid">
-    <div class="col-md-4 add">
+    <div class="col-md-5 add">
         <img id="icons" src="../../../assets/images/add.svg" class="img-fluid">
         <br>
         <button class="btn btn-info btn-lg" (click)="openModal(addAppointmentModal)">New Appointment</button>
     </div>
-    <div class="col-md-4 search">
+    <div class="col-md-2 search">
         <img id="icons" src="../../../assets/images/search_icon.svg" class="img-fluid">
         <br>
         <button class="btn btn-info btn-lg" (click)="openModal(searchAppointmentModal)">My Appointments</button>
     </div>
-    <div class="col-md-4 edit">
+    <div class="col-md-5 edit">
         <img id="icons" src="../../../assets/images/settings_icon.svg" class="img-fluid">
         <br>
-        <button class="btn btn-info btn-lg">Edit Appointments</button>
+        <button [routerLink]="['/userhomepage/edit']" class="btn btn-info btn-lg">Edit Appointments</button>
     </div>
 </div>
 <!-- ----------------------------------------------------NEW APPOINTMENT MODAL----------------------------------------------------- -->
@@ -116,9 +117,9 @@
                     <label for="doctorSpecialty">
                         Doctor's Specialty
                     </label>
-                    <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" (change)="selectedDoctorSpecialty($event)"
-                        #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': searchAppointmentForm.submitted && doctorSpecialty.invalid}"
-                        ngModel required>
+                    <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" #doctorSpecialty="ngModel"
+                        [ngClass]="{'is-invalid': searchAppointmentForm.submitted && doctorSpecialty.invalid}" ngModel
+                        required>
                         <option *ngFor="let spe of docSpecialty">{{spe.name}}</option>
                     </select>
                     <div class="invalid-feedback">Είναι υποχρεωτικό</div>

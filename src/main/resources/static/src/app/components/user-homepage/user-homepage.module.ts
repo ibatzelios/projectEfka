@@ -8,9 +8,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
-
-
 @NgModule({
 	imports: [
 		CommonModule,
@@ -21,8 +18,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 		TimepickerModule.forRoot(),
 		RouterModule.forChild([{
 			path: '',
-			component: UserHomepageComponent
-		}])
+			component: UserHomepageComponent,
+		}
+		])
 	],
 	declarations: [
 		UserHomepageComponent

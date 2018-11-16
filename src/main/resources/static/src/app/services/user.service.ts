@@ -1,89 +1,91 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
 import { user } from '../models/userModel';
 import { loginModel } from '../models/loginModel';
 import { appointment } from '../models/appointment';
-import { Observable } from 'rxjs';
-import { catchError } from "../../../node_modules/rxjs/operators";
+import { Observable, throwError } from 'rxjs';
+import { catchError } from '../../../node_modules/rxjs/operators';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl: string = 'http://localhost:8080';
+  private baseUrl = environment.apiUrl;
+  private headers = new HttpHeaders({ 'Content-type': 'application/json' });
   constructor(private http: HttpClient) { }
 
+  private handleError(errorResponce: HttpErrorResponse) {
+    if (errorResponce.error instanceof ErrorEvent) {
+      console.log('Client Side Error: ', errorResponce);
+    } else {
+      console.log('Server Side Error: ', errorResponce);
+    }
+    return throwError('Something went wrong !!');
+  }
   login(loginData: loginModel) {
-    localStorage.setItem('token', 'true');
-    let headers = new HttpHeaders();
-    headers.append('Content-type', 'application/json');
     return this.http
-      .post(this.baseUrl + '/login', loginData, { headers })
+      .post(this.baseUrl + '/login', loginData, { headers: this.headers })
       .pipe(
-        catchError((err) => {
-          return err;
-        })
+        catchError(this.handleError)
       );
   }
 
   register(user: user): Observable<any> {
-    let headers = new HttpHeaders();
-    headers.append('Content-type', 'application/json');
     return this.http
-      .post(this.baseUrl + '/register', user, { headers })
+      .post(this.baseUrl + '/register', user, { headers: this.headers })
       .pipe(
-        catchError((err) => {
-          return err;
-        })
+        catchError(this.handleError)
       );
   }
 
   getDoctorsSpecialtys() {
-    let headers = new HttpHeaders();
-    headers.append('Content-type', 'application/json');
     return this.http
-      .get(this.baseUrl + '/userhomepage/newappointment', { headers })
+      .get(this.baseUrl + '/userhomepage/newappointment', { headers: this.headers })
       .pipe(
-        catchError((err) => {
-          return err;
-        })
+        catchError(this.handleError)
       );
   }
 
   getDoctorsNames(specialty) {
-    let headers = new HttpHeaders();
-    let params = new HttpParams().set("specialty", specialty);
-    headers.append('Content-type', 'application/json');
+    const params = new HttpParams().set('specialty', specialty);
     return this.http
-      .get(this.baseUrl + '/userhomepage/newappointment/doctorsname', { headers, params })
+      .get(this.baseUrl + '/userhomepage/newappointment/doctorsname', { headers: this.headers, params })
       .pipe(
-        catchError((err) => {
-          return err;
-        })
+        catchError(this.handleError)
       );
   }
-  setNewAppointment(appointment: appointment){
-    let headers = new HttpHeaders();
-    headers.append('Content-type', 'application/json');
+  setNewAppointment(appointment: appointment) {
     return this.http
-      .post(this.baseUrl + '/userhomepage/newappointment', appointment, { headers })
+      .post(this.baseUrl + '/userhomepage/newappointment', appointment, { headers: this.headers })
       .pipe(
-        catchError((err) => {
-          return err;
-        })
+        catchError(this.handleError)
       );
   }
-  getFilteredAppointments(doctorSpecialty, appointmentDateFrom, appointmentDateTo){
-    let headers = new HttpHeaders();
-    let params = new HttpParams().set("doctorSpecialty", doctorSpecialty).set("appointmentDateFrom", appointmentDateFrom).set("appointmentDateTo", appointmentDateTo);
-    headers.append('Content-type', 'application/json');
+  getFilteredAppointments(doctorSpecialty, appointmentDateFrom, appointmentDateTo) {
+    const params = new HttpParams().
+      set('doctorSpecialty', doctorSpecialty)
+      .set('appointmentDateFrom', appointmentDateFrom)
+      .set('appointmentDateTo', appointmentDateTo);
     return this.http
-      .get(this.baseUrl + '/userhomepage/searchappointment', { headers, params })
+      .get(this.baseUrl + '/userhomepage/searchappointment', { headers: this.headers, params })
       .pipe(
-        catchError((err) => {
-          return err;
-        })
+        catchError(this.handleError)
+      );
+  }
+  getAllAppointments() {
+    return this.http.get(this.baseUrl + '/userhomepage/editappointment/edit', { headers: this.headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  deleteAppointment(id) {
+    const params = new HttpParams().set('id', id);
+    return this.http.delete(this.baseUrl + '/userhomepage/editappointment/edit', { headers: this.headers, params })
+      .pipe(
+        catchError(this.handleError)
       );
   }
 }

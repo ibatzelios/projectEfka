@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { user } from '../../models/userModel';
 import { Router } from '@angular/router';
-import { UserService } from "../../services/user.service";
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -25,14 +25,14 @@ export class RegisterComponent implements OnInit {
       userName: registerForm.value.registerUsername,
       password: registerForm.value.registerPassword,
       phone: registerForm.value.registerPhone
-    }
+    };
 
     console.log(newUser);
     this.userService.register(newUser).subscribe((data) => {
-      console.log(data)
+      console.log(data);
     },
       (error) => {
-        console.log("error");
+        console.log('error');
       });
 
     registerForm.reset();

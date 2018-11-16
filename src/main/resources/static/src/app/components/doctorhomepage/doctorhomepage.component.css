@@ -1,3 +1,33 @@
-p{
-    color: white;
+#navtext{
+	color: white;
+	text-align: right;
+}
+h5{
+	color: #006DF0;
+}
+#navbtn{
+	text-align: right;
+}
+.navbar-brand{
+	padding: 0;
+	margin-left:22%;
+}
+#bodyimg{
+	border-radius: 100px;
+}
+#bottom-search-bar{
+	margin-top: 10%;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	background: #1A2B3C;
+}
+#icon{
+	width: 60px; 
+	height: 60px;
+}
+#search-date, #search-input, #search-button{
+	text-align: center;
+}
+#search-date{
+	margin-left: 15%;
 }

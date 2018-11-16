@@ -8,10 +8,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { UserService } from 'src/app/services/user.service';
 
 interface DocSpecialty {
-  name: String
-}
-interface DocName {
-  name: String
+  name: String;
 }
 
 @Component({
@@ -49,15 +46,12 @@ export class UserHomepageComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
-  //Need testing and be added in the new appointment button && to the search appointment button
+  // Need testing and be added in the new appointment button && to the search appointment button
   setDoctorsSpecialtys() {
     this.userServise.getDoctorsSpecialtys().subscribe((data) => {
       this.doctorSpecialty = data;
       console.log(data);
-    },
-      (error) => {
-        console.log("error");
-      });
+    });
   }
   // We may need to have 2 variables, one for all doctors specialts and one for the selected
   selectedDoctorSpecialty(event: any) {
@@ -65,10 +59,7 @@ export class UserHomepageComponent implements OnInit {
     this.userServise.getDoctorsNames(this.doctorSpecialty).subscribe((data) => {
       this.docName = data;
       console.log(data);
-    },
-      (error) => {
-        console.log("error");
-      });
+    });
 
     this.docName = [
       { name: 'Premtsis' },
@@ -87,33 +78,44 @@ export class UserHomepageComponent implements OnInit {
       appointmentTime: appointmentForm.value.appointmentTime.toTimeString(),
       description: appointmentForm.value.description,
       other: appointmentForm.value.remarks
-    }
+    };
     this.userServise.setNewAppointment(newAppointment).subscribe(res => {
       console.log(res);
-    })
+    });
     console.log(newAppointment);
     appointmentForm.reset();
     this.modalRef.hide();
   }
   searchAppointment(searchForm) {
     this.appointment = [
-      { doctorSpecialty: 'odontiatros', doctorName: 'papadopoulos', appointmentDate: '22/01/2018', appointmentTime: '12:00', description: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw', other: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw' },
-      { doctorSpecialty: 'paidiatros', doctorName: 'premtsis', appointmentDate: '04/03/2018', appointmentTime: '15:00', description: 'axxxxxxxxxxx', other: 'den mporwwwwww' },
-      { doctorSpecialty: 'kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00', description: 'baxxxxxxxxx', other: 'tirthe to teloss' },
+      {
+        doctorSpecialty: 'odontiatros', doctorName: 'papadopoulos', appointmentDate: '22/01/2018', appointmentTime: '12:00',
+        description: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw',
+        other: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw'
+      },
+      {
+        doctorSpecialty: 'paidiatros', doctorName: 'premtsis', appointmentDate: '04/03/2018', appointmentTime: '15:00',
+        description: 'axxxxxxxxxxx', other: 'den mporwwwwww'
+      },
+      {
+        doctorSpecialty: 'kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+        description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+      },
 
     ];
     let searchAppointments: searchAppointmentModel = {
       doctorSpecialty: searchForm.value.doctorSpecialty,
       appointmentDateFrom: searchForm.value.appointmentDate[0],
       appointmentDateTo: searchForm.value.appointmentDate[1]
-    }
+    };
     console.log(searchAppointments);
 
-    this.userServise.getFilteredAppointments(searchAppointments.doctorSpecialty, searchAppointments.appointmentDateFrom, searchAppointments.appointmentDateTo)
-    .subscribe(data=> {
-      console.log(data);
-      this.appointment = data;
-    })
+    this.userServise.getFilteredAppointments(searchAppointments.doctorSpecialty,
+      searchAppointments.appointmentDateFrom, searchAppointments.appointmentDateTo)
+      .subscribe(data => {
+        console.log(data);
+        this.appointment = data;
+      });
 
   }
 
