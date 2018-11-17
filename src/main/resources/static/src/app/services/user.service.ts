@@ -26,8 +26,13 @@ export class UserService {
     return throwError('Something went wrong !!');
   }
   login(loginData: loginModel) {
+    var headers = new HttpHeaders();
+     headers.append('Content-Type', 'multipart/form-data');
+     const FD = new FormData();
+        FD.append('username', loginData.username);
+        FD.append('password', loginData.password);
     return this.http
-      .post(this.baseUrl + '/login', loginData, { headers: this.headers })
+      .post(this.baseUrl + '/login', FD, {headers: headers})
       .pipe(
         catchError(this.handleError)
       );

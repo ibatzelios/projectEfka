@@ -17,7 +17,7 @@ public class Patient {
     @Column(name="email")
     private String email;
     @Column(name="username")
-    private String userName;
+    private String username;
     @Column(name="password")
     private String password;
     @Column(name="amka")
@@ -31,7 +31,7 @@ public class Patient {
         this.lastName = lname;
         this.firstName = fname;
         this.email = email;
-        this.userName = username;
+        this.username = username;
         this.password = password;
         this.amka = amka;
         this.phone = phone;
@@ -54,7 +54,7 @@ public class Patient {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public String getPassword() {
@@ -86,7 +86,7 @@ public class Patient {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public void setPassword(String password) {
@@ -108,7 +108,7 @@ public class Patient {
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", email='" + email + '\'' +
-                ", userName='" + userName + '\'' +
+                ", userName='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", amka='" + amka + '\'' +
                 ", phone='" + phone + '\'' +

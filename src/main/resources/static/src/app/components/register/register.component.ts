@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
       firstName: registerForm.value.registerfName,
       lastName: registerForm.value.registerlName,
       email: registerForm.value.registerEmail,
-      userName: registerForm.value.registerUsername,
+      username: registerForm.value.registerUsername,
       password: registerForm.value.registerPassword,
       phone: registerForm.value.registerPhone
     };

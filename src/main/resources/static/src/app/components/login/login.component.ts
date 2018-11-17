@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   login(loginForm) {
     let newUser: loginModel = {
-      userName: loginForm.value.loginUsername,
+      username: loginForm.value.loginUsername,
       password: loginForm.value.loginPassword
     };
     console.log(newUser);
