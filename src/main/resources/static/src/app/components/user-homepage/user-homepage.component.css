@@ -11,18 +11,16 @@
 	padding: 0;
 	margin: 0;
 }
+.buttons{
+	margin-top: 20px;
+}
 .add, .search, .edit{
 	text-align: center;
  }
-/* .search{
-	text-align: center;
-}
-.edit{
-	text-align: left;
-} */
 #icons{
 	width: 80px; 
 	height: 80px;
 }
-#submit{
-}
+#bodyimg{
+	margin-top: 20px;
+} 

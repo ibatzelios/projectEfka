@@ -1,9 +1,8 @@
-<router-outlet name="edit"></router-outlet>
 <nav class="navbar navbar-dark bg-info container-fluid">
     <div class="row container-fluid">
         <div class="col-sm-7 ">
             <a class="navbar-brand">
-                <img src="../../../assets/images/efka_logo.jpg" width="200" height="90" alt="">
+                <img src="../../../assets/images/efka_logo.jpg" width="30%" height="30%">
             </a>
         </div>
         <div class="col-sm-3 ">
@@ -18,24 +17,29 @@
     </div>
 </nav>
 <div class="container">
-    <img id="bodyimg" src="../../../assets/images/cover.jpg" class="img-fluid">
-</div>
-<div class="row container-fluid">
-    <div class="col-md-5 add">
-        <img id="icons" src="../../../assets/images/add.svg" class="img-fluid">
-        <br>
-        <button class="btn btn-info btn-lg" (click)="openModal(addAppointmentModal)">New Appointment</button>
+    
+    <div class="row container-fluid buttons">
+
+        <div class="col-md-4 add">
+            <img id="icons" src="../../../assets/images/add.svg" class="img-fluid">
+            <br>
+            <button class="btn btn-info btn-lg" (click)="openModal(addAppointmentModal)">New Appointment</button>
+        </div>
+
+        <div class="col-md-4 search">
+            <img id="icons" src="../../../assets/images/search_icon.svg" class="img-fluid">
+            <br>
+            <button class="btn btn-info btn-lg" (click)="openModal(searchAppointmentModal)">My Appointments</button>
+        </div>
+        <div class="col-md-4 edit">
+            <img id="icons" src="../../../assets/images/settings_icon.svg" class="img-fluid">
+            <br>
+            <button [routerLink]="['/userhomepage/edit']" class="btn btn-info btn-lg">Edit Appointments</button>
+        </div>
     </div>
-    <div class="col-md-2 search">
-        <img id="icons" src="../../../assets/images/search_icon.svg" class="img-fluid">
-        <br>
-        <button class="btn btn-info btn-lg" (click)="openModal(searchAppointmentModal)">My Appointments</button>
-    </div>
-    <div class="col-md-5 edit">
-        <img id="icons" src="../../../assets/images/settings_icon.svg" class="img-fluid">
-        <br>
-        <button [routerLink]="['/userhomepage/edit']" class="btn btn-info btn-lg">Edit Appointments</button>
-    </div>
+    <div class="container">
+            <img id="bodyimg" src="../../../assets/images/cover.jpg" class="img-fluid">
+        </div>
 </div>
 <!-- ----------------------------------------------------NEW APPOINTMENT MODAL----------------------------------------------------- -->
 <ng-template #addAppointmentModal>
@@ -78,7 +82,6 @@
                     ngModel required />
                 <div class="invalid-feedback">Είναι υποχρεωτικό</div>
             </div>
-
             <div class="form-group">
                 <label for="appointmentTime">
                     Appointment Time

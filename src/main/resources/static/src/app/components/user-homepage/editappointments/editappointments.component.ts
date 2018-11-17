@@ -40,8 +40,7 @@ export class EditappointmentsComponent implements OnInit {
     {
       id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
       description: 'baxxxxxxxxx', other: 'tirthe to teloss'
-    },
-
+    }
   ];
   constructor(private userService: UserService, private modalService: BsModalService) { }
   openModal(template: TemplateRef<any>, appointment: any) {

@@ -14,8 +14,8 @@
         <tbody>
             <tr *ngFor="let app of testAppointments">
                 <td>
-                    <button class="btn btn-danger" (click)="deleteAppointment(app)">Delete</button>
-                    <button class="btn btn-primary" (click)="openModal(updateAppointmentModal, app)">Update</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteAppointment(app)"><img id="icons" src="../../../assets/images/delete_icon.svg"></button>
+                    <button class="btn btn-primary btn-sm" (click)="openModal(updateAppointmentModal, app)"><img id="icons" src="../../../assets/images/update_icon.svg"></button>
                 </td>
                 <td>{{app.doctorSpecialty}}</td>
                 <td>{{app.doctorName}}</td>
