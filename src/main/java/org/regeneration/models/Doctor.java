@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "doctor")
-public class Doctor {
+public class Doctor implements User{
 
     private int id;
     private String lastName;
@@ -79,5 +79,6 @@ public class Doctor {
     public void setSpecialtyId(int specialtyId) {
         this.specialtyId = specialtyId;
     }
+
 
 }

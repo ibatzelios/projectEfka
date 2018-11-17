@@ -1,10 +1,12 @@
 package org.regeneration.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "patient")
-public class Patient {
+public class Patient implements User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -53,7 +55,7 @@ public class Patient {
         return email;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
 
@@ -108,7 +110,7 @@ public class Patient {
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", email='" + email + '\'' +
-                ", userName='" + username + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", amka='" + amka + '\'' +
                 ", phone='" + phone + '\'' +

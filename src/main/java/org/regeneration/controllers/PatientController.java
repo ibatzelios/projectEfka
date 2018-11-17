@@ -1,11 +1,13 @@
 package org.regeneration.controllers;
 
+import org.regeneration.exceptions.NoLoggedInUserException;
 import org.regeneration.models.Patient;
 import org.regeneration.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +26,13 @@ public class PatientController {
     }
 
     @GetMapping("/patients")
-    public List<Patient> getPatients() {
-        return patientRepository.findAll();
+        public Patient getLoggedInPatient(Principal principal) {
+            if (principal == null) {
+                throw new NoLoggedInUserException();
+            } else {
+                Patient loggedInUser = patientRepository.findByUsername(principal.getName());
+                return loggedInUser;
+            }
     }
 
     @GetMapping("/patients/{id}")
@@ -38,7 +45,5 @@ public class PatientController {
         patient.setPassword(passwordEncoder.encode(patient.getPassword()));
         return patientRepository.save(patient);
     }
-
-
 
 }

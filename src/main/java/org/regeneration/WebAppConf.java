@@ -3,7 +3,7 @@ package org.regeneration;
 import org.regeneration.security.CustomAccessDeniedHandler;
 import org.regeneration.security.MySavedRequestAwareAuthenticationSuccessHandler;
 import org.regeneration.security.RestAuthenticationEntryPoint;
-import org.regeneration.services.MyPatientDetailsService;
+import org.regeneration.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,7 @@ public class WebAppConf extends WebSecurityConfigurerAdapter {
     private CustomAccessDeniedHandler accessDeniedHandler;
 
     @Autowired
-    private MyPatientDetailsService myPatientDetailsService;
+    private MyUserDetailsService myPatientDetailsService;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -57,6 +57,7 @@ public class WebAppConf extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/patient/**").authenticated()
+                .antMatchers("/doctor/**").authenticated()
                 //.antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()

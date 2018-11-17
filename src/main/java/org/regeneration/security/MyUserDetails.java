@@ -1,6 +1,7 @@
 package org.regeneration.security;
 
 import org.regeneration.models.Patient;
+import org.regeneration.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,12 +9,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-public class MyPatientDetails implements UserDetails {
+public class MyUserDetails implements UserDetails {
 
-    private final Patient patient;
+    private final User user;
 
-    public MyPatientDetails(Patient patient) {
-        this.patient = patient;
+    public MyUserDetails(User user) {
+        this.user = user;
     }
 
     @Override
@@ -24,13 +25,13 @@ public class MyPatientDetails implements UserDetails {
     @Override
     public String getPassword() {
 
-        return patient.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername()
     {
-        return patient.getUserName();
+        return user.getUsername();
     }
 
     @Override
