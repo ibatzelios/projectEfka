@@ -13,27 +13,31 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) { }
 
   login(loginForm) {
+    let newUsername = loginForm.value.exampleRadios + loginForm.value.loginUsername;
     let newUser: loginModel = {
-      username: loginForm.value.loginUsername,
+      username: newUsername,
       password: loginForm.value.loginPassword
     };
     console.log(newUser);
     this.userService.login(newUser).subscribe((data) => {
-      console.log('registered');
+      if(loginForm.value.exampleRadios == 'p'){
+      console.log('Hello Patient');
       localStorage.setItem('token', 'true');
       this.router.navigate(['/userhomepage']);
-      // }
-      // ,
-      //   (error) => {
-      //     localStorage.clear();
-      //     // localStorage.setItem('token', 'true');
-      //     // console.log('NOT registered');
-      //     console.log(error);
-      //     // this.router.navigate(['/userhomepage']);
+      setTimeout(function () {
+        loginForm.reset();
+      }, 1000);
+    } else if(loginForm.value.exampleRadios == 'd'){
+      console.log('Hello Doctor');
+      localStorage.setItem('token', 'true');
+      this.router.navigate(['/doctorhomepage']);
+      setTimeout(function () {
+        loginForm.reset();
+      }, 1000);
+    } else {
+      console.log("wrong inputs");
+    }
     });
-    setTimeout(function () {
-      loginForm.reset();
-    }, 1000);
   }
 
   ngOnInit() {

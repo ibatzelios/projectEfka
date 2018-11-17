@@ -17,7 +17,7 @@ interface DocSpecialty {
 export class EditappointmentsComponent implements OnInit {
   modalRef: BsModalRef;
   datePickerConfig: Partial<BsDatepickerConfig>;
-
+  selectedAppointment: any;
   docSpecialty: DocSpecialty[] = [
     { name: 'Odontiatros' },
     { name: 'Paidiatros' },
@@ -29,23 +29,24 @@ export class EditappointmentsComponent implements OnInit {
   docSpecialtys: any;
   testAppointments = [
     {
-      id: '1', doctorSpecialty: 'odontiatros', doctorName: 'papadopoulos', appointmentDate: '22/01/2018', appointmentTime: '12:00',
+      id: '1', doctorSpecialty: 'Odontiatros', doctorName: 'papadopoulos', appointmentDate: '22/01/2018', appointmentTime: '12:00',
       description: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw',
       other: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw'
     },
     {
-      id: '2', doctorSpecialty: 'paidiatros', doctorName: 'premtsis', appointmentDate: '04/03/2018', appointmentTime: '15:00',
+      id: '2', doctorSpecialty: 'Paidiatros', doctorName: 'premtsis', appointmentDate: '04/03/2018', appointmentTime: '15:00',
       description: 'axxxxxxxxxxx', other: 'den mporwwwwww'
     },
     {
-      id: '3', doctorSpecialty: 'kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
       description: 'baxxxxxxxxx', other: 'tirthe to teloss'
     },
 
   ];
   constructor(private userService: UserService, private modalService: BsModalService) { }
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>, appointment: any) {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    this.selectedAppointment = appointment;
   }
   deleteAppointment(app) {
     this.userService.deleteAppointment(app.id).subscribe((data) => {
