@@ -12,7 +12,6 @@ import java.util.Set;
 @Entity
 @Table(name = "specialty")
 public class Specialty {
-    @JsonIgnore
     private int id;
     private String specialty;
 
@@ -41,15 +40,8 @@ public class Specialty {
         this.specialty = specialty;
     }
 
-    private DoctorRepository doctorRepository;
-
     @OneToMany(mappedBy = "specialty", cascade = CascadeType.ALL)
-    private Collection<Doctor> doctors;
-//    @JoinColumn(name = "specialty_id")
-//    public List<Doctor> getDoctors() {
-//        return doctorRepository.findAll();
-//    }
+    private List<Doctor> doctor;
 
- //   public void setSpecialty(Specialty specialty) {
-   // }
+
 }
