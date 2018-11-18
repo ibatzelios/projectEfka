@@ -30,9 +30,7 @@ export class RegisterComponent implements OnInit {
     console.log(newUser);
     this.userService.register(newUser).subscribe((data) => {
       console.log(data);
-    },
-      (error) => {
-        console.log('error');
+    
       });
 
     registerForm.reset();
