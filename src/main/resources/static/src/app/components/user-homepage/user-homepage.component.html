@@ -23,7 +23,7 @@
         <div class="col-md-4 add">
             <img id="icons" src="../../../assets/images/add.svg" class="img-fluid">
             <br>
-            <button class="btn btn-info btn-lg" (click)="openModal(addAppointmentModal)">New Appointment</button>
+            <button class="btn btn-info btn-lg" (click)="openModal(addAppointmentModal); setDoctorsSpecialtys();">New Appointment</button>
         </div>
 
         <div class="col-md-4 search">
@@ -59,7 +59,7 @@
                 <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" (change)="selectedDoctorSpecialty($event)"
                     #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorSpecialty.invalid}"
                     ngModel required>
-                    <option *ngFor="let spe of docSpecialty">{{spe.name}}</option>
+                    <option *ngFor="let spe of docSpecialty">{{spe.specialty}}</option>
                 </select>
                 <div class="invalid-feedback">Είναι υποχρεωτικό</div>
             </div>
