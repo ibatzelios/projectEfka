@@ -1,5 +1,6 @@
 package org.regeneration.controllers;
 
+import org.regeneration.dtos.SpecialtyDto;
 import org.regeneration.models.Doctor;
 import org.regeneration.models.Patient;
 import org.regeneration.repositories.DoctorRepository;
@@ -21,6 +22,12 @@ public class DoctorController {
     @GetMapping("/doctors")
     public List<Doctor> getDoctor() {
         return doctorRepository.findAll();
+    }
+
+
+    @GetMapping("/userhomepage/newappointment/doctorsname")
+    public List<Doctor> getDoctorBySpecialtyId(@RequestBody SpecialtyDto specialtyDto){
+        return doctorRepository.findBySpecialtyId(specialtyDto.getSpecialtyId());
     }
 
 //    @GetMapping("/userhomepage/newappointment/doctorsname")
