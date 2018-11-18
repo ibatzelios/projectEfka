@@ -21,17 +21,11 @@ export class UserHomepageComponent implements OnInit {
   mytime: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
 
-  // docSpecialty: DocSpecialty[] = [
-  //   { name: 'Odontiatros' },
-  //   { name: 'Paidiatros' },
-  //   { name: 'Orthopaidikos' },
-  //   { name: 'Kardiologos' },
-  // ];
-  docSpecialty:any;
-  docName: any;
-  //doctorSpecialty: any;
-  selectedSpe: any;
   
+  docSpecialty: any;
+  docName: any;
+  selectedSpe: any;
+
 
   modalRef: BsModalRef;
   appointment: any;
@@ -53,30 +47,23 @@ export class UserHomepageComponent implements OnInit {
     this.userServise.getDoctorsSpecialtys().subscribe((data) => {
       console.log(data);
       this.docSpecialty = data;
-      
+
     });
   }
   // We may need to have 2 variables, one for all doctors specialts and one for the selected
   selectedDoctorSpecialty(event: any) {
     var selectedSpe = event.target.value;
     var id;
-    for (let i = 0; i< this.docSpecialty.length; i++) {
+    for (let i = 0; i < this.docSpecialty.length; i++) {
       console.log(this.docSpecialty[i].specialty);
-      if(selectedSpe == this.docSpecialty[i].specialty)
-      id = this.docSpecialty[i].id;
+      if (selectedSpe == this.docSpecialty[i].specialty) {
+        id = this.docSpecialty[i].id;
+      }
     }
     this.userServise.getDoctorsNames(id).subscribe((data) => {
       console.log(data);
       this.docName = data;
     });
-
-    // this.docName = [
-    //   { name: 'Premtsis' },
-    //   { name: 'Papadopoulos' },
-    //   { name: 'Mpalios' },
-    //   { name: 'Patroklos' },
-    // ];
-    
     console.log(this.docSpecialty);
   }
 

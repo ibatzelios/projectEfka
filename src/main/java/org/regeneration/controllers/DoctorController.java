@@ -27,8 +27,8 @@ public class DoctorController {
 
 
     @GetMapping("/userhomepage/newappointment/doctorsname")
-    public List<Doctor> getDoctorBySpecialtyId(@RequestBody SpecialtyDto specialtyDto){
-        return doctorRepository.findBySpecialtyId(specialtyDto.getSpecialtyId());
+    public List<Doctor> getDoctorBySpecialtyId(@RequestParam("specialtyId") int specialtyDto){
+        return doctorRepository.findBySpecialtyId(specialtyDto);
     }
 
 //    @GetMapping("/userhomepage/newappointment/doctorsname")
