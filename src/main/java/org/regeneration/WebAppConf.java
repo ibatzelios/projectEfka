@@ -60,6 +60,8 @@ public class WebAppConf extends WebSecurityConfigurerAdapter {
                 .antMatchers("/doctor/**").authenticated()
                 //.antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
+                .formLogin().loginProcessingUrl("/api/login")
+                .and()
                 .formLogin()
                 .successHandler(mySuccessHandler)
                 .failureHandler(myFailureHandler)

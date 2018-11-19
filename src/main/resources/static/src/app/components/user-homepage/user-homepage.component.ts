@@ -8,9 +8,9 @@ import { doctorModel } from '../../models/doctorModel';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { UserService } from 'src/app/services/user.service';
 
-interface DocSpecialty {
-  name: String;
-}
+// interface DocSpecialty {
+//   name: String;
+// }
 
 @Component({
   selector: 'app-user-homepage',
@@ -21,7 +21,7 @@ export class UserHomepageComponent implements OnInit {
   mytime: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
 
-  
+
   docSpecialty: any;
   docName: any;
   selectedSpe: any;

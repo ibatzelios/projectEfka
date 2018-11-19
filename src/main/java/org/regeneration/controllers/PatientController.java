@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class
 PatientController {
 
@@ -26,7 +25,7 @@ PatientController {
         this.patientRepository = patientRepository;
     }
 
-    @GetMapping("/patients")
+    @GetMapping("/api/patients")
         public Patient getLoggedInPatient(Principal principal) {
             if (principal == null) {
                 throw new NoLoggedInUserException();
@@ -36,12 +35,12 @@ PatientController {
             }
     }
 
-    @GetMapping("/patients/{id}")
+    @GetMapping("/api/patients/{id}")
     public Optional<Patient> getPatient(@PathVariable int id) {
         return patientRepository.findById(id);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/api/register")
     public Patient newPatient(@RequestBody Patient patient) {
             patient.setPassword(passwordEncoder.encode(patient.getPassword()));
             return patientRepository.save(patient);
