@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService, } from 'ngx-bootstrap';
 import { NgForm } from '@angular/forms';
 import { appointment } from '../../models/appointment';
 import { searchAppointmentModel } from '../../models/searchAppointmentModel';
+import { doctorModel } from '../../models/doctorModel';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { UserService } from 'src/app/services/user.service';
 
@@ -20,16 +21,11 @@ export class UserHomepageComponent implements OnInit {
   mytime: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
 
-  docSpecialty: DocSpecialty[] = [
-    { name: 'Odontiatros' },
-    { name: 'Paidiatros' },
-    { name: 'Orthopaidikos' },
-    { name: 'Kardiologos' },
-  ];
-
-  doctorSpecialty: any;
-
+  
+  docSpecialty: any;
   docName: any;
+  selectedSpe: any;
+
 
   modalRef: BsModalRef;
   appointment: any;
@@ -49,25 +45,26 @@ export class UserHomepageComponent implements OnInit {
   // Need testing and be added in the new appointment button && to the search appointment button
   setDoctorsSpecialtys() {
     this.userServise.getDoctorsSpecialtys().subscribe((data) => {
-      this.doctorSpecialty = data;
       console.log(data);
+      this.docSpecialty = data;
+
     });
   }
   // We may need to have 2 variables, one for all doctors specialts and one for the selected
   selectedDoctorSpecialty(event: any) {
-    this.doctorSpecialty = event.target.value;
-    this.userServise.getDoctorsNames(this.doctorSpecialty).subscribe((data) => {
-      this.docName = data;
+    var selectedSpe = event.target.value;
+    var id;
+    for (let i = 0; i < this.docSpecialty.length; i++) {
+      console.log(this.docSpecialty[i].specialty);
+      if (selectedSpe == this.docSpecialty[i].specialty) {
+        id = this.docSpecialty[i].id;
+      }
+    }
+    this.userServise.getDoctorsNames(id).subscribe((data) => {
       console.log(data);
+      this.docName = data;
     });
-
-    this.docName = [
-      { name: 'Premtsis' },
-      { name: 'Papadopoulos' },
-      { name: 'Mpalios' },
-      { name: 'Patroklos' },
-    ];
-    console.log(this.doctorSpecialty);
+    console.log(this.docSpecialty);
   }
 
   newAppointment(appointmentForm: NgForm) {

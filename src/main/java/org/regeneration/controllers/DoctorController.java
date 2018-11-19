@@ -1,5 +1,6 @@
 package org.regeneration.controllers;
 
+import org.regeneration.dtos.SpecialtyDto;
 import org.regeneration.models.Doctor;
 import org.regeneration.models.Patient;
 import org.regeneration.repositories.DoctorRepository;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class DoctorController {
 
     private final DoctorRepository doctorRepository;
@@ -21,6 +23,12 @@ public class DoctorController {
     @GetMapping("/doctors")
     public List<Doctor> getDoctor() {
         return doctorRepository.findAll();
+    }
+
+
+    @GetMapping("/userhomepage/newappointment/doctorsname")
+    public List<Doctor> getDoctorBySpecialtyId(@RequestParam("specialtyId") int specialtyDto){
+        return doctorRepository.findBySpecialtyId(specialtyDto);
     }
 
 //    @GetMapping("/userhomepage/newappointment/doctorsname")

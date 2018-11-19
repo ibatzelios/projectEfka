@@ -55,7 +55,7 @@ export class UserService {
   }
 
   getDoctorsNames(specialty) {
-    const params = new HttpParams().set('specialty', specialty);
+    const params = new HttpParams().set('specialtyId', specialty);
     return this.http
       .get(this.baseUrl + '/userhomepage/newappointment/doctorsname', { headers: this.headers, params })
       .pipe(

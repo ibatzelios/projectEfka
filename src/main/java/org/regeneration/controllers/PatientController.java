@@ -13,7 +13,8 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class PatientController {
+public class
+PatientController {
 
     private final PatientRepository patientRepository;
 
