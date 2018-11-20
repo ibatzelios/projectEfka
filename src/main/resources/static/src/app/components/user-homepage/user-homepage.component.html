@@ -30,7 +30,8 @@
         <div class="col-md-4 search">
             <img id="icons" src="../../../assets/images/search_icon.svg" class="img-fluid">
             <br>
-            <button class="btn btn-info btn-lg" (click)="openModal(searchAppointmentModal)">My Appointments</button>
+            <button class="btn btn-info btn-lg" (click)="openModal(searchAppointmentModal); setDoctorsSpecialtys();">My
+                Appointments</button>
         </div>
         <div class="col-md-4 edit">
             <img id="icons" src="../../../assets/images/settings_icon.svg" class="img-fluid">
@@ -126,7 +127,8 @@
                     <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" #doctorSpecialty="ngModel"
                         [ngClass]="{'is-invalid': searchAppointmentForm.submitted && doctorSpecialty.invalid}" ngModel
                         required>
-                        <option *ngFor="let spe of docSpecialty">{{spe.name}}</option>
+                        <option disabled></option>
+                        <option *ngFor="let spe of docSpecialty">{{spe.specialty}}</option>
                     </select>
                     <div class="invalid-feedback">Είναι υποχρεωτικό</div>
                 </div>

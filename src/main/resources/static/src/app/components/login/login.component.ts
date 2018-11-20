@@ -20,23 +20,23 @@ export class LoginComponent implements OnInit {
     };
     console.log(newUser);
     this.userService.login(newUser).subscribe((data) => {
-      if(loginForm.value.exampleRadios == 'p'){
-      console.log('Hello Patient');
-      localStorage.setItem('token', 'true');
-      this.router.navigate(['/userhomepage']);
-      setTimeout(function () {
-        loginForm.reset();
-      }, 1000);
-    } else if(loginForm.value.exampleRadios == 'd'){
-      console.log('Hello Doctor');
-      localStorage.setItem('token', 'true');
-      this.router.navigate(['/doctorhomepage']);
-      setTimeout(function () {
-        loginForm.reset();
-      }, 1000);
-    } else {
-      console.log("wrong inputs");
-    }
+      if (loginForm.value.exampleRadios == 'p') {
+        console.log('Hello Patient');
+        localStorage.setItem('token', 'true');
+        this.router.navigate(['/userhomepage']);
+        setTimeout(function () {
+          loginForm.reset();
+        }, 1000);
+      } else if (loginForm.value.exampleRadios == 'd') {
+        console.log('Hello Doctor');
+        localStorage.setItem('token', 'true');
+        this.router.navigate(['/doctorhomepage']);
+        setTimeout(function () {
+          loginForm.reset();
+        }, 1000);
+      } else {
+        console.log('wrong inputs');
+      }
     });
   }
 

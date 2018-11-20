@@ -31,7 +31,7 @@ export class UserHomepageComponent implements OnInit {
   appointment: any;
   searchAppointmentModel: searchAppointmentModel[] = [];
 
-  constructor(private router: Router, private modalService: BsModalService, private userServise: UserService) {
+  constructor(private router: Router, private modalService: BsModalService, private userService: UserService) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-blue',
       showWeekNumbers: false,
@@ -44,27 +44,22 @@ export class UserHomepageComponent implements OnInit {
   }
   // Need testing and be added in the new appointment button && to the search appointment button
   setDoctorsSpecialtys() {
-    this.userServise.getDoctorsSpecialtys().subscribe((data) => {
-      console.log(data);
+    this.userService.getDoctorsSpecialtys().subscribe((data) => {
       this.docSpecialty = data;
 
     });
   }
-  // We may need to have 2 variables, one for all doctors specialts and one for the selected
   selectedDoctorSpecialty(event: any) {
     var selectedSpe = event.target.value;
     var id;
     for (let i = 0; i < this.docSpecialty.length; i++) {
-      console.log(this.docSpecialty[i].specialty);
       if (selectedSpe == this.docSpecialty[i].specialty) {
         id = this.docSpecialty[i].id;
       }
     }
-    this.userServise.getDoctorsNames(id).subscribe((data) => {
-      console.log(data);
+    this.userService.getDoctorsNames(id).subscribe((data) => {
       this.docName = data;
     });
-    console.log(this.docSpecialty);
   }
 
   newAppointment(appointmentForm: NgForm) {
@@ -76,7 +71,7 @@ export class UserHomepageComponent implements OnInit {
       description: appointmentForm.value.description,
       other: appointmentForm.value.remarks
     };
-    this.userServise.setNewAppointment(newAppointment).subscribe(res => {
+    this.userService.setNewAppointment(newAppointment).subscribe(res => {
       console.log(res);
     });
     console.log(newAppointment);
@@ -102,12 +97,12 @@ export class UserHomepageComponent implements OnInit {
     ];
     let searchAppointments: searchAppointmentModel = {
       doctorSpecialty: searchForm.value.doctorSpecialty,
-      appointmentDateFrom: searchForm.value.appointmentDate[0],
-      appointmentDateTo: searchForm.value.appointmentDate[1]
+      appointmentDateFrom: searchForm.value.appointmentDate[0].toDateString(),
+      appointmentDateTo: searchForm.value.appointmentDate[1].toDateString()
     };
     console.log(searchAppointments);
 
-    this.userServise.getFilteredAppointments(searchAppointments.doctorSpecialty,
+    this.userService.getFilteredAppointments(searchAppointments.doctorSpecialty,
       searchAppointments.appointmentDateFrom, searchAppointments.appointmentDateTo)
       .subscribe(data => {
         console.log(data);

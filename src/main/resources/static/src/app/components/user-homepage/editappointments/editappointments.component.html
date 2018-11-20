@@ -15,7 +15,8 @@
             <tr *ngFor="let app of testAppointments">
                 <td>
                     <button class="btn btn-danger btn-sm" (click)="deleteAppointment(app)"><img id="icons" src="../../../assets/images/delete_icon.svg"></button>
-                    <button class="btn btn-primary btn-sm" (click)="openModal(updateAppointmentModal, app)"><img id="icons" src="../../../assets/images/update_icon.svg"></button>
+                    <button class="btn btn-primary btn-sm" (click)="openModal(updateAppointmentModal, app)"><img id="icons"
+                            src="../../../assets/images/update_icon.svg"></button>
                 </td>
                 <td>{{app.doctorSpecialty}}</td>
                 <td>{{app.doctorName}}</td>
@@ -42,7 +43,7 @@
         </tbody>
     </table>
 </div>
-<!-- ----------------------------------------------------NEW APPOINTMENT MODAL----------------------------------------------------- -->
+<!-- ----------------------------------------------------UPDATE APPOINTMENT MODAL----------------------------------------------------- -->
 <ng-template #updateAppointmentModal>
     <div class="modal-header">
         <h5 class="modal-title" id="updateModalLabel">Update Appointment</h5>
@@ -51,27 +52,46 @@
         </button>
     </div>
     <div class="modal-body">
-            <form #newAppointmentForm="ngForm" name="form" >
+        <form #newAppointmentForm="ngForm" name="form">
             <div class="form-group">
-                    <label for="doctorSpecialty">
-                        Doctor's Specialty
-                    </label>
-                    <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" (change)="selectedDoctorSpecialty($event)"
-                        #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorSpecialty.invalid}"
-                        [(ngModel)]="selectedAppointment.doctorSpecialty" required>
-                        <option *ngFor="let spe of docSpecialty" [value]="spe.name">{{spe.name}}</option>
-                    </select>
-                    <div class="invalid-feedback">Είναι υποχρεωτικό</div>
-                </div>
-                <div class="form-group">
-                        <label for="appointmentDate">
-                            Appointment Date
-                        </label>
-                        <input class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig"
-                            name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentDate.invalid}"
-                            [(ngModel)]="selectedAppointment.appointmentDate" required />
-                        <div class="invalid-feedback">Είναι υποχρεωτικό</div>
-                    </div>
-                </form>
+                <label for="doctorSpecialty">
+                    Doctor's Specialty
+                </label>
+                <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" (change)="selectedDoctorSpecialty($event)"
+                    #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorSpecialty.invalid}"
+                    [(ngModel)]="selectedAppointment.doctorSpecialty" required>
+                    <option *ngFor="let spe of docSpecialty" [value]="spe.specialty">{{spe.specialty}}</option>
+                </select>
+                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+            </div>
+            <div class="form-group">
+                <label for="doctorName">
+                    Doctor's Name
+                </label>
+                <select class="form-control" id="doctorName" name="doctorName" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorName.invalid}"
+                    [(ngModel)]="selectedAppointment.doctorName" required>
+                    <option disabled></option>
+                    <option *ngFor="let doc of docName">{{doc.lastName}}</option>
+                </select>
+                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+            </div>
+            <div class="form-group">
+                <label for="appointmentDate">
+                    Appointment Date
+                </label>
+                <input class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig"
+                    name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentDate.invalid}"
+                    [(ngModel)]="selectedAppointment.appointmentDate" required />
+                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+            </div>
+            <div class="form-group">
+                <label for="appointmentTime">
+                    Appointment Time
+                </label>
+                <timepicker id="appointmentTime" name="appointmentTime" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentTime.invalid}"
+                [(ngModel)]="selectedAppointment.appointmentTime"  required></timepicker>
+                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+            </div>
+        </form>
     </div>
 </ng-template>
