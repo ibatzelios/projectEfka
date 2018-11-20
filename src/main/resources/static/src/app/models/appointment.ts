@@ -1,8 +1,7 @@
 export class appointment {
-    doctorSpecialty: string;
-    doctorName: string;
-    appointmentDate: string;
-    appointmentTime: string;
-    description: string;
-    other: string;
+    doctorId: string;
+    date: string;
+    time: string;
+    illness: string;
+    comments: string;
 }

@@ -25,7 +25,7 @@ export class UserHomepageComponent implements OnInit {
   docSpecialty: any;
   docName: any;
   selectedSpe: any;
-
+  doctorId: any;
 
   modalRef: BsModalRef;
   appointment: any;
@@ -63,13 +63,20 @@ export class UserHomepageComponent implements OnInit {
   }
 
   newAppointment(appointmentForm: NgForm) {
+    var id;
+    for (let i = 0; i < this.docName.length; i++) {
+      if (appointmentForm.value.doctorName == this.docName[i].lastName) {
+        id = this.docName[i].id;
+      }
+    }
+    console.log('This is the doctors id !!!!!!!!!!!!!!');
+    console.log(id);
     let newAppointment: appointment = {
-      doctorSpecialty: appointmentForm.value.doctorSpecialty,
-      doctorName: appointmentForm.value.doctorName,
-      appointmentDate: appointmentForm.value.appointmentDate.toDateString(),
-      appointmentTime: appointmentForm.value.appointmentTime.toTimeString(),
-      description: appointmentForm.value.description,
-      other: appointmentForm.value.remarks
+      doctorId: id,
+      date: appointmentForm.value.appointmentDate.toDateString(),
+      time: appointmentForm.value.appointmentTime.toTimeString(),
+      illness: appointmentForm.value.description,
+      comments: appointmentForm.value.remarks
     };
     this.userService.setNewAppointment(newAppointment).subscribe(res => {
       console.log(res);
