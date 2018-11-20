@@ -28,15 +28,13 @@ public class Appointment {
     //@JoinColumn(name = "patient_id")
     private Patient patient;
 
-    public Appointment(int doctorId, int patientId, Date date, Time time, String illness, String comments, Doctor doctor, Patient patient) {
+    public Appointment(int doctorId,  Date date, Time time, String illness, String comments) {
         this.doctorId = doctorId;
-        this.patientId = patientId;
+        //this.patientId = patientId;
         this.date = date;
         this.time = time;
         this.illness = illness;
         this.comments = comments;
-        this.doctor = doctor;
-        this.patient = patient;
     }
 
     public Appointment() { }

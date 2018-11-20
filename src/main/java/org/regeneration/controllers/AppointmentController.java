@@ -37,8 +37,9 @@ public class AppointmentController {
     }
 
     @PostMapping("/api/userhomepage/newappointment")
-    public Appointment appointment(@RequestBody Appointment appointment, Principal principal) {
+    public Appointment newAppointment(@RequestBody Appointment appointment, Principal principal) {
         Patient patient = patientRepository.findByUsername(principal.getName());
+        System.out.println(appointment.toString());
         appointment.setPatientId(patient.getId());
         return appointmentRepository.save(appointment);
     }
