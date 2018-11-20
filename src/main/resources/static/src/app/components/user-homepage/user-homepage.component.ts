@@ -73,8 +73,8 @@ export class UserHomepageComponent implements OnInit {
     console.log(id);
     let newAppointment: appointment = {
       doctorId: id,
-      date: appointmentForm.value.appointmentDate,
-      time: appointmentForm.value.appointmentTime,
+      date: appointmentForm.value.appointmentDate.toISOString(),
+      time: appointmentForm.value.appointmentTime.toTimeString(),
       illness: appointmentForm.value.description,
       comments: appointmentForm.value.remarks
     };
