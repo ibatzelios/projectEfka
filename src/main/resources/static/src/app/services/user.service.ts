@@ -27,12 +27,12 @@ export class UserService {
   }
   login(loginData: loginModel) {
     var headers = new HttpHeaders();
-     headers.append('Content-Type', 'multipart/form-data');
-     const FD = new FormData();
-        FD.append('username', loginData.username);
-        FD.append('password', loginData.password);
+    headers.append('Content-Type', 'multipart/form-data');
+    const FD = new FormData();
+    FD.append('username', loginData.username);
+    FD.append('password', loginData.password);
     return this.http
-      .post(this.baseUrl + '/login', FD, {headers: headers})
+      .post(this.baseUrl + '/login', FD, { headers: headers })
       .pipe(
         catchError(this.handleError)
       );

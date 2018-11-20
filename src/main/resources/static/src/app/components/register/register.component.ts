@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { user } from '../../models/userModel';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -11,8 +12,9 @@ import { UserService } from '../../services/user.service';
 })
 export class RegisterComponent implements OnInit {
   user: user[] = [];
-
-  constructor(private router: Router, private userService: UserService) {
+  loading = false;
+  constructor(private router: Router, private userService: UserService,
+    private alertService: AlertService) {
 
   }
 
@@ -26,16 +28,12 @@ export class RegisterComponent implements OnInit {
       password: registerForm.value.registerPassword,
       phone: registerForm.value.registerPhone
     };
-
-    console.log(newUser);
+    this.loading = true;
     this.userService.register(newUser).subscribe((data) => {
-      console.log(data);
-    
-      });
-
-    registerForm.reset();
-    this.router.navigate(['/']);
-
+      this.alertService.success('Registration successful');
+      this.router.navigate(['/']);
+      registerForm.reset();
+    });
   }
   ngOnInit() {
 

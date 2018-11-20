@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SpecialtyController {
     private final SpecialtyRepository specialtyRepository;
 
@@ -20,7 +19,7 @@ public class SpecialtyController {
         this.specialtyRepository = specialtyRepository;
     }
 
-    @GetMapping("/userhomepage/newappointment")
+    @GetMapping("/api/userhomepage/newappointment")
     public List<Specialty> getSpecialty() {
         return specialtyRepository.findAll();
     }

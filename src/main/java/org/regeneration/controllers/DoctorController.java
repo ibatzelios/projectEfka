@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class DoctorController {
 
     private final DoctorRepository doctorRepository;
@@ -20,13 +19,13 @@ public class DoctorController {
         this.doctorRepository = doctorRepository;
     }
 
-    @GetMapping("/doctors")
+    @GetMapping("/api/doctors")
     public List<Doctor> getDoctor() {
         return doctorRepository.findAll();
     }
 
 
-    @GetMapping("/userhomepage/newappointment/doctorsname")
+    @GetMapping("/api/userhomepage/newappointment/doctorsname")
     public List<Doctor> getDoctorBySpecialtyId(@RequestParam("specialtyId") int specialtyDto){
         return doctorRepository.findBySpecialtyId(specialtyDto);
     }

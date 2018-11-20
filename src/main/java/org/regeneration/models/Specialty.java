@@ -43,5 +43,4 @@ public class Specialty {
     @OneToMany(mappedBy = "specialty", cascade = CascadeType.ALL)
     private List<Doctor> doctor;
 
-
 }
