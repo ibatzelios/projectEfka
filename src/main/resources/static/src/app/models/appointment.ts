@@ -1,7 +1,7 @@
 export class appointment {
-    doctorId: string;
-    date: string;
-    time: string;
+    doctorId: Number;
+    date: any;
+    time: any;
     illness: string;
     comments: string;
 }
