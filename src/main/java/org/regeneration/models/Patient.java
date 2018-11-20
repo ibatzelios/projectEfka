@@ -101,6 +101,10 @@ public class Patient implements User {
         this.phone = phone;
     }
 
+    public int getIdFromUsername(String username){
+        return this.getId();
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
