@@ -1,8 +1,10 @@
 
 <div class="menu">
   <h1>Welcome to EFKA</h1>
-  <app-alert></app-alert>
   <div class="mx-auto" style="width: 410px">
+    <div style="background-color:greenyellow">
+      {{message}}
+    </div>
     <button [routerLink]="['/login']" class="btn btn-primary home-btn">Login</button>
     <button [routerLink]="['/register']" class="btn btn-primary home-btn">Register</button>
   </div>
