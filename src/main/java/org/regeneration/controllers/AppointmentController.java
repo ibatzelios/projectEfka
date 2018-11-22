@@ -1,8 +1,11 @@
 package org.regeneration.controllers;
 
+import org.regeneration.dtos.AppointmentDto;
 import org.regeneration.models.Appointment;
+import org.regeneration.models.Doctor;
 import org.regeneration.models.Patient;
 import org.regeneration.repositories.AppointmentRepository;
+import org.regeneration.repositories.DoctorRepository;
 import org.regeneration.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +13,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Optional;
 
 @RestController
@@ -17,17 +22,15 @@ public class AppointmentController {
 
     private final AppointmentRepository appointmentRepository;
     private final PatientRepository patientRepository;
+    private final DoctorRepository doctorRepository;
 
     @Autowired
-    public AppointmentController(AppointmentRepository appointmentRepository, PatientRepository patientRepository) {
+    public AppointmentController(AppointmentRepository appointmentRepository, PatientRepository patientRepository, DoctorRepository doctorRepository) {
         this.appointmentRepository = appointmentRepository;
         this.patientRepository =patientRepository;
+        this.doctorRepository = doctorRepository;
     }
 
-//    @GetMapping("/userhomepage/editappointment/edit/{id}")
-//    public Optional<Appointment> getAppointment(@PathVariable int id) {
-//        return appointmentRepository.findById(id);
-//    }
 
     @DeleteMapping("/userhomepage/editappointment/edit/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
@@ -37,11 +40,18 @@ public class AppointmentController {
     }
 
     @PostMapping("/api/userhomepage/newappointment")
-    public Appointment newAppointment(@RequestBody Appointment appointment, Principal principal) {
+    public Appointment newAppointment(@RequestBody AppointmentDto appointmentDto, Principal principal) {
+        Appointment appointment = new Appointment();
         Patient patient = patientRepository.findByUsername(principal.getName());
+        Doctor doctor = doctorRepository.findById(appointmentDto.getDoctorId());
+        appointment.setPatient(patient);
+        appointment.setDoctor(doctor);
+        appointment.setComments(appointmentDto.getComments());
+        appointment.setIllness(appointmentDto.getIllness());
+        appointment.setTime(Time.valueOf(appointmentDto.getTime()));
+        appointment.setDate(Date.valueOf(appointmentDto.getDate()));
         System.out.println(appointment.toString());
-        appointment.setPatientId(patient.getId());
+
         return appointmentRepository.save(appointment);
     }
-
 }

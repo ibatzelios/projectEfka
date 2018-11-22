@@ -1,43 +1,45 @@
 package org.regeneration.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Time;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "appointment")
-public class Appointment {
+public class Appointment implements Serializable{
+    private static final long serialVersionUiD =1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
-    @Column(name = "doctor_id", insertable = false, updatable = false)
-    private int doctorId;
-    @Column(name = "patient_id", insertable = false, updatable = false)
-    private int patientId;
-    private Date date;
-    private Time time;
-    private String illness;
-    private String comments;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "doctor_id")
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    @JsonIgnoreProperties("appointment")
     private Doctor doctor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "patient_id")
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    @JsonIgnoreProperties("appointment")
     private Patient patient;
 
-    public Appointment(int doctorId,  Date date, Time time, String illness, String comments) {
-        this.doctorId = doctorId;
-        //this.patientId = patientId;
-        this.date = date;
-        this.time = time;
-        this.illness = illness;
-        this.comments = comments;
-    }
+    @Column(name="date")
+    private Date date;
 
-    public Appointment() { }
+    @Column(name="time")
+    private Time time;
+
+    @Column(name="illness")
+    private String illness;
+
+    @Column(name="comments")
+    private String comments;
+
 
     public int getId() {
         return id;
@@ -46,6 +48,16 @@ public class Appointment {
     public void setId(int id) {
         this.id = id;
     }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+
+    public Patient getPatient() {
+        return patient;
+    }
+
 
     public Date getDate() {
         return date;
@@ -79,35 +91,24 @@ public class Appointment {
         this.comments = comments;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
-    }
-
-    public Patient getPatient() {
-        return patient;
     }
 
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
 
-    public int getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", doctor=" + doctor +
+                ", patient=" + patient +
+                ", date=" + date +
+                ", time=" + time +
+                ", illness='" + illness + '\'' +
+                ", comments='" + comments + '\'' +
+                '}';
     }
 }
