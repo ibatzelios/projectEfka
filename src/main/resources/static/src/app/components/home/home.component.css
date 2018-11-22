@@ -3,10 +3,35 @@ body{
 }
 h1{color: white;
     text-align: center;
-    margin-top:30%;
-}
-
-.home-btn{
-    width: 200px;
-    margin-left: 5px;
-}
+    margin: 5%;
+ }
+ .home-btn{
+    width: 300px;
+    height: 70px;
+    margin: 20px;
+    font-size: 20px;
+ }
+ #laptop, #doctor{
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    border-radius: 200px;
+    height: 400px;
+    width: 400px;
+ }
+ #userlogo{
+    height: 150px;
+    width: 150px;
+    margin: 20px;
+ }
+ #login-register{
+    height: 400px;
+    min-width: 400px;
+    padding: 2%;
+ }
+ #userlogo, button{
+    display: block;
+ }
+ .alert{
+    text-align: center;
+    font-size: 30px;
+ }

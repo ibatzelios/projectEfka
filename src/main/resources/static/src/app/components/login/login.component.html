@@ -1,16 +1,16 @@
-<div class="container jumbotron">
+<div class="container jumbotron col-md-4">
   <form name="form" #loginForm="ngForm" (ngSubmit)="loginForm.form.valid && login(loginForm)" novalidate>
     <div class="form-group row">
-      <label for="loginUsername" class="col-sm-2 col-form-label">Username</label>
-      <div class="col-sm-10">
+      <label for="loginUsername" class="col-sm-3 col-form-label">Username</label>
+      <div class="col-sm-9">
         <input name="loginUsername" type="text" class="form-control" #loginUsername="ngModel" [ngClass]="{'is-invalid': loginForm.submitted && loginUsername.invalid}"
           required ngModel>
         <div class="invalid-feedback">Το username είναι υποχρεώτικο</div>
       </div>
     </div>
     <div class="form-group row">
-      <label for="loginPassword" class="col-sm-2 col-form-label">Password</label>
-      <div class="col-sm-10">
+      <label for="loginPassword" class="col-sm-3 col-form-label">Password</label>
+      <div class="col-sm-9">
         <input name="loginPassword" type="password" class="form-control" #loginPassword="ngModel" [ngClass]="{'is-invalid': loginForm.submitted && loginPassword.invalid}"
           required minlength="7" ngModel>
         <div *ngIf="loginForm.submitted && loginPassword.invalid" class="invalid-feedback">
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label">User type</label>
+      <label class="col-sm-3 col-form-label">User type</label>
       <div class="col-sm-2 col-form-label">
         <div class="form-check">
           <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="p" checked
@@ -37,7 +37,9 @@
         </div>
       </div>
     </div>
-    <button id="submit" type="submit" class="btn btn-primary">Login</button>
+    <div class="rounded mx-auto d-block col-sm-4">
+      <button id="submit" type="submit" class="btn btn-primary">Login</button>
+      <a [routerLink]="['/home']" class="btn btn-link">Cancel</a>
+    </div>
   </form>
-  <a [routerLink]="['/home']" class="btn btn-link">Cancel</a>
 </div>

@@ -127,10 +127,6 @@ export class UserHomepageComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  // dateAdjustment(year, month, day) {
-  //   return year + '/' + month + '/' + day;
-  // }
-
   ngOnInit() { }
 }
 

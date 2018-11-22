@@ -1,14 +1,24 @@
-
-<div class="menu">
-  <h1>Welcome to EFKA</h1>
-  <div class="mx-auto" style="width: 410px">
-    <div style="background-color:rgb(255, 0, 0)" *ngIf="failedMessage">
-      {{failedMessage}}
+<h1>Welcome to EFKA appointment booking!</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4" class="mx-auto d-block">
+      <img id="laptop" src="../../../assets/images/efka_laptop.jpg">
     </div>
-    <div style="background-color:rgb(0, 255, 34)" *ngIf="successMessage">
-      {{successMessage}}
+    <div class="col-md-4">
+      <div id="login-register">
+        <img id="userlogo" class="mx-auto d-block" src="../../../assets/images/user_logo.svg">
+        <button [routerLink]="['/login']" class="btn btn-primary home-btn mx-auto d-block">Login</button>
+        <button [routerLink]="['/register']" class="btn btn-primary home-btn mx-auto d-block">Register</button>
+        <div *ngIf="failedMessage">
+          <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(255, 0, 0)" disabled>{{failedMessage}}</button>
+        </div>
+        <div *ngIf="successMessage">
+          <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(0, 255, 34)" disabled>{{successMessage}}</button>
+        </div>
+      </div>
     </div>
-    <button [routerLink]="['/login']" class="btn btn-primary home-btn">Login</button>
-    <button [routerLink]="['/register']" class="btn btn-primary home-btn">Register</button>
+    <div id="login-cancel" class="col-md-4" class="mx-auto d-block">
+      <img id="doctor" src="../../../assets/images/doctor.jpg">
+    </div>
   </div>
 </div>

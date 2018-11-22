@@ -6,9 +6,6 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { dateAdjustment } from '../../../helperFunctions/dateAdjustment';
 import { timeAdjustment } from '../../../helperFunctions/timeAdjustment';
 
-interface DocSpecialty {
-  name: String;
-}
 
 @Component({
   selector: 'app-editappointments',
@@ -24,6 +21,8 @@ export class EditappointmentsComponent implements OnInit {
   appointments: any;
   docSpecialtys: any;
   docName: any;
+  currAppointments: any ;
+  
   testAppointments = [
     {
       id: '1', doctorSpecialty: 'Odontiatros', doctorName: 'papadopoulos', appointmentDate: '04/03/2018', appointmentTime: '12:00',
@@ -37,15 +36,103 @@ export class EditappointmentsComponent implements OnInit {
     {
       id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
       description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    },
+    {
+      id: '3', doctorSpecialty: 'Kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+      description: 'baxxxxxxxxx', other: 'tirthe to teloss'
     }
   ];
   constructor(private userService: UserService, private modalService: BsModalService) { }
   openModal(template: TemplateRef<any>, appointment: any) {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     this.selectedAppointment = appointment;
-      this.userService.getDoctorsSpecialtys().subscribe((data) => {
-        this.docSpecialty = data;
-      });
+    this.userService.getDoctorsSpecialtys().subscribe((data) => {
+      this.docSpecialty = data;
+    });
   }
   selectedDoctorSpecialty(event: any) {
     var selectedSpe = event.target.value;
@@ -67,6 +154,14 @@ export class EditappointmentsComponent implements OnInit {
   }
   updateAppointment(updateForm: NgForm) {
     console.log(updateForm.value);
+    this.userService.updateAppointment(this.selectedAppointment).subscribe((data)=>{
+
+    }, error => {
+      this.userService.getAllAppointments().subscribe((data) => {
+        this.appointments = data;
+      });
+      
+    });
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 <div class="container jumbotron">
-    <table id="editTable" class="table table-striped table-responsive">
-        <thead>
+    <div class="panel-heading">
+        <table>
             <tr>
                 <th scope="col">Operations</th>
                 <th scope="col">Doctor's Specialty</th>
@@ -10,38 +10,44 @@
                 <th scope="col">Short Description of Illness</th>
                 <th scope="col">Other Remarks</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let app of testAppointments">
-                <td>
-                    <button class="btn btn-danger btn-sm" (click)="deleteAppointment(app)"><img id="icons" src="../../../assets/images/delete_icon.svg"></button>
-                    <button class="btn btn-primary btn-sm" (click)="openModal(updateAppointmentModal, app)"><img id="icons"
-                            src="../../../assets/images/update_icon.svg"></button>
-                </td>
-                <td>{{app.doctorSpecialty}}</td>
-                <td>{{app.doctorName}}</td>
-                <td>{{app.appointmentDate}}</td>
-                <td>{{app.appointmentTime}}</td>
-                <td>
-                    <ng-template #popContentDescr>{{app.description}}</ng-template>
-                    <ng-template #popDescr>Description</ng-template>
-                    <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContentDescr"
-                        [popoverTitle]="popDescr">
-                        Click in..
-                    </button>
-                </td>
-                <td>
-                    <ng-template #popContentOther>{{app.other}}</ng-template>
-                    <ng-template #popOther>Other Remarks</ng-template>
-                    <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContentOther"
-                        [popoverTitle]="popOther">
-                        Click in..
-                    </button>
-                </td>
-            </tr>
-            <a [routerLink]="['/userhomepage']" class="btn btn-link">Cancel</a>
-        </tbody>
-    </table>
+        </table>
+        <div id="tablebox">
+            <table id="editTable" class="table table-striped table-responsive">
+
+                <tbody>
+                    <tr *ngFor="let app of testAppointments">
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="deleteAppointment(app)"><img id="icons" src="../../../assets/images/delete_icon.svg"></button>
+                            <button class="btn btn-primary btn-sm" (click)="openModal(updateAppointmentModal, app)"><img
+                                    id="icons" src="../../../assets/images/update_icon.svg"></button>
+                        </td>
+                        <td>{{app.doctorSpecialty}}</td>
+                        <td>{{app.doctorName}}</td>
+                        <td>{{app.appointmentDate}}</td>
+                        <td>{{app.appointmentTime}}</td>
+                        <td>
+                            <ng-template #popContentDescr>{{app.description}}</ng-template>
+                            <ng-template #popDescr>Description</ng-template>
+                            <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContentDescr"
+                                [popoverTitle]="popDescr">
+                                Click in..
+                            </button>
+                        </td>
+                        <td>
+                            <ng-template #popContentOther>{{app.other}}</ng-template>
+                            <ng-template #popOther>Other Remarks</ng-template>
+                            <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContentOther"
+                                [popoverTitle]="popOther">
+                                Click in..
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a [routerLink]="['/userhomepage']" class="btn btn-link">Cancel</a>
+    
 </div>
 <!-- ----------------------------------------------------UPDATE APPOINTMENT MODAL----------------------------------------------------- -->
 <ng-template #updateAppointmentModal>
@@ -52,46 +58,47 @@
         </button>
     </div>
     <div class="modal-body">
-        <form #newAppointmentForm="ngForm" name="form">
+        <form #updateAppointmentForm="ngForm" name="form" [ngFormOptions]="{ updateOn: 'submit' }" (ngSubmit)="updateAppointment(updateAppointmentForm)">
             <div class="form-group">
                 <label for="doctorSpecialty">
                     Doctor's Specialty
                 </label>
                 <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" (change)="selectedDoctorSpecialty($event)"
-                    #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorSpecialty.invalid}"
+                    #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && doctorSpecialty.invalid}"
                     [(ngModel)]="selectedAppointment.doctorSpecialty" required>
                     <option *ngFor="let spe of docSpecialty" [value]="spe.specialty">{{spe.specialty}}</option>
                 </select>
-                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+                <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
             </div>
             <div class="form-group">
                 <label for="doctorName">
                     Doctor's Name
                 </label>
-                <select class="form-control" id="doctorName" name="doctorName" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorName.invalid}"
-                    [(ngModel)]="selectedAppointment.doctorName" required>
+                <select class="form-control" id="doctorName" name="doctorName" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && doctorName.invalid}"
+                    [(ngModel)]="selectedAppointment.doctorName" #doctorName="ngModel" required>
                     <option disabled></option>
                     <option *ngFor="let doc of docName">{{doc.lastName}}</option>
                 </select>
-                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+                <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
             </div>
             <div class="form-group">
                 <label for="appointmentDate">
                     Appointment Date
                 </label>
-                <input class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig" [ngModelOptions]="{name: 'user'}"
-                    name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentDate.invalid}"
-                    [(ngModel)]="selectedAppointment.appointmentDate" required />
-                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+                <input class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig"
+                    name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && appointmentDate.invalid}"
+                    [(ngModel)]="selectedAppointment.appointmentDate" #doctorNappointmentDate="ngModel" required />
+                <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
             </div>
             <div class="form-group">
                 <label for="appointmentTime">
                     Appointment Time
                 </label>
-                <timepicker id="appointmentTime" name="appointmentTime" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentTime.invalid}"
-                [(ngModel)]="selectedAppointment.appointmentTime"  required></timepicker>
-                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+                <timepicker id="appointmentTime" name="appointmentTime" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && appointmentTime.invalid}"
+                    [(ngModel)]="selectedAppointment.appointmentTime" #appointmentTime="ngModel" required></timepicker>
+                <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
             </div>
+            <button id="submit" type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </ng-template>

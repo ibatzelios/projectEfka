@@ -5,3 +5,14 @@
  button{
     margin-right: 5px;
  }
+ #tablebox{
+   overflow: auto;
+   max-height: 500px;
+ }
+ #titlerow{
+   background: rgb(182, 174, 174);
+ }
+ th, td{
+   padding-left: 1%;
+   width: 10%;
+ }
