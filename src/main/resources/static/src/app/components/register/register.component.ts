@@ -34,9 +34,11 @@ export class RegisterComponent implements OnInit {
         let message = 'Registration Successful';
         this.router.navigate(['/home', message]);
         registerForm.reset();
-    }), error => {
-      console.log("hellooooooooooooooo");
-    };
+    }, error => {
+      console.log(error);
+      let message = 'Registration Failed';
+        this.router.navigate(['/home', message]);
+    });
   }
   ngOnInit() {
 

@@ -79,7 +79,7 @@
                 <label for="appointmentDate">
                     Appointment Date
                 </label>
-                <input class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig"
+                <input class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig" [ngModelOptions]="{name: 'user'}"
                     name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentDate.invalid}"
                     [(ngModel)]="selectedAppointment.appointmentDate" required />
                 <div class="invalid-feedback">Είναι υποχρεωτικό</div>

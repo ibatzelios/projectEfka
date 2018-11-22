@@ -2,8 +2,11 @@
 <div class="menu">
   <h1>Welcome to EFKA</h1>
   <div class="mx-auto" style="width: 410px">
-    <div style="background-color:greenyellow">
-      {{message}}
+    <div style="background-color:rgb(255, 0, 0)" *ngIf="failedMessage">
+      {{failedMessage}}
+    </div>
+    <div style="background-color:rgb(0, 255, 34)" *ngIf="successMessage">
+      {{successMessage}}
     </div>
     <button [routerLink]="['/login']" class="btn btn-primary home-btn">Login</button>
     <button [routerLink]="['/register']" class="btn btn-primary home-btn">Register</button>

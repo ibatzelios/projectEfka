@@ -3,7 +3,8 @@ import { UserService } from 'src/app/services/user.service';
 import { NgForm } from '@angular/forms';
 import { BsModalRef, BsModalService, } from 'ngx-bootstrap';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { appointment } from 'src/app/models/appointment';
+import { dateAdjustment } from '../../../helperFunctions/dateAdjustment';
+import { timeAdjustment } from '../../../helperFunctions/timeAdjustment';
 
 interface DocSpecialty {
   name: String;

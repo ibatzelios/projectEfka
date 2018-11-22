@@ -8,12 +8,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   sub: any;
-  message: any;
+  successMessage: any;
+  failedMessage: any;
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.message = params['message']; 
+      if(params['message'] == 'Registration Successful'){
+        this.successMessage = params['message']; 
+      } else {
+        this.failedMessage = params['message'];
+      }
+      
    });
   }
 
