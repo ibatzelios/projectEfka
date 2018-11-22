@@ -1,6 +1,7 @@
 package org.regeneration.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,12 +21,14 @@ public class Appointment implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
-    @JsonIgnoreProperties("appointment")
+    //@JsonIgnoreProperties("appointment")
+    @JsonManagedReference
     private Doctor doctor;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    @JsonIgnoreProperties("appointment")
+    //@JsonIgnoreProperties("appointment")
+    @JsonManagedReference
     private Patient patient;
 
     @Column(name="date")

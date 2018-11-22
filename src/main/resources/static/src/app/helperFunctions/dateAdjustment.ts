@@ -3,5 +3,5 @@ export function dateAdjustment(date) {
     let month = date.getMonth() + 1;
     let day = date.getDate();
     
-    return year + '/' + month + '/' + day;
+    return year + '-' + month + '-' + day;
 }

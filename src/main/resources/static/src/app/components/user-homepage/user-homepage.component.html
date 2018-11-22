@@ -64,7 +64,7 @@
                             #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorSpecialty.invalid}"
                             ngModel required>
                             <option disabled></option>
-                            <option *ngFor="let spe of docSpecialty">{{spe.specialty}}</option>
+                            <option *ngFor="let spe of docSpecialty">{{spe.name}}</option>
                         </select>
                         <div class="invalid-feedback">Είναι υποχρεωτικό</div>
                     </div>

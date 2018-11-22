@@ -55,7 +55,7 @@ export class UserHomepageComponent implements OnInit {
     var selectedSpe = event.target.value;
     var id;
     for (let i = 0; i < this.docSpecialty.length; i++) {
-      if (selectedSpe == this.docSpecialty[i].specialty) {
+      if (selectedSpe == this.docSpecialty[i].name) {
         id = this.docSpecialty[i].id;
       }
     }

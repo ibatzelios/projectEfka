@@ -1,6 +1,8 @@
 package org.regeneration.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +13,7 @@ import java.util.Set;
 public class Doctor implements User, Serializable {
 
     private static final long serialVersionUiD = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -23,11 +26,14 @@ public class Doctor implements User, Serializable {
 
     @ManyToOne
     @JoinColumn(name = "specialty_id")
-    @JsonIgnoreProperties("doctor")
+    //@JsonIgnoreProperties("doctor")
+    @JsonManagedReference
     private Specialty specialty;
 
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @JsonBackReference
+
     private Set<Appointment> appointment;
 
 

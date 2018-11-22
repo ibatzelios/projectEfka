@@ -1,5 +1,6 @@
 package org.regeneration.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class Patient implements User {
     private String phone;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL )
+    @JsonBackReference
     private Set<Appointment> appointment;
 
     public Patient(){};
