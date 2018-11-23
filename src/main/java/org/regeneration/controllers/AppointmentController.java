@@ -4,6 +4,7 @@ import org.regeneration.dtos.AppointmentDto;
 import org.regeneration.models.Appointment;
 import org.regeneration.models.Doctor;
 import org.regeneration.models.Patient;
+import org.regeneration.models.Specialty;
 import org.regeneration.repositories.AppointmentRepository;
 import org.regeneration.repositories.DoctorRepository;
 import org.regeneration.repositories.PatientRepository;
@@ -58,7 +59,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/api/userhomepage/searchappointment")
-    public List<Appointment> getSearchAppointment(@RequestParam("specialtyId") int specialtyId,
+    public List<Appointment> getSearchAppointment(@RequestParam("specialtyId") Specialty specialtyId,
                                                   @RequestParam("dateFrom") String dateFrom,
                                                   @RequestParam("dateTo") String dateTo, Principal principal ){
         Patient patient = patientRepository.findByUsername(principal.getName());
@@ -66,6 +67,6 @@ public class AppointmentController {
         Date dateT = Date.valueOf(dateTo);
         int patientId = patient.getId();
 
-        return appointmentRepository.search(dateF,dateT,specialtyId,patientId);
+        return appointmentRepository. findAll(dateF,dateT,specialtyId,patientId);
     }
 }
