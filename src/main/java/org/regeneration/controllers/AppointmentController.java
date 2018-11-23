@@ -12,9 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.security.Principal;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -53,5 +55,17 @@ public class AppointmentController {
         System.out.println(appointment.toString());
 
         return appointmentRepository.save(appointment);
+    }
+
+    @GetMapping("/api/userhomepage/searchappointment")
+    public List<Appointment> getSearchAppointment(@RequestParam("specialtyId") int specialtyId,
+                                                  @RequestParam("dateFrom") String dateFrom,
+                                                  @RequestParam("dateTo") String dateTo, Principal principal ){
+        Patient patient = patientRepository.findByUsername(principal.getName());
+        Date dateF = Date.valueOf(dateFrom);
+        Date dateT = Date.valueOf(dateTo);
+        int patientId = patient.getId();
+
+        return appointmentRepository.search(dateF,dateT,specialtyId,patientId);
     }
 }
