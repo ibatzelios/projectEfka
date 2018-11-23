@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { RegisterdialogComponent } from 'src/app/dialogs/registerDialog/registerdialog/registerdialog.component';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +12,7 @@ export class HomeComponent implements OnInit {
   sub: any;
   successMessage: any;
   failedMessage: any;
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -22,5 +24,17 @@ export class HomeComponent implements OnInit {
       
    });
   }
+  openRegisterDialog(){
+    console.log('open dialogggggggggg');
+      const dialogRef = this.dialog.open(RegisterdialogComponent, {
+        width: '700px',
+        //data: {name: this.name, animal: this.animal}
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        //this.animal = result;
+      });
+    }
+  }
 
-}

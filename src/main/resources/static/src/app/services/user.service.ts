@@ -69,11 +69,11 @@ export class UserService {
     //   catchError(this.handleError)
     // );
   }
-  getFilteredAppointments(doctorSpecialty, appointmentDateFrom, appointmentDateTo) {
+  getFilteredAppointments(specialtyId, dateFrom, dateTo) {
     const params = new HttpParams().
-      set('doctorSpecialty', doctorSpecialty)
-      .set('appointmentDateFrom', appointmentDateFrom)
-      .set('appointmentDateTo', appointmentDateTo);
+      set('specialtyId', specialtyId)
+      .set('dateFrom', dateFrom)
+      .set('dateTo', dateTo);
     return this.http
       .get(this.baseUrl + '/userhomepage/searchappointment', { headers: this.headers, params })
     // .pipe(

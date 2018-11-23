@@ -1,5 +1,5 @@
 export class searchAppointmentModel {
-    doctorSpecialty: string;
-    appointmentDateFrom: string;
-    appointmentDateTo: string;
+    specialtyId: string;
+    dateFrom: string;
+    dateTo: string;
 }
