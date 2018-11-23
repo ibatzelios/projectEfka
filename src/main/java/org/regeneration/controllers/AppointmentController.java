@@ -4,6 +4,7 @@ import org.regeneration.dtos.AppointmentDto;
 import org.regeneration.models.Appointment;
 import org.regeneration.models.Doctor;
 import org.regeneration.models.Patient;
+import org.regeneration.models.Specialty;
 import org.regeneration.repositories.AppointmentRepository;
 import org.regeneration.repositories.DoctorRepository;
 import org.regeneration.repositories.PatientRepository;
@@ -12,9 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.security.Principal;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,15 +34,8 @@ public class AppointmentController {
         this.doctorRepository = doctorRepository;
     }
 
-
-    @DeleteMapping("/userhomepage/editappointment/edit/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteAppointment(@PathVariable int id) {
-       // getAppointment(id);
-        appointmentRepository.deleteById(id);
-    }
-
     @PostMapping("/api/userhomepage/newappointment")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public Appointment newAppointment(@RequestBody AppointmentDto appointmentDto, Principal principal) {
         Appointment appointment = new Appointment();
         Patient patient = patientRepository.findByUsername(principal.getName());
@@ -54,4 +50,31 @@ public class AppointmentController {
 
         return appointmentRepository.save(appointment);
     }
+
+    @GetMapping("/api/userhomepage/searchappointment")
+    public List<Appointment> searchAppointment(@RequestParam("specialtyId") Specialty specialtyId,
+                                                  @RequestParam("dateFrom") String dateFrom,
+                                                  @RequestParam("dateTo") String dateTo, Principal principal ){
+        Patient patient = patientRepository.findByUsername(principal.getName());
+        Date dateF = Date.valueOf(dateFrom);
+        Date dateT = Date.valueOf(dateTo);
+        int patientId = patient.getId();
+
+        return appointmentRepository. findAll(dateF,dateT,specialtyId,patientId);
+    }
+
+    @GetMapping("/api/userhomepage/editappointment/edit")
+    public List<Appointment> getAppointmentByPatient(Principal principal) {
+        Patient patient = patientRepository.findByUsername(principal.getName());
+        int patientId = patient.getId();
+        return appointmentRepository.findByPatientId(patientId);
+    }
+
+    @DeleteMapping("/api/userhomepage/editappointment/edit")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteAppointment(@RequestParam("id") int id) {
+        appointmentRepository.deleteById(id);
+    }
+
+
 }

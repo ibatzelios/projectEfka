@@ -90,31 +90,39 @@ export class UserHomepageComponent implements OnInit {
     this.modalRef.hide();
   }
   searchAppointment(searchForm) {
-    this.appointment = [
-      {
-        doctorSpecialty: 'odontiatros', doctorName: 'papadopoulos', appointmentDate: '22/01/2018', appointmentTime: '12:00',
-        description: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw',
-        other: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw'
-      },
-      {
-        doctorSpecialty: 'paidiatros', doctorName: 'premtsis', appointmentDate: '04/03/2018', appointmentTime: '15:00',
-        description: 'axxxxxxxxxxx', other: 'den mporwwwwww'
-      },
-      {
-        doctorSpecialty: 'kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
-        description: 'baxxxxxxxxx', other: 'tirthe to teloss'
-      },
+    // this.appointment = [
+    //   {
+    //     doctorSpecialty: 'odontiatros', doctorName: 'papadopoulos', appointmentDate: '22/01/2018', appointmentTime: '12:00',
+    //     description: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw',
+    //     other: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw'
+    //   },
+    //   {
+    //     doctorSpecialty: 'paidiatros', doctorName: 'premtsis', appointmentDate: '04/03/2018', appointmentTime: '15:00',
+    //     description: 'axxxxxxxxxxx', other: 'den mporwwwwww'
+    //   },
+    //   {
+    //     doctorSpecialty: 'kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
+    //     description: 'baxxxxxxxxx', other: 'tirthe to teloss'
+    //   },
 
-    ];
+    // ];
+    var speId;
+    for (let i = 0; i < this.docSpecialty.length; i++) {
+      if (searchForm.value.doctorSpecialty == this.docSpecialty[i].name) {
+        speId = this.docSpecialty[i].id;
+      }
+    }
+    var dateFrom = dateAdjustment(searchForm.value.appointmentDate[0]);
+    var dateTo = dateAdjustment(searchForm.value.appointmentDate[1]);
     let searchAppointments: searchAppointmentModel = {
-      doctorSpecialty: searchForm.value.doctorSpecialty,
-      appointmentDateFrom: searchForm.value.appointmentDate[0].toDateString(),
-      appointmentDateTo: searchForm.value.appointmentDate[1].toDateString()
+      specialtyId: speId,
+      dateFrom: dateFrom,
+      dateTo: dateTo
     };
     console.log(searchAppointments);
 
-    this.userService.getFilteredAppointments(searchAppointments.doctorSpecialty,
-      searchAppointments.appointmentDateFrom, searchAppointments.appointmentDateTo)
+    this.userService.getFilteredAppointments(searchAppointments.specialtyId,
+      searchAppointments.dateFrom, searchAppointments.dateTo)
       .subscribe(data => {
         console.log(data);
         this.appointment = data;

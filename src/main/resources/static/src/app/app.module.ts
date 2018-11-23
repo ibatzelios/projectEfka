@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { UserService } from './services/user.service';
 import { UserhomepageAuthService } from './services/userhomepage-auth.service';
 import { LoginpageAuthService } from './services/loginpage-auth.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 
 
@@ -21,7 +23,8 @@ import { LoginpageAuthService } from './services/loginpage-auth.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     UserService,

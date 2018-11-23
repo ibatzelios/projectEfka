@@ -1,7 +1,6 @@
 package org.regeneration.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -33,7 +32,6 @@ public class Doctor implements User, Serializable {
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     @JsonBackReference
-
     private Set<Appointment> appointment;
 
 

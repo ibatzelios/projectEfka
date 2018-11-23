@@ -8,7 +8,7 @@
       <div id="login-register">
         <img id="userlogo" class="mx-auto d-block" src="../../../assets/images/user_logo.svg">
         <button [routerLink]="['/login']" class="btn btn-primary home-btn mx-auto d-block">Login</button>
-        <button [routerLink]="['/register']" class="btn btn-primary home-btn mx-auto d-block">Register</button>
+        <button (click)="openRegisterDialog()" class="btn btn-primary home-btn mx-auto d-block">Register</button>
         <div *ngIf="failedMessage">
           <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(255, 0, 0)" disabled>{{failedMessage}}</button>
         </div>
