@@ -9,8 +9,7 @@ import { AppComponent } from './app.component';
 import { UserService } from './services/user.service';
 import { UserhomepageAuthService } from './services/userhomepage-auth.service';
 import { LoginpageAuthService } from './services/loginpage-auth.service';
-import { AlertService } from './services/alert.service';
-// import { AlertComponent } from './components/alert/alert.component';
+
 
 
 @NgModule({
@@ -25,7 +24,6 @@ import { AlertService } from './services/alert.service';
     HttpClientModule
   ],
   providers: [
-    AlertService,
     UserService,
     UserhomepageAuthService,
     LoginpageAuthService

@@ -7,6 +7,8 @@ import { searchAppointmentModel } from '../../models/searchAppointmentModel';
 import { doctorModel } from '../../models/doctorModel';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { UserService } from 'src/app/services/user.service';
+import { dateAdjustment } from '../../helperFunctions/dateAdjustment';
+import { timeAdjustment } from '../../helperFunctions/timeAdjustment';
 
 // interface DocSpecialty {
 //   name: String;
@@ -53,7 +55,7 @@ export class UserHomepageComponent implements OnInit {
     var selectedSpe = event.target.value;
     var id;
     for (let i = 0; i < this.docSpecialty.length; i++) {
-      if (selectedSpe == this.docSpecialty[i].specialty) {
+      if (selectedSpe == this.docSpecialty[i].name) {
         id = this.docSpecialty[i].id;
       }
     }
@@ -69,12 +71,14 @@ export class UserHomepageComponent implements OnInit {
         id = this.docName[i].id;
       }
     }
-    console.log('This is the doctors id !!!!!!!!!!!!!!');
-    console.log(id);
+
+    var finalTime = timeAdjustment(appointmentForm.value.appointmentTime);
+    var finalDate = dateAdjustment(appointmentForm.value.appointmentDate);
+
     let newAppointment: appointment = {
       doctorId: id,
-      date: appointmentForm.value.appointmentDate,
-      time: appointmentForm.value.appointmentTime,
+      date: finalDate,
+      time: finalTime,
       illness: appointmentForm.value.description,
       comments: appointmentForm.value.remarks
     };

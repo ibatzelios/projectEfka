@@ -1,34 +1,42 @@
 package org.regeneration.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "doctor")
-public class Doctor implements User{
+public class Doctor implements User, Serializable {
 
-    private int id;
-    private String lastName;
-    private String firstName;
-    private String username;
-    private String password;
-    private int specialtyId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "specialty_id")
-    private Specialty specialty;
-
-    public Doctor(String lastName, String firstName, String username, String password, int specialtyId) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.username = username;
-        this.password = password;
-        this.specialtyId = specialtyId;
-    }
-
-    public Doctor() {    }
+    private static final long serialVersionUiD = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "first_name")
+    private String firstName;
+    private String username;
+    private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "specialty_id")
+    //@JsonIgnoreProperties("doctor")
+    @JsonManagedReference
+    private Specialty specialty;
+
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @JsonBackReference
+
+    private Set<Appointment> appointment;
+
+
     public int getId() {
         return id;
     }
@@ -37,7 +45,7 @@ public class Doctor implements User{
         this.id = id;
     }
 
-    @Column(name = "last_name")
+
     public String getLastName() {
         return lastName;
     }
@@ -46,7 +54,7 @@ public class Doctor implements User{
         this.lastName = lastName;
     }
 
-    @Column(name = "first_name")
+
     public String getFirstName() {
         return firstName;
     }
@@ -71,14 +79,19 @@ public class Doctor implements User{
         this.password = password;
     }
 
-    @Column(name = "specialty_id")
-    public int getSpecialtyId() {
-        return specialtyId;
+    public Specialty getSpecialty() {
+        return specialty;
     }
 
-    public void setSpecialtyId(int specialtyId) {
-        this.specialtyId = specialtyId;
+    public void setSpecialty(Specialty specialty) {
+        this.specialty = specialty;
     }
 
+    public Set<Appointment> getAppointment() {
+        return appointment;
+    }
 
+    public void setAppointment(Set<Appointment> appointment) {
+        this.appointment = appointment;
+    }
 }

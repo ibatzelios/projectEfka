@@ -1,6 +1,12 @@
 package org.regeneration.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "patient")
@@ -24,6 +30,10 @@ public class Patient implements User {
     private String amka;
     @Column(name="phone")
     private String phone;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL )
+    @JsonBackReference
+    private Set<Appointment> appointment;
 
     public Patient(){};
 
@@ -105,6 +115,14 @@ public class Patient implements User {
         return this.getId();
     }
 
+    public Set<Appointment> getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Set<Appointment> appointment) {
+        this.appointment = appointment;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
@@ -118,4 +136,5 @@ public class Patient implements User {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+
 }

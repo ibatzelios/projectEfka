@@ -1,10 +1,10 @@
 package org.regeneration.controllers;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.regeneration.models.Specialty;
 import org.regeneration.repositories.SpecialtyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
