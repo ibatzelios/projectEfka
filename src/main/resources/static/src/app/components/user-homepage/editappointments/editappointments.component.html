@@ -65,7 +65,7 @@
                 </label>
                 <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" (change)="selectedDoctorSpecialty($event)"
                     #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && doctorSpecialty.invalid}"
-                    [(ngModel)]="selectedAppointment.doctorSpecialty" required>
+                    [(ngModel)]="selectedAppointment.doctor.specialty.name" required>
                     <option *ngFor="let spe of docSpecialty" [value]="spe.name">{{spe.name}}</option>
                 </select>
                 <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
@@ -75,7 +75,7 @@
                     Doctor's Name
                 </label>
                 <select class="form-control" id="doctorName" name="doctorName" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && doctorName.invalid}"
-                    [(ngModel)]="selectedAppointment.doctorName" #doctorName="ngModel" required>
+                    [(ngModel)]="selectedAppointment.doctor.lastName" #doctorName="ngModel" required>
                     <option disabled></option>
                     <option *ngFor="let doc of docName" [value]="doc.lastName">{{doc.lastName}}</option>
                 </select>
@@ -87,7 +87,7 @@
                 </label>
                 <input class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig"
                     name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && appointmentDate.invalid}"
-                    [(ngModel)]="selectedAppointment.appointmentDate" #doctorNappointmentDate="ngModel" required />
+                    [(ngModel)]="selectedAppointment.date" #doctorNappointmentDate="ngModel" required />
                 <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
             </div>
             <div class="form-group">
@@ -95,19 +95,19 @@
                     Appointment Time
                 </label>
                 <ngb-timepicker id="appointmentTime" name="appointmentTime" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && appointmentTime.invalid}"
-                    [(ngModel)]="selectedAppointment.appointmentTime" #appointmentTime="ngModel" required></ngb-timepicker>
+                    [(ngModel)]="selectedAppointment.time" #appointmentTime="ngModel" required></ngb-timepicker>
                 <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
             </div>
             <div class="form-group">
                 <label for="description">Short Description of Illness</label>
                 <textarea class="form-control" rows="4" id="description" name="description" #description="ngModel"
-                    [ngClass]="{'is-invalid': updateAppointmentForm.submitted && description.invalid}" [(ngModel)]="selectedAppointment.description"
+                    [ngClass]="{'is-invalid': updateAppointmentForm.submitted && description.invalid}" [(ngModel)]="selectedAppointment.illness"
                     required></textarea>
                 <div class="invalid-feedback">Είναι υποχρεωτικό</div>
             </div>
             <div class="form-group">
                 <label for="remarks">Other Remarks</label>
-                <textarea class="form-control" rows="4" id="remarks" name="remarks" [(ngModel)]="selectedAppointment.other"></textarea>
+                <textarea class="form-control" rows="4" id="remarks" name="remarks" [(ngModel)]="selectedAppointment.comments"></textarea>
             </div>
             <button id="submit" type="submit" class="btn btn-primary">Submit</button>
         </form>

@@ -18,15 +18,16 @@ export class EditappointmentsComponent implements OnInit {
   selectedAppointment: any;
   docSpecialty: any;
   appointments: any;
-  docSpecialtys: any;
+  //docSpecialtys: any;
   docName: any;
-  currAppointments: any;
+  //currAppointments: any;
   staticAppointments: any;
 
   constructor(private userService: UserService, private modalService: BsModalService) { }
   openModal(template: TemplateRef<any>, appointment: any) {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     this.selectedAppointment = appointment;
+    console.log(this.selectedAppointment);
     this.userService.getDoctorsSpecialtys().subscribe((data) => {
       this.docSpecialty = data;
     });
@@ -49,6 +50,16 @@ export class EditappointmentsComponent implements OnInit {
     });
   }
   updateAppointment(updateForm: NgForm) {
+    
+    this.selectedAppointment.date = dateAdjustment(this.selectedAppointment.date);
+    this.selectedAppointment.time = timeAdjustment(this.selectedAppointment.time);
+    let id;
+    for (let i = 0; i < this.docSpecialty.length; i++) {
+      if (this.selectedAppointment.doctor.specialty.name == this.docSpecialty[i].name) {
+        id = this.docSpecialty[i].id;
+      }
+    }
+    this.selectedAppointment.doctor.id = id;
     console.log(this.selectedAppointment);
     this.userService.updateAppointment(this.selectedAppointment).subscribe((data) => {
       let updatedDate = dateAdjustment(this.selectedAppointment.appointmentDate);
@@ -73,6 +84,7 @@ export class EditappointmentsComponent implements OnInit {
       console.log(data);
       this.appointments = data;
       this.staticAppointments = JSON.parse(JSON.stringify(this.appointments));
+      console.log(this.staticAppointments);
     });
   }
 
