@@ -17,11 +17,11 @@ const routes: Routes = [{
 		loadChildren: './components/home/home.module#HomeModule',
 		canActivate: [LoginpageAuthService]
 	},
-	{
-		path: 'home/:message',
-		loadChildren: './components/home/home.module#HomeModule',
-		canActivate: [LoginpageAuthService]
-	},
+	// {
+	// 	path: 'home/:message',
+	// 	loadChildren: './components/home/home.module#HomeModule',
+	// 	canActivate: [LoginpageAuthService]
+	// },
 	{
 		path: 'login',
 		loadChildren: './components/login/login.module#LoginModule',

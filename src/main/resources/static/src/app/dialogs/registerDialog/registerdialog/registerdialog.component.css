@@ -1,5 +1,5 @@
 .container{
-    margin-top: 10%;
+    width: 100%;
  }
  #buttons{
     margin-top: 100px;
@@ -7,3 +7,4 @@
  .row{
     margin-bottom: 30px;
  }
+ 

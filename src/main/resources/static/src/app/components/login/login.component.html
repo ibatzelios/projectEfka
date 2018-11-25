@@ -30,7 +30,7 @@
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="d" ngModel>
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="d" ngModel required>
           <label class="form-check-label" for="exampleRadios2">
             Doctor
           </label>
@@ -40,6 +40,15 @@
     <div class="rounded mx-auto d-block col-sm-4">
       <button id="submit" type="submit" class="btn btn-primary">Login</button>
       <a [routerLink]="['/home']" class="btn btn-link">Cancel</a>
+      <a (click)="openRegisterDialog()" class="btn btn-link">Register</a>
     </div>
+    <div *ngIf="alert">
+        <div *ngIf="!message">
+          <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(255, 0, 0)" disabled>Failed</button>
+        </div>
+        <div *ngIf="message">
+          <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(0, 255, 34)" disabled>Success</button>
+        </div>
+      </div>
   </form>
 </div>

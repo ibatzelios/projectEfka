@@ -166,12 +166,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let app of appointment">
-                    <td>{{app.doctorSpecialty}}</td>
-                    <td>{{app.doctorName}}</td>
-                    <td>{{app.appointmentDate}}</td>
-                    <td>{{app.appointmentTime}}</td>
+                    <td>{{app.doctor.specialty.name}}</td>
+                    <td>{{app.doctor.lastName}}</td>
+                    <td>{{app.date}}</td>
+                    <td>{{app.time}}</td>
                     <td>
-                        <ng-template #popContentDescr>{{app.description}}</ng-template>
+                        <ng-template #popContentDescr>{{app.illness}}</ng-template>
                         <ng-template #popDescr>Description</ng-template>
                         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContentDescr"
                             [popoverTitle]="popDescr">
@@ -179,7 +179,7 @@
                         </button>
                     </td>
                     <td>
-                        <ng-template #popContentOther>{{app.other}}</ng-template>
+                        <ng-template #popContentOther>{{app.comments}}</ng-template>
                         <ng-template #popOther>Other Remarks</ng-template>
                         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContentOther"
                             [popoverTitle]="popOther">
