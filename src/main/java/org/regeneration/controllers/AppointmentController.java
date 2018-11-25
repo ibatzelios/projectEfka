@@ -1,6 +1,7 @@
 package org.regeneration.controllers;
 
 import org.regeneration.dtos.AppointmentDto;
+import org.regeneration.exceptions.AppointmentNotFoundException;
 import org.regeneration.models.Appointment;
 import org.regeneration.models.Doctor;
 import org.regeneration.models.Patient;
@@ -30,7 +31,7 @@ public class AppointmentController {
     @Autowired
     public AppointmentController(AppointmentRepository appointmentRepository, PatientRepository patientRepository, DoctorRepository doctorRepository) {
         this.appointmentRepository = appointmentRepository;
-        this.patientRepository =patientRepository;
+        this.patientRepository = patientRepository;
         this.doctorRepository = doctorRepository;
     }
 
@@ -53,14 +54,14 @@ public class AppointmentController {
 
     @GetMapping("/api/userhomepage/searchappointment")
     public List<Appointment> searchAppointment(@RequestParam("specialtyId") Specialty specialtyId,
-                                                  @RequestParam("dateFrom") String dateFrom,
-                                                  @RequestParam("dateTo") String dateTo, Principal principal ){
+                                               @RequestParam("dateFrom") String dateFrom,
+                                               @RequestParam("dateTo") String dateTo, Principal principal) {
         Patient patient = patientRepository.findByUsername(principal.getName());
         Date dateF = Date.valueOf(dateFrom);
         Date dateT = Date.valueOf(dateTo);
         int patientId = patient.getId();
 
-        return appointmentRepository. findAll(dateF,dateT,specialtyId,patientId);
+        return appointmentRepository.findAll(dateF, dateT, specialtyId, patientId);
     }
 
     @GetMapping("/api/userhomepage/editappointment/edit")
@@ -70,11 +71,27 @@ public class AppointmentController {
         return appointmentRepository.findByPatientId(patientId);
     }
 
+    @PutMapping("/api/userhomepage/editappointment/edit")
+    public Appointment updateAppointment(@RequestBody Appointment updatedAppointment) {
+        int id = updatedAppointment.getId();
+//        Date date= Date.valueOf(updatedAppointment.getDate());
+//        Time time = Time.valueOf(updatedAppointment.getTime());
+        return appointmentRepository.findById(id)
+                .map(appointment -> {
+                    appointment.setDoctor(updatedAppointment.getDoctor());
+                    appointment.setPatient(updatedAppointment.getPatient());
+                    appointment.setDate(updatedAppointment.getDate());
+                    appointment.setTime(updatedAppointment.getTime());
+                    appointment.setIllness(updatedAppointment.getIllness());
+                    appointment.setComments(updatedAppointment.getComments());
+                    return appointmentRepository.save(appointment);
+                })
+                .orElseThrow(() -> new AppointmentNotFoundException(id));
+    }
+
     @DeleteMapping("/api/userhomepage/editappointment/edit")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteAppointment(@RequestParam("id") int id) {
         appointmentRepository.deleteById(id);
     }
-
-
 }
