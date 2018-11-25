@@ -22,13 +22,13 @@ public class Appointment implements Serializable{
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     //@JsonIgnoreProperties("appointment")
-    @JsonManagedReference
+    //@JsonManagedReference
     private Doctor doctor;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
     //@JsonIgnoreProperties("appointment")
-    @JsonManagedReference
+    //@JsonManagedReference
     private Patient patient;
 
     @Column(name="date")

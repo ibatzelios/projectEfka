@@ -3,8 +3,6 @@ import { NgForm } from '@angular/forms';
 import { user } from '../../models/userModel';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +17,8 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(registerForm: NgForm) {
-    
+    console.log(registerForm.value.registerAmka);
+
     let newUser: user = {
       amka: registerForm.value.registerAmka,
       firstName: registerForm.value.registerfName,

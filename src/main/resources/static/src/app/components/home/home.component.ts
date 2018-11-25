@@ -10,30 +10,26 @@ import { RegisterdialogComponent } from 'src/app/dialogs/registerDialog/register
 })
 export class HomeComponent implements OnInit {
   sub: any;
-  successMessage: any;
-  failedMessage: any;
+  message: any;
+  alert = false;
+ 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) { }
 
-  ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      if(params['message'] == 'Registration Successful'){
-        this.successMessage = params['message']; 
-      } else {
-        this.failedMessage = params['message'];
-      }
-      
-   });
-  }
+  ngOnInit(){
+   };
+  
   openRegisterDialog(){
-    console.log('open dialogggggggggg');
       const dialogRef = this.dialog.open(RegisterdialogComponent, {
-        width: '700px',
-        //data: {name: this.name, animal: this.animal}
+        width: '50%'
       });
   
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        //this.animal = result;
+        if(result != null){
+        this.message= result.status;
+        this.alert = result.exists;
+        } else {
+        this.alert = false;
+        }
       });
     }
   }

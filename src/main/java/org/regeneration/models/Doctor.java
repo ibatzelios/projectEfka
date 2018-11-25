@@ -26,7 +26,7 @@ public class Doctor implements User, Serializable {
     @ManyToOne
     @JoinColumn(name = "specialty_id")
     //@JsonIgnoreProperties("doctor")
-    @JsonManagedReference
+    //@JsonManagedReference
     private Specialty specialty;
 
 
