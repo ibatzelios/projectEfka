@@ -63,6 +63,6 @@ public class PatientControllerAdvice {
 
 
         String message = e.getMessage().substring(first +1, second);
-        return new ErrorDetails("Duplicate entry","Duplicate entry for "+message+" field");
+        return new ErrorDetails("Duplicate entry","Duplicate entry for "+message+"");
     }
 }
