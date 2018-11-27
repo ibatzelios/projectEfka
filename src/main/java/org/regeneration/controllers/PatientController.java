@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -25,13 +26,13 @@ PatientController {
     }
 
     @GetMapping("/api/patients")
-        public Patient getLoggedInPatient(Principal principal) {
-            if (principal == null) {
-                throw new NoLoggedInUserException();
-            } else {
-                Patient loggedInUser = patientRepository.findByUsername(principal.getName());
-                return loggedInUser;
-            }
+    public Patient getLoggedInPatient(Principal principal) {
+        if (principal == null) {
+            throw new NoLoggedInUserException();
+        } else {
+            Patient loggedInUser = patientRepository.findByUsername(principal.getName());
+            return loggedInUser;
+        }
     }
 
     @GetMapping("/api/patients/{id}")
@@ -41,8 +42,10 @@ PatientController {
 
     @PostMapping("/api/register")
     public Patient newPatient(@RequestBody Patient patient) {
+
             patient.setPassword(passwordEncoder.encode(patient.getPassword()));
             return patientRepository.save(patient);
-    }
 
+    }
 }
+

@@ -2,9 +2,15 @@ package org.regeneration.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 
@@ -16,19 +22,38 @@ public class Patient implements User {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
+
     @Column(name="last_name")
+    @NotBlank(message = "$Last name cannot be empty$")
     private String lastName;
+
     @Column(name="first_name")
+    @NotBlank(message = "$First name cannot be empty$")
     private String firstName;
+
     @Column(name="email")
+    @NotBlank
+    @Email(message = "$Email should be valid$")
     private String email;
-    @Column(name="username")
+
+    @Column(name="username", unique = true)
+    @NotBlank(message = "$Username cannot be empty$")
+    @Size(min=2)
     private String username;
+
     @Column(name="password")
+    @NotBlank
+    @Size(min=7, message = "$This password must have 7 characters$")
     private String password;
-    @Column(name="amka")
+
+    @Column(name="amka", unique = true)
+    @NotBlank(message = "$Amka cannot be empty$")
+    @Size(min =10, max=11,message = "$Amka must have 11 characters$")
     private String amka;
-    @Column(name="phone")
+
+    @Column(name="phone", unique = true)
+    @NotBlank(message = "$Phone cannot be empty$")
+    @Size(min=10, max=15)
     private String phone;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL )

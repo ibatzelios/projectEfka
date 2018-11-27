@@ -33,6 +33,4 @@ public class DoctorController {
     public List<Doctor> getDoctorBySpecialtyId(@RequestParam("specialtyId") int specialtyDto){
         return doctorRepository.findBySpecialtyId(specialtyDto);
     }
-
-
 }

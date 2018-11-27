@@ -45,8 +45,6 @@ public class AppointmentController {
         appointment.setIllness(appointmentDto.getIllness());
         appointment.setTime(Time.valueOf(appointmentDto.getTime()));
         appointment.setDate(Date.valueOf(appointmentDto.getDate()));
-        System.out.println(appointment.toString());
-
         return appointmentRepository.save(appointment);
     }
 
@@ -58,6 +56,7 @@ public class AppointmentController {
         Date dateF = Date.valueOf(dateFrom);
         Date dateT = Date.valueOf(dateTo);
         int patientId = patient.getId();
+
 
         return appointmentRepository.findByDateAndSpecialty(dateF, dateT, specialtyId, patientId);
     }
