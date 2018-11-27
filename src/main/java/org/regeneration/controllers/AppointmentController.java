@@ -11,10 +11,8 @@ import org.regeneration.repositories.DoctorRepository;
 import org.regeneration.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
 import java.security.Principal;
 import java.sql.Date;
 import java.sql.Time;
@@ -61,7 +59,7 @@ public class AppointmentController {
         Date dateT = Date.valueOf(dateTo);
         int patientId = patient.getId();
 
-        return appointmentRepository.findAll(dateF, dateT, specialtyId, patientId);
+        return appointmentRepository.findByDateAndSpecialty(dateF, dateT, specialtyId, patientId);
     }
 
     @GetMapping("/api/userhomepage/editappointment/edit")
@@ -74,8 +72,6 @@ public class AppointmentController {
     @PutMapping("/api/userhomepage/editappointment/edit")
     public Appointment updateAppointment(@RequestBody Appointment updatedAppointment) {
         int id = updatedAppointment.getId();
-//        Date date= Date.valueOf(updatedAppointment.getDate());
-//        Time time = Time.valueOf(updatedAppointment.getTime());
         return appointmentRepository.findById(id)
                 .map(appointment -> {
                     appointment.setDoctor(updatedAppointment.getDoctor());
@@ -93,5 +89,25 @@ public class AppointmentController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteAppointment(@RequestParam("id") int id) {
         appointmentRepository.deleteById(id);
+    }
+
+    @GetMapping("/api/doctorhomepage/searchappointments")
+    public List<Appointment> searchDoctorsAppointment(@RequestParam("searchText") String searchText,
+                                                      @RequestParam("dateFrom") String dateFrom,
+                                                      @RequestParam("dateTo") String dateTo, Principal principal) {
+        Doctor doctor = doctorRepository.findByUsername(principal.getName());
+        Date dateF = Date.valueOf(dateFrom);
+        Date dateT = Date.valueOf(dateTo);
+        int doctorId = doctor.getId();
+
+        return appointmentRepository.findByDateAndIllness(dateF, dateT, searchText, doctorId);
+    }
+
+    //edw xreiazetai enas elegxos gia na elegxei oti to rantevou anhkei ston sygkekrimeno giatro
+    @GetMapping("/api/doctorhomepage/showappointmentsdetails")
+    public Optional<Appointment> getAppointmentById(@RequestParam("id") int id, Principal principal) {
+        Doctor doctor = doctorRepository.findByUsername(principal.getName());
+        int doctorId = doctor.getId();
+        return appointmentRepository.findById(id);
     }
 }
