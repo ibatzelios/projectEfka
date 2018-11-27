@@ -47,8 +47,6 @@ public class AppointmentController {
         appointment.setIllness(appointmentDto.getIllness());
         appointment.setTime(Time.valueOf(appointmentDto.getTime()));
         appointment.setDate(Date.valueOf(appointmentDto.getDate()));
-        System.out.println(appointment.toString());
-
         return appointmentRepository.save(appointment);
     }
 
@@ -60,7 +58,6 @@ public class AppointmentController {
         Date dateF = Date.valueOf(dateFrom);
         Date dateT = Date.valueOf(dateTo);
         int patientId = patient.getId();
-
         return appointmentRepository.findAll(dateF, dateT, specialtyId, patientId);
     }
 
@@ -74,8 +71,6 @@ public class AppointmentController {
     @PutMapping("/api/userhomepage/editappointment/edit")
     public Appointment updateAppointment(@RequestBody Appointment updatedAppointment) {
         int id = updatedAppointment.getId();
-//        Date date= Date.valueOf(updatedAppointment.getDate());
-//        Time time = Time.valueOf(updatedAppointment.getTime());
         return appointmentRepository.findById(id)
                 .map(appointment -> {
                     appointment.setDoctor(updatedAppointment.getDoctor());
