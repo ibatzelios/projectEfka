@@ -9,6 +9,9 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { UserService } from 'src/app/services/user.service';
 import { dateAdjustment } from '../../helperFunctions/dateAdjustment';
 import { timeAdjustment } from '../../helperFunctions/timeAdjustment';
+import { MatDialog } from '@angular/material/dialog';
+import { NewappointmentdialogComponent } from 'src/app/dialogs/userdialogs/newappointmentdialog/newappointmentdialog.component';
+import { AlertdialogComponent } from 'src/app/dialogs/userdialogs/alertdialog/alertdialog.component';
 
 // interface DocSpecialty {
 //   name: String;
@@ -20,7 +23,8 @@ import { timeAdjustment } from '../../helperFunctions/timeAdjustment';
   styleUrls: ['./user-homepage.component.css']
 })
 export class UserHomepageComponent implements OnInit {
-  mytime: Date;
+  // mytime: Date;
+  loading = false;
   datePickerConfig: Partial<BsDatepickerConfig>;
 
 
@@ -33,17 +37,33 @@ export class UserHomepageComponent implements OnInit {
   appointment: any;
   searchAppointmentModel: searchAppointmentModel[] = [];
 
-  constructor(private router: Router, private modalService: BsModalService, private userService: UserService) {
+  constructor(private router: Router, private modalService: BsModalService, private userService: UserService, public dialog: MatDialog) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-blue',
       showWeekNumbers: false,
       minDate: new Date()
     });
   }
+  openNewAppointmentDialog() {
+    const dialogRef = this.dialog.open(NewappointmentdialogComponent, {
+      // width: '50%'
+    });
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null) {
+        const dialogRef = this.dialog.open(AlertdialogComponent, {
+          data: {
+            result: result
+          }
+        });
+      }
+    });
   }
+
+
+  // openModal(template: TemplateRef<any>) {
+  //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+  // }
   // Need testing and be added in the new appointment button && to the search appointment button
   setDoctorsSpecialtys() {
     this.userService.getDoctorsSpecialtys().subscribe((data) => {
@@ -65,6 +85,7 @@ export class UserHomepageComponent implements OnInit {
   }
 
   newAppointment(appointmentForm: NgForm) {
+    this.loading = true;
     var id;
     for (let i = 0; i < this.docName.length; i++) {
       if (appointmentForm.value.doctorName == this.docName[i].lastName) {
@@ -83,29 +104,18 @@ export class UserHomepageComponent implements OnInit {
       comments: appointmentForm.value.remarks
     };
     this.userService.setNewAppointment(newAppointment).subscribe(res => {
-      console.log(res);
+      this.loading = false;
+
+    }, error => {
+      this.loading = false;
+
     });
-    console.log(newAppointment);
     appointmentForm.reset();
     this.modalRef.hide();
   }
   searchAppointment(searchForm) {
-    // this.appointment = [
-    //   {
-    //     doctorSpecialty: 'odontiatros', doctorName: 'papadopoulos', appointmentDate: '22/01/2018', appointmentTime: '12:00',
-    //     description: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw',
-    //     other: 'Mou ponaei o laimos edw kai pente meres den kserw ti na kanw'
-    //   },
-    //   {
-    //     doctorSpecialty: 'paidiatros', doctorName: 'premtsis', appointmentDate: '04/03/2018', appointmentTime: '15:00',
-    //     description: 'axxxxxxxxxxx', other: 'den mporwwwwww'
-    //   },
-    //   {
-    //     doctorSpecialty: 'kardiologos', doctorName: 'sarantidis', appointmentDate: '12/11/2018', appointmentTime: '17:00',
-    //     description: 'baxxxxxxxxx', other: 'tirthe to teloss'
-    //   },
+    this.loading = true;
 
-    // ];
     var speId;
     for (let i = 0; i < this.docSpecialty.length; i++) {
       if (searchForm.value.doctorSpecialty == this.docSpecialty[i].name) {
@@ -119,13 +129,16 @@ export class UserHomepageComponent implements OnInit {
       dateFrom: dateFrom,
       dateTo: dateTo
     };
-    console.log(searchAppointments);
 
     this.userService.getFilteredAppointments(searchAppointments.specialtyId,
       searchAppointments.dateFrom, searchAppointments.dateTo)
       .subscribe(data => {
-        console.log(data);
         this.appointment = data;
+        this.loading = false;
+
+      }, error => {
+        this.loading = false;
+
       });
 
   }

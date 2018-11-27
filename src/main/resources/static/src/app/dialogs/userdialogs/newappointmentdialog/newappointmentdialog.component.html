@@ -1,0 +1,71 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="registerModalLabel">New Appointment</h5>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container-fluid">
+    <form #newAppointmentForm="ngForm" name="form" (ngSubmit)="newAppointmentForm.form.valid && newAppointment(newAppointmentForm)"
+      novalidate>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="doctorSpecialty">
+            Doctor's Specialty
+          </label>
+          <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" (change)="selectedDoctorSpecialty($event)"
+            #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorSpecialty.invalid}"
+            ngModel required>
+            <option disabled></option>
+            <option *ngFor="let spe of docSpecialty">{{spe.name}}</option>
+          </select>
+          <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="doctorName">
+            Doctor's Name
+          </label>
+          <select class="form-control" id="doctorName" name="doctorName" #doctorName="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && doctorName.invalid}"
+            ngModel required>
+            <option disabled></option>
+            <option *ngFor="let doc of docName">{{doc.lastName}}</option>
+          </select>
+          <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="appointmentDate">
+            Appointment Date
+          </label>
+          <input autocomplete="off" class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig"
+            name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentDate.invalid}"
+            ngModel required />
+          <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="appointmentTime">
+            Appointment Time
+          </label>
+          <ngb-timepicker id="appointmentTime" name="appointmentTime" #appointmentTime="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentTime.invalid}"
+            ngModel required></ngb-timepicker>
+          <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Short Description of Illness</label>
+        <textarea class="form-control" rows="4" id="description" name="description" #description="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && description.invalid}"
+          ngModel required></textarea>
+        <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+      </div>
+      <div class="form-group">
+        <label for="remarks">Other Remarks</label>
+        <textarea class="form-control" rows="4" id="remarks" name="remarks" ngModel></textarea>
+      </div>
+      <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+<div class="loadWrapper" *ngIf="loading">  
+  <div class="loader"></div>  
+</div>

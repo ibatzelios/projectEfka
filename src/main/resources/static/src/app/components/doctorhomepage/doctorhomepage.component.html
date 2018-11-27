@@ -23,25 +23,30 @@
 </div>
 
 <div id="bottom-search-bar" class="row container-fluid mx-auto">
-   
-  <div id="search-date" class="col-md-3 edit">
+   <form #searchAppointmentForm="ngForm" name="form" (ngSubmit)="searchAppointmentForm.form.valid && searchAppointment(searchAppointmentForm)"
+   novalidate>
+   <div class="row">
+  <div id="search-date" class="col-md-4 edit">
     <label for="appointmentDate">
-    <h5>Appointment Date</h5>
-    </label><br><br>
-    <input class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig" name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': newAppointmentForm.submitted && appointmentDate.invalid}" ngModel required/>
-    <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+      <h5>Appointment Date</h5>
+  </label>
+  <input autocomplete="off" class="form-control" id="appointmentDate" type="text" bsDaterangepicker [bsConfig]="datePickerConfig" placement="right"
+      name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': searchAppointmentForm.submitted && appointmentDate.invalid}"
+      ngModel required />
+  <div class="invalid-feedback">Είναι υποχρεωτικό</div>
   </div>
 
-  <div id="search-input"class="col-md-3 edit">
+  <div id="search-input"class="col-md-4 edit">
     <label for="illnessType">
     <h5>Illness Type</h5>
     </label><br><br>
-    <input type="text" class="form-control">
+    <input type="text" name="illnessType" class="form-control" ngModel>
   </div>
   
-  <div id="search-button" class="col-md-3 edit">
+  <div id="search-button" class="col-md-4 edit">
     <img id="icon" src="../../../assets/images/search_icon.svg" class="img-fluid"><br>
-    <button class="btn btn-info btn-lg">Search Appointments</button>
+    <button class="btn btn-info btn-lg" type="submit">Search Appointments</button>
   </div>
-  
+</div>
+</form>
 </div>

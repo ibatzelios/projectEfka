@@ -23,7 +23,8 @@
         <div class="col-md-4 add">
             <img id="icons" src="../../../assets/images/add.svg" class="img-fluid">
             <br>
-            <button class="btn btn-info btn-lg" (click)="openModal(addAppointmentModal); setDoctorsSpecialtys();">New
+            <!-- (click)="openModal(addAppointmentModal); setDoctorsSpecialtys();" -->
+            <button class="btn btn-info btn-lg" (click)="openNewAppointmentDialog()">New
                 Appointment</button>
         </div>
 
@@ -42,6 +43,9 @@
     <div class="container">
         <img id="bodyimg" src="../../../assets/images/cover.jpg" class="img-fluid rounded mx-auto d-block">
     </div>
+    <div class="loadWrapper"  *ngIf="loading">  
+        <div class="loader"></div>  
+      </div>
 </div>
 <!-- ----------------------------------------------------NEW APPOINTMENT MODAL----------------------------------------------------- -->
 <ng-template #addAppointmentModal>

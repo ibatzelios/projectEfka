@@ -28,7 +28,7 @@ export class RegisterdialogComponent implements OnInit {
     this.dialogRef.close();
   }
   registerUser(registerForm: NgForm) {
-    console.log(registerForm);
+    this.loading = true;
     let newUser: user = {
       amka: registerForm.value.registerAmka,
       firstName: registerForm.value.registerfName,
@@ -39,18 +39,20 @@ export class RegisterdialogComponent implements OnInit {
       phone: registerForm.value.registerPhone
     };
     console.log(newUser);
-    this.loading = true;
+    
     this.userService.register(newUser).subscribe((data) => {
+      this.loading = false;
         registerForm.reset();
         let status = true;
         let exists = true;
         
         this.dialogRef.close({status, exists});
     }, error => {
+      this.loading = false;
       registerForm.reset();
       let status = false;
       let exists = true;
-        
+      
       this.dialogRef.close({status, exists});
     });
   }

@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { RegisterdialogComponent } from '../registerdialog/registerdialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 
 
@@ -13,8 +12,8 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule
   ],
   declarations: [RegisterdialogComponent],
-  
-  entryComponents:[RegisterdialogComponent]
-  
+
+  entryComponents: [RegisterdialogComponent]
+
 })
 export class RegisterdialogModule { }

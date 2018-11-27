@@ -9,7 +9,9 @@ import { AppComponent } from './app.component';
 import { UserService } from './services/user.service';
 import { UserhomepageAuthService } from './services/userhomepage-auth.service';
 import { LoginpageAuthService } from './services/loginpage-auth.service';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DoctorService } from './services/doctor.service';
+import { SearchappointmentsComponent } from './dialogs/doctorsdialogs/searchappointments/searchappointments.component';
 
 
 
@@ -17,7 +19,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
-    // AlertComponent
+    SearchappointmentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   providers: [
     UserService,
     UserhomepageAuthService,
-    LoginpageAuthService
+    LoginpageAuthService,
+    DoctorService
   ],
   bootstrap: [AppComponent]
 })

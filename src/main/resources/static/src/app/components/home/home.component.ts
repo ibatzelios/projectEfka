@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router ,ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { RegisterdialogComponent } from 'src/app/dialogs/registerDialog/registerdialog/registerdialog.component';
+import { RegisterdialogComponent } from 'src/app/dialogs/registerdialog/registerdialog.component';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   message: any;
   alert = false;
  
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(){
    };

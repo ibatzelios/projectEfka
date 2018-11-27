@@ -43,6 +43,11 @@ const routes: Routes = [{
 		// canActivate: [UserhomepageAuthService]
 	},
 	{
+		path: 'doctorhomepage/searchappointments/:datefrom/:dateto/:text',
+		loadChildren: './components/doctorsappointments/doctorsappointments.module#DoctorsappointmentsModule',
+		//canActivate: [UserhomepageAuthService]
+	},
+	{
 		path: 'register',
 		loadChildren: './components/register/register.module#RegisterModule',
 	},

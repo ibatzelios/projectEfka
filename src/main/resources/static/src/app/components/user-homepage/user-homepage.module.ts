@@ -7,12 +7,17 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NewappointmentdialogModule } from 'src/app/dialogs/userdialogs/newappointmentdialog/newappointmentdialog.module';
+import { AlertdialogModule } from 'src/app/dialogs/userdialogs/alertdialog/alertdialog.module';
+//import { NewappointmentdialogComponent } from 'src/app/dialogs/userdialogs/newappointmentdialog/newappointmentdialog.component';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		FormsModule,
 		NgbModule,
+		NewappointmentdialogModule,
+		AlertdialogModule,
 		ModalModule.forRoot(),
 		BsDatepickerModule.forRoot(),
 		TimepickerModule.forRoot(),

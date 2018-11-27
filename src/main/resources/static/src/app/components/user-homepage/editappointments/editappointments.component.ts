@@ -18,12 +18,16 @@ export class EditappointmentsComponent implements OnInit {
   selectedAppointment: any;
   docSpecialty: any;
   appointments: any;
-  //docSpecialtys: any;
   docName: any;
-  //currAppointments: any;
   staticAppointments: any;
 
-  constructor(private userService: UserService, private modalService: BsModalService) { }
+  constructor(private userService: UserService, private modalService: BsModalService) {
+    this.datePickerConfig = Object.assign({}, {
+      containerClass: 'theme-blue',
+      showWeekNumbers: false,
+      minDate: new Date()
+    });
+   }
   openModal(template: TemplateRef<any>, appointment: any) {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     this.selectedAppointment = appointment;
@@ -50,7 +54,9 @@ export class EditappointmentsComponent implements OnInit {
     });
   }
   updateAppointment(updateForm: NgForm) {
-    
+    console.log(this.selectedAppointment.date);
+    console.log(this.selectedAppointment.time);
+
     this.selectedAppointment.date = dateAdjustment(this.selectedAppointment.date);
     this.selectedAppointment.time = timeAdjustment(this.selectedAppointment.time);
     let id;
@@ -62,6 +68,10 @@ export class EditappointmentsComponent implements OnInit {
     this.selectedAppointment.doctor.id = id;
     console.log(this.selectedAppointment);
     this.userService.updateAppointment(this.selectedAppointment).subscribe((data) => {
+      console.log('PANW ap to hide');
+      this.modalRef.hide();
+      console.log('KATW ap to hide');
+
       let updatedDate = dateAdjustment(this.selectedAppointment.appointmentDate);
       let updatedTime = timeAdjustment(this.selectedAppointment.appointmentTime);
 
@@ -72,10 +82,10 @@ export class EditappointmentsComponent implements OnInit {
         }
       }
     }, error => {
+      //this.modalRef.hide();
       this.appointments = this.staticAppointments;
       this.staticAppointments = JSON.parse(JSON.stringify(this.appointments));
     });
-
 
   }
 
