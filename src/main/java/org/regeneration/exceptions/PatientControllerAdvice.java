@@ -15,54 +15,52 @@ public class PatientControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ErrorDetails validationError(ConstraintViolationException e) {
 
-        int first=0;
-        int second=0;
+        int first = 0;
+        int second = 0;
 
-        for (int i =0; i< e.getMessage().length(); i++) {
+        for (int i = 0; i < e.getMessage().length(); i++) {
             if (e.getMessage().charAt(i) == '$') {
                 first = i;
                 break;
             }
         }
 
-            for (int i =first+1; i< e.getMessage().length(); i++){
-                if( e.getMessage().charAt(i) == '$'){
-                    second =i;
-                    break;
-                }
+        for (int i = first + 1; i < e.getMessage().length(); i++) {
+            if (e.getMessage().charAt(i) == '$') {
+                second = i;
+                break;
             }
+        }
 
-            String message = e.getMessage().substring(first +1, second);
-
-        return new ErrorDetails("Validation Error",message);
+        String message = e.getMessage().substring(first + 1, second);
+        return new ErrorDetails("Validation Error", message);
     }
-
-
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ErrorDetails DataIntegrityViolation(DataIntegrityViolationException e) {
 
-        int count =0;
-        int first=0;
-        int second=0;
-        for (int i =0; i< e.getMessage().length(); i++) {
+        int count = 0;
+        int first = 0;
+        int second = 0;
+        for (int i = 0; i < e.getMessage().length(); i++) {
             if (e.getMessage().charAt(i) == '[') {
                 count++;
             }
-            if (count ==2){
-                first =i;
+            if (count == 2) {
+                first = i;
                 break;
             }
         }
-        for (int i =first+1; i< e.getMessage().length(); i++) {
+        for (int i = first + 1; i < e.getMessage().length(); i++) {
             if (e.getMessage().charAt(i) == ']') {
-                second =i;
+                second = i;
             }
         }
-
-
-        String message = e.getMessage().substring(first +1, second);
-        return new ErrorDetails("Duplicate entry","Duplicate entry for "+message+"");
+        String message = e.getMessage().substring(first + 1, second);
+        return new ErrorDetails("Duplicate entry", "Duplicate entry for " + message + "");
     }
+
+
+
 }

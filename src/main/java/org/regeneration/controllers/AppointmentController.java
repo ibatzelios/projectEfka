@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.sql.Date;
 import java.sql.Time;
@@ -34,8 +35,8 @@ public class AppointmentController {
     }
 
     @PostMapping("/api/userhomepage/newappointment")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public Appointment newAppointment(@RequestBody AppointmentDto appointmentDto, Principal principal) {
+    //@ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public Appointment newAppointment(@Valid @RequestBody AppointmentDto appointmentDto, Principal principal) {
         Appointment appointment = new Appointment();
         Patient patient = patientRepository.findByUsername(principal.getName());
         Doctor doctor = doctorRepository.findById(appointmentDto.getDoctorId());

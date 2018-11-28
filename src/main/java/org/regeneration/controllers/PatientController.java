@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -41,7 +42,7 @@ PatientController {
     }
 
     @PostMapping("/api/register")
-    public Patient newPatient(@RequestBody Patient patient) {
+    public Patient newPatient(@Valid @RequestBody Patient patient) {
 
             patient.setPassword(passwordEncoder.encode(patient.getPassword()));
             return patientRepository.save(patient);

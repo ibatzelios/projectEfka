@@ -1,6 +1,6 @@
 package org.regeneration.exceptions;
 
-import java.util.Date;
+
 
 public class ErrorDetails {
 

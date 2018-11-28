@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -16,11 +18,22 @@ public class Doctor implements User, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "last_name")
+    @NotBlank(message = "Last name cannot be empty$")
     private String lastName;
+
     @Column(name = "first_name")
+    @NotBlank(message = "First name cannot be empty$")
     private String firstName;
+
+    @Column(name = "username", unique = true)
+    @NotBlank(message = "Username cannot be empty$")
+    @Size(min=5, message = "$Username must have at least 5 characters$")
     private String username;
+
+    @Column(name = "password")
+    @NotBlank(message = "Password cannot be empty$")
     private String password;
 
     @ManyToOne
