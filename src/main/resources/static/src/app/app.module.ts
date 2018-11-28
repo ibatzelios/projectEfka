@@ -11,7 +11,7 @@ import { UserhomepageAuthService } from './services/userhomepage-auth.service';
 import { LoginpageAuthService } from './services/loginpage-auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DoctorService } from './services/doctor.service';
-import { SearchappointmentsComponent } from './dialogs/doctorsdialogs/searchappointments/searchappointments.component';
+import { DoctorAuthService } from './services/doctor-auth.service';
 
 
 
@@ -19,7 +19,6 @@ import { SearchappointmentsComponent } from './dialogs/doctorsdialogs/searchappo
 @NgModule({
   declarations: [
     AppComponent,
-    SearchappointmentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +31,8 @@ import { SearchappointmentsComponent } from './dialogs/doctorsdialogs/searchappo
     UserService,
     UserhomepageAuthService,
     LoginpageAuthService,
-    DoctorService
+    DoctorService,
+    DoctorAuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -36,6 +36,8 @@ export class UserHomepageComponent implements OnInit {
   modalRef: BsModalRef;
   appointment: any;
   searchAppointmentModel: searchAppointmentModel[] = [];
+  loggedUser: any;
+  username: any;
 
   constructor(private router: Router, private modalService: BsModalService, private userService: UserService, public dialog: MatDialog) {
     this.datePickerConfig = Object.assign({}, {
@@ -61,9 +63,9 @@ export class UserHomepageComponent implements OnInit {
   }
 
 
-  // openModal(template: TemplateRef<any>) {
-  //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-  // }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+  }
   // Need testing and be added in the new appointment button && to the search appointment button
   setDoctorsSpecialtys() {
     this.userService.getDoctorsSpecialtys().subscribe((data) => {
@@ -144,10 +146,15 @@ export class UserHomepageComponent implements OnInit {
   }
 
   logout() {
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/home']);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userService.getLastName().subscribe((data)=>{
+      this.username = data;
+      this.loggedUser = this.username.lastName;
+    });
+   }
 }
 

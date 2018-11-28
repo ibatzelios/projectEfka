@@ -1,4 +1,7 @@
 <div class="container jumbotron col-md-4">
+  <div *ngIf="errorMessage" style="color:red; text-align: center;">
+    {{loginErrorMessage}}
+  </div>
   <form name="form" #loginForm="ngForm" (ngSubmit)="loginForm.form.valid && login(loginForm)" novalidate>
     <div class="form-group row">
       <label for="loginUsername" class="col-sm-3 col-form-label">Username</label>
@@ -44,7 +47,7 @@
     </div>
     <div *ngIf="alert">
         <div *ngIf="!message">
-          <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(255, 0, 0)" disabled>Failed</button>
+          <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(255, 0, 0)" disabled>Failed!! {{registerErrorMessage}}</button>
         </div>
         <div *ngIf="message">
           <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(0, 255, 34)" disabled>Success</button>

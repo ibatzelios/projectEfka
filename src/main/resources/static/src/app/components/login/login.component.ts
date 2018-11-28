@@ -15,7 +15,10 @@ export class LoginComponent implements OnInit {
   message: any;
   alert = false;
   user: user[] = [];
-  constructor(private router: Router, private userService: UserService,  public dialog: MatDialog) { }
+  loginErrorMessage: any;
+  registerErrorMessage: any;
+
+  constructor(private router: Router, private userService: UserService, public dialog: MatDialog) { }
 
   login(loginForm) {
     this.loading = true;
@@ -26,18 +29,18 @@ export class LoginComponent implements OnInit {
       password: loginForm.value.loginPassword
     };
     this.userService.login(newUser).subscribe((data) => {
-      
+      console.log(data);
       if (loginForm.value.exampleRadios == 'p') {
-        localStorage.setItem('token', 'true');
-        this.loading = false;
+        sessionStorage.setItem('token', 'true');
         this.router.navigate(['/userhomepage']);
+        this.loading = false;
         setTimeout(function () {
           loginForm.reset();
         }, 1000);
       } else if (loginForm.value.exampleRadios == 'd') {
-        localStorage.setItem('token', 'true');
-        this.loading = false;
+        sessionStorage.setItem('doctortoken', 'true');
         this.router.navigate(['/doctorhomepage']);
+        this.loading = false;
         setTimeout(function () {
           loginForm.reset();
         }, 1000);
@@ -46,23 +49,29 @@ export class LoginComponent implements OnInit {
         console.log('wrong inputs');
       }
     }, error => {
+      this.loginErrorMessage = 'Wrong Inputs';
       this.loading = false;
     });
   }
-  openRegisterDialog(){
-      const dialogRef = this.dialog.open(RegisterdialogComponent, {
-        width: '50%'
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        if(result != null){
-        this.message= result.status;
+  openRegisterDialog() {
+    const dialogRef = this.dialog.open(RegisterdialogComponent, {
+      width: '50%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null) {
+        console.log(result.errorMessage);
+        this.registerErrorMessage = result.errorMessage;
+        this.message = result.status;
         this.alert = result.exists;
-        } else {
+      } else {
         this.alert = false;
-        }
-      });
-    }
+        this.registerErrorMessage = result.errorMessage;
+        console.log(result.errorMessage);
+        console.log(this.registerErrorMessage);
+      }
+    });
+  }
   ngOnInit() {
   }
 

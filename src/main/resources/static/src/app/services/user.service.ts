@@ -45,7 +45,9 @@ export class UserService {
     //   catchError(this.handleError)
     // );
   }
-
+  getLastName(){
+    return this.http.get(this.baseUrl + '/patients', {headers: this.headers});
+  }
   getDoctorsSpecialtys() {
     return this.http
       .get(this.baseUrl + '/userhomepage/newappointment', { headers: this.headers })

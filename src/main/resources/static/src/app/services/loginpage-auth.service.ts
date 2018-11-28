@@ -11,7 +11,7 @@ export class LoginpageAuthService {
   constructor(private router: Router) { }
 
   canActivate(): boolean {
-    if (localStorage.getItem('token')) {
+    if (sessionStorage.getItem('token')) {
       this.router.navigate(['/userhomepage']);
       return false;
     }
