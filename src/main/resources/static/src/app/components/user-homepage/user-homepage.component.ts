@@ -38,6 +38,7 @@ export class UserHomepageComponent implements OnInit {
   searchAppointmentModel: searchAppointmentModel[] = [];
   loggedUser: any;
   username: any;
+  
 
   constructor(private router: Router, private modalService: BsModalService, private userService: UserService, public dialog: MatDialog) {
     this.datePickerConfig = Object.assign({}, {
@@ -46,9 +47,10 @@ export class UserHomepageComponent implements OnInit {
       minDate: new Date()
     });
   }
+  
   openNewAppointmentDialog() {
     const dialogRef = this.dialog.open(NewappointmentdialogComponent, {
-      // width: '50%'
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {

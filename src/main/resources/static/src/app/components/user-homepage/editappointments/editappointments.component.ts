@@ -66,9 +66,6 @@ export class EditappointmentsComponent implements OnInit {
 
   }
   updateAppointment(updateForm: NgForm) {
-    console.log(this.selectedAppointment.date);
-    console.log(this.selectedAppointment.time);
-
     this.selectedAppointment.date = dateAdjustment(this.selectedAppointment.date);
     this.selectedAppointment.time = timeAdjustment(this.selectedAppointment.time);
     let id;
@@ -78,12 +75,10 @@ export class EditappointmentsComponent implements OnInit {
       }
     }
     this.selectedAppointment.doctor.id = id;
-    console.log(this.selectedAppointment);
     this.userService.updateAppointment(this.selectedAppointment).subscribe((data) => {
       console.log('PANW ap to hide');
       this.modalRef.hide();
       console.log('KATW ap to hide');
-
       let updatedDate = dateAdjustment(this.selectedAppointment.appointmentDate);
       let updatedTime = timeAdjustment(this.selectedAppointment.appointmentTime);
 
