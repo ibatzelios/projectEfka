@@ -61,4 +61,6 @@ public class PatientControllerAdvice {
         return new ErrorDetails("Duplicate entry", "Duplicate entry for " + message + "");
     }
 
+
+
 }
