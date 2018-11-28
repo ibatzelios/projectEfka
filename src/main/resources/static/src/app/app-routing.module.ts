@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginpageAuthService } from './services/loginpage-auth.service';
 import { UserhomepageAuthService } from './services/userhomepage-auth.service';
+import { DoctorAuthService } from './services/doctor-auth.service';
 
 const routes: Routes = [{
 	path: '',
@@ -17,11 +18,6 @@ const routes: Routes = [{
 		loadChildren: './components/home/home.module#HomeModule',
 		canActivate: [LoginpageAuthService]
 	},
-	// {
-	// 	path: 'home/:message',
-	// 	loadChildren: './components/home/home.module#HomeModule',
-	// 	canActivate: [LoginpageAuthService]
-	// },
 	{
 		path: 'login',
 		loadChildren: './components/login/login.module#LoginModule',
@@ -35,17 +31,17 @@ const routes: Routes = [{
 	{
 		path: 'userhomepage/edit',
 		loadChildren: './components/user-homepage/editappointments/editappointments.module#EditappointmentsModule',
-		// canActivate: [UserhomepageAuthService]
+		canActivate: [UserhomepageAuthService]
 	},
 	{
 		path: 'doctorhomepage',
 		loadChildren: './components/doctorhomepage/doctorhomepage.module#DoctorhomepageModule',
-		// canActivate: [UserhomepageAuthService]
+		canActivate: [DoctorAuthService]
 	},
 	{
 		path: 'doctorhomepage/searchappointments/:datefrom/:dateto/:text',
 		loadChildren: './components/doctorsappointments/doctorsappointments.module#DoctorsappointmentsModule',
-		//canActivate: [UserhomepageAuthService]
+		canActivate: [DoctorAuthService]
 	},
 	{
 		path: 'register',

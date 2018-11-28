@@ -5,12 +5,13 @@ import { Router, CanActivate } from '@angular/router';
   providedIn: 'root'
 })
 
-export class UserhomepageAuthService {
+
+export class DoctorAuthService {
 
   constructor(private router: Router) { }
 
   canActivate(): boolean {
-    if (!sessionStorage.getItem('token')) {
+    if (!sessionStorage.getItem('doctortoken')) {
       this.router.navigate(['/login']);
       return false;
     }

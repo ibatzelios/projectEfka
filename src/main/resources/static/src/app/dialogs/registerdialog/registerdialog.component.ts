@@ -20,7 +20,6 @@ export class RegisterdialogComponent implements OnInit {
   user: user[] = [];
   loading = false;
   alertInfo: DialogData;
-  
   constructor(
     public dialogRef: MatDialogRef<any>, private router: Router, private userService: UserService) { }
 
@@ -52,8 +51,8 @@ export class RegisterdialogComponent implements OnInit {
       registerForm.reset();
       let status = false;
       let exists = true;
-      
-      this.dialogRef.close({status, exists});
+      let errorMessage = error.error.details;
+      this.dialogRef.close({status, exists, errorMessage});
     });
   }
   ngOnInit() {

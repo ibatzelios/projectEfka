@@ -10,7 +10,7 @@ export class AlertdialogComponent implements OnInit {
 //message: '';
   constructor(public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
-message = this.data.result;
+    message = this.data.result;
   ngOnInit() {
   }
 

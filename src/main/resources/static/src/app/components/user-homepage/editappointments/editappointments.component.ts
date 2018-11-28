@@ -5,6 +5,8 @@ import { BsModalRef, BsModalService, } from 'ngx-bootstrap';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { dateAdjustment } from '../../../helperFunctions/dateAdjustment';
 import { timeAdjustment } from '../../../helperFunctions/timeAdjustment';
+import { MatDialog } from '@angular/material';
+import { DeleteComponent } from 'src/app/dialogs/userdialogs/editappointment/delete/delete.component';
 
 
 @Component({
@@ -21,13 +23,13 @@ export class EditappointmentsComponent implements OnInit {
   docName: any;
   staticAppointments: any;
 
-  constructor(private userService: UserService, private modalService: BsModalService) {
+  constructor(private userService: UserService, private modalService: BsModalService, public dialog: MatDialog) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-blue',
       showWeekNumbers: false,
       minDate: new Date()
     });
-   }
+  }
   openModal(template: TemplateRef<any>, appointment: any) {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     this.selectedAppointment = appointment;
@@ -49,9 +51,19 @@ export class EditappointmentsComponent implements OnInit {
     });
   }
   deleteAppointment(app) {
-    this.userService.deleteAppointment(app.id).subscribe((data) => {
-      this.appointments.splice(this.appointments.indexOf(app), 1);
+    const dialogRef = this.dialog.open(DeleteComponent, {
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'delete') {
+        this.userService.deleteAppointment(app.id).subscribe((data) => {
+          this.appointments.splice(this.appointments.indexOf(app), 1);
+        });
+      } else {
+        console.log('canceled');
+      }
+    });
+
   }
   updateAppointment(updateForm: NgForm) {
     console.log(this.selectedAppointment.date);
@@ -60,9 +72,9 @@ export class EditappointmentsComponent implements OnInit {
     this.selectedAppointment.date = dateAdjustment(this.selectedAppointment.date);
     this.selectedAppointment.time = timeAdjustment(this.selectedAppointment.time);
     let id;
-    for (let i = 0; i < this.docSpecialty.length; i++) {
-      if (this.selectedAppointment.doctor.specialty.name == this.docSpecialty[i].name) {
-        id = this.docSpecialty[i].id;
+    for (let i = 0; i < this.docName.length; i++) {
+      if (this.selectedAppointment.doctor.lastName == this.docName[i].lastName) {
+        id = this.docName[i].id;
       }
     }
     this.selectedAppointment.doctor.id = id;
@@ -96,6 +108,7 @@ export class EditappointmentsComponent implements OnInit {
       this.staticAppointments = JSON.parse(JSON.stringify(this.appointments));
       console.log(this.staticAppointments);
     });
+
   }
 
 }

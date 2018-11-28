@@ -3,46 +3,23 @@
       <table>
           <tr>
               <th scope="col">Operations</th>
-              <th scope="col">Doctor's Specialty</th>
-              <th scope="col">Doctor's Name</th>
+              <th scope="col">Patient's Name</th>
               <th scope="col">Appointment Date</th>
-              <th scope="col">Appointment Time</th>
-              <th scope="col">Short Description of Illness</th>
-              <th scope="col">Other Remarks</th>
           </tr>
       </table>
       <div id="tablebox">
           <table id="editTable" class="table table-striped table-responsive">
 
-              <!-- <tbody>
+               <tbody>
                   <tr *ngFor="let app of appointments">
                       <td>
-                          <button class="btn btn-danger btn-sm" (click)="deleteAppointment(app)"><img id="icons" src="../../../assets/images/delete_icon.svg"></button>
-                          <button class="btn btn-primary btn-sm" (click)="openModal(updateAppointmentModal, app)"><img
-                                  id="icons" src="../../../assets/images/update_icon.svg"></button>
+                          <button class="btn btn-info " (click)="seeAppointmentsDetails(app)">Appointments Details</button>
+                          <button class="btn btn-info " (click)="seePatientsDetails(app)">Patients Details</button>
                       </td>
-                      <td>{{app.doctor.specialty.name}}</td>
-                      <td>{{app.doctor.lastName}}</td>
+                      <td>{{app.patient.lastName}}</td>
                       <td>{{app.date}}</td>
-                      <td>{{app.time}}</td>
-                      <td>
-                          <ng-template #popContentDescr>{{app.illness}}</ng-template>
-                          <ng-template #popDescr>Description</ng-template>
-                          <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContentDescr"
-                              [popoverTitle]="popDescr">
-                              Click in..
-                          </button>
-                      </td>
-                      <td>
-                          <ng-template #popContentOther>{{app.comments}}</ng-template>
-                          <ng-template #popOther>Other Remarks</ng-template>
-                          <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContentOther"
-                              [popoverTitle]="popOther">
-                              Click in..
-                          </button>
-                      </td>
                   </tr>
-              </tbody> -->
+              </tbody> 
           </table>
       </div>
   </div>

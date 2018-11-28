@@ -102,12 +102,4 @@ public class AppointmentController {
 
         return appointmentRepository.findByDateAndIllness(dateF, dateT, searchText, doctorId);
     }
-
-    //edw xreiazetai enas elegxos gia na elegxei oti to rantevou anhkei ston sygkekrimeno giatro
-    @GetMapping("/api/doctorhomepage/showappointmentsdetails")
-    public Optional<Appointment> getAppointmentById(@RequestParam("id") int id, Principal principal) {
-        Doctor doctor = doctorRepository.findByUsername(principal.getName());
-        int doctorId = doctor.getId();
-        return appointmentRepository.findById(id);
-    }
 }

@@ -10,7 +10,9 @@ export class DoctorService {
   private baseUrl = environment.apiUrl;
   private headers = new HttpHeaders({ 'Content-type': 'application/json' });
   constructor(private http: HttpClient) { }
-
+  getLastName(){
+    return this.http.get(this.baseUrl + '/doctor', {headers: this.headers});
+  }
   getFilteredAppointments(searchText, dateFrom, dateTo) {
     console.log('in serviceeeeeeeee');
     console.log(searchText, dateFrom, dateTo);
@@ -19,7 +21,7 @@ export class DoctorService {
       .set('dateFrom', dateFrom)
       .set('dateTo', dateTo);
     return this.http
-      .get(this.baseUrl + '/doctorhomepage', { headers: this.headers, params })
+      .get(this.baseUrl + '/doctorhomepage/searchappointments', { headers: this.headers, params })
     // .pipe(
     //   catchError(this.handleError)
     // );
