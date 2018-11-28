@@ -4,6 +4,7 @@ package org.regeneration.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
@@ -32,7 +33,6 @@ public class Appointment implements Serializable{
 
     @Column(name="date")
     private Date date;
-
     @Column(name="time")
     private Time time;
 

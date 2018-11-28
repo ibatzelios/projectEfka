@@ -3,6 +3,7 @@ package org.regeneration.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
@@ -11,7 +12,8 @@ public class Specialty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "specialty")
+    @Column(name = "specialty", unique = true)
+    @NotBlank(message = "$Name cannot be empty$")
     private String name;
 
     public Specialty(String name) {

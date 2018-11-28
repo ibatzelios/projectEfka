@@ -1,11 +1,17 @@
 package org.regeneration.dtos;
 
+import javax.validation.constraints.NotBlank;
+
 public class AppointmentDto {
 
     private int doctorId;
+    @NotBlank(message = "$Date cannot be empty$")
     private String date;
+    @NotBlank(message = "$Time cannot be empty$")
     private String time;
+    @NotBlank(message = "$Illness cannot be empty$")
     private String illness;
+    @NotBlank(message = "$Comments cannot be empty$")
     private String comments;
 
     public int getDoctorId() {

@@ -31,18 +31,18 @@ public class Patient implements User {
     @NotBlank(message = "$First name cannot be empty$")
     private String firstName;
 
-    @Column(name="email")
-    @NotBlank
+    @Column(name="email", unique = true)
+    @NotBlank(message = "Email cannot be empty$")
     @Email(message = "$Email should be valid$")
     private String email;
 
     @Column(name="username", unique = true)
     @NotBlank(message = "$Username cannot be empty$")
-    @Size(min=2)
+    @Size(min=5, message = "$Username must have at least 5 characters$")
     private String username;
 
     @Column(name="password")
-    @NotBlank
+    @NotBlank(message = "$Password cannot be empty$")
     @Size(min=7, message = "$This password must have 7 characters$")
     private String password;
 
@@ -53,7 +53,7 @@ public class Patient implements User {
 
     @Column(name="phone", unique = true)
     @NotBlank(message = "$Phone cannot be empty$")
-    @Size(min=10, max=15)
+    @Size(min=10, max=15, message = "$Amka must have 10 - 15 characters$")
     private String phone;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL )
