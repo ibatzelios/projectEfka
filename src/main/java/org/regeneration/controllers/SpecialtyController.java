@@ -1,9 +1,6 @@
 package org.regeneration.controllers;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.regeneration.models.Specialty;
-import org.regeneration.repositories.SpecialtyRepository;
 import org.regeneration.services.SpecialtyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +18,6 @@ public class SpecialtyController {
     public List<Specialty> getSpecialty() {
         return specialtyService.getSpecialty();
     }
-
 
 }
 

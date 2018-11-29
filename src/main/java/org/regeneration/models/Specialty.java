@@ -9,9 +9,11 @@ import java.util.Set;
 @Entity
 @Table(name = "specialty")
 public class Specialty {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "specialty", unique = true)
     @NotBlank(message = "$Name cannot be empty$")
     private String name;

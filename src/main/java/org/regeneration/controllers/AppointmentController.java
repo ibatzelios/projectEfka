@@ -16,7 +16,7 @@ import java.util.List;
 public class AppointmentController {
 
     @Autowired
-    private  AppointmentService appointmentService;
+    private AppointmentService appointmentService;
 
     @PostMapping("/api/userhomepage/newappointment")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)

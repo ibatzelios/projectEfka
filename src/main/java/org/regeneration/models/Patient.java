@@ -1,15 +1,11 @@
 package org.regeneration.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -19,50 +15,51 @@ import java.util.Set;
 public class Patient implements User {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     @NotBlank(message = "$Last name cannot be empty$")
     private String lastName;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     @NotBlank(message = "$First name cannot be empty$")
     private String firstName;
 
-    @Column(name="email", unique = true)
+    @Column(name = "email", unique = true)
     @NotBlank(message = "Email cannot be empty$")
     @Email(message = "$Email should be valid$")
     private String email;
 
-    @Column(name="username", unique = true)
+    @Column(name = "username", unique = true)
     @NotBlank(message = "$Username cannot be empty$")
-    @Size(min=5, message = "$Username must have at least 5 characters$")
+    @Size(min = 5, message = "$Username must have at least 5 characters$")
     private String username;
 
-    @Column(name="password")
+    @Column(name = "password")
     @NotBlank(message = "$Password cannot be empty$")
-    @Size(min=7, message = "$This password must have 7 characters$")
+    @Size(min = 7, message = "$This password must have 7 characters$")
     private String password;
 
-    @Column(name="amka", unique = true)
+    @Column(name = "amka", unique = true)
     @NotBlank(message = "$Amka cannot be empty$")
-    @Size(min =10, max=11,message = "$Amka must have 11 characters$")
+    @Size(min = 10, max = 11, message = "$Amka must have 11 characters$")
     private String amka;
 
-    @Column(name="phone", unique = true)
+    @Column(name = "phone", unique = true)
     @NotBlank(message = "$Phone cannot be empty$")
-    @Size(min=10, max=15, message = "Phone must have 10 - 15 characters$")
+    @Size(min = 10, max = 15, message = "Phone must have 10 - 15 characters$")
     private String phone;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL )
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Appointment> appointment;
 
-    public Patient(){};
+    public Patient() {
+    }
 
-    public Patient(String lname,String fname,  String email, String username, String password, String amka, String phone) {
+    public Patient(String lname, String fname, String email, String username, String password, String amka, String phone) {
         this.lastName = lname;
         this.firstName = fname;
         this.email = email;
@@ -136,7 +133,7 @@ public class Patient implements User {
         this.phone = phone;
     }
 
-    public int getIdFromUsername(String username){
+    public int getIdFromUsername(String username) {
         return this.getId();
     }
 

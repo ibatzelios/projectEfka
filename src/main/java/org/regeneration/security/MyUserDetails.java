@@ -1,6 +1,5 @@
 package org.regeneration.security;
 
-import org.regeneration.models.Patient;
 import org.regeneration.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,8 +27,7 @@ public class MyUserDetails implements UserDetails {
     }
 
     @Override
-    public String getUsername()
-    {
+    public String getUsername() {
         return user.getUsername();
     }
 

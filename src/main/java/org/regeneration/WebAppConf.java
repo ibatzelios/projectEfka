@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 @Configuration
 @EnableWebSecurity
 public class WebAppConf extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
@@ -38,6 +39,7 @@ public class WebAppConf extends WebSecurityConfigurerAdapter {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
+
     private SimpleUrlAuthenticationFailureHandler myFailureHandler = new SimpleUrlAuthenticationFailureHandler();
 
     @Override

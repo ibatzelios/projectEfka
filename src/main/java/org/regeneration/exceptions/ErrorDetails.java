@@ -1,7 +1,5 @@
 package org.regeneration.exceptions;
 
-
-
 public class ErrorDetails {
 
     private String error;

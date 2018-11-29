@@ -1,47 +1,38 @@
 package org.regeneration.models;
 
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 
-
 @Entity
 @Table(name = "appointment")
-public class Appointment implements Serializable{
-    private static final long serialVersionUiD =1L;
+public class Appointment implements Serializable {
+    private static final long serialVersionUiD = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "date")
+    private Date date;
+    @Column(name = "time")
+    private Time time;
+
+    @Column(name = "illness")
+    private String illness;
+
+    @Column(name = "comments")
+    private String comments;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
-   // @JsonManagedReference
     private Doctor doctor;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    //@JsonIgnoreProperties("appointment")
-    //@JsonManagedReference
     private Patient patient;
-
-    @Column(name="date")
-    private Date date;
-    @Column(name="time")
-    private Time time;
-
-    @Column(name="illness")
-    private String illness;
-
-    @Column(name="comments")
-    private String comments;
-
 
     public int getId() {
         return id;
@@ -55,11 +46,9 @@ public class Appointment implements Serializable{
         return doctor;
     }
 
-
     public Patient getPatient() {
         return patient;
     }
-
 
     public Date getDate() {
         return date;

@@ -20,14 +20,13 @@ import java.util.List;
 public class AppointmentService {
 
     @Autowired
-    private  AppointmentRepository appointmentRepository;
+    private AppointmentRepository appointmentRepository;
     @Autowired
-    private  PatientRepository patientRepository;
+    private PatientRepository patientRepository;
     @Autowired
-    private  DoctorRepository doctorRepository;
+    private DoctorRepository doctorRepository;
 
-
-    public Appointment createAppointment(AppointmentDto appointmentDto,String patientName){
+    public Appointment createAppointment(AppointmentDto appointmentDto, String patientName) {
         Patient patient = patientRepository.findByUsername(patientName);
         Doctor doctor = doctorRepository.findById(appointmentDto.getDoctorId());
         Appointment appointment = new Appointment();
@@ -40,7 +39,7 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
-    public List<Appointment> findAppointment(Specialty specialtyId, String dateFrom, String dateTo, String patientName){
+    public List<Appointment> findAppointment(Specialty specialtyId, String dateFrom, String dateTo, String patientName) {
         Patient patient = patientRepository.findByUsername(patientName);
         int patientId = patient.getId();
         Date dateF = Date.valueOf(dateFrom);
@@ -48,13 +47,13 @@ public class AppointmentService {
         return appointmentRepository.findByDateAndSpecialty(dateF, dateT, specialtyId, patientId);
     }
 
-    public List<Appointment> findAppointmentByPatient(String patientName){
+    public List<Appointment> findAppointmentByPatient(String patientName) {
         Patient patient = patientRepository.findByUsername(patientName);
         int patientId = patient.getId();
         return appointmentRepository.findByPatientId(patientId);
     }
 
-    public Appointment updateAppointment(Appointment updatedAppointment){
+    public Appointment updateAppointment(Appointment updatedAppointment) {
         int id = updatedAppointment.getId();
         return appointmentRepository.findById(id)
                 .map(appointment -> {
