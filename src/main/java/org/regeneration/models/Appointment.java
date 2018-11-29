@@ -20,16 +20,8 @@ public class Appointment implements Serializable{
     @Column(name="id")
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-   // @JsonManagedReference
-    private Doctor doctor;
 
-    @ManyToOne
-    @JoinColumn(name = "patient_id")
-    //@JsonIgnoreProperties("appointment")
-    //@JsonManagedReference
-    private Patient patient;
+
 
     @Column(name="date")
     private Date date;
@@ -41,6 +33,16 @@ public class Appointment implements Serializable{
 
     @Column(name="comments")
     private String comments;
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    // @JsonManagedReference
+    private Doctor doctor;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    //@JsonIgnoreProperties("appointment")
+    //@JsonManagedReference
+    private Patient patient;
 
 
     public int getId() {
