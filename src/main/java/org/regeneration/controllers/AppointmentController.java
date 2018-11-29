@@ -9,6 +9,7 @@ import org.regeneration.models.Specialty;
 import org.regeneration.repositories.AppointmentRepository;
 import org.regeneration.repositories.DoctorRepository;
 import org.regeneration.repositories.PatientRepository;
+import org.regeneration.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,83 +24,42 @@ import java.util.Optional;
 @RestController
 public class AppointmentController {
 
-    private final AppointmentRepository appointmentRepository;
-    private final PatientRepository patientRepository;
-    private final DoctorRepository doctorRepository;
-
     @Autowired
-    public AppointmentController(AppointmentRepository appointmentRepository, PatientRepository patientRepository, DoctorRepository doctorRepository) {
-        this.appointmentRepository = appointmentRepository;
-        this.patientRepository = patientRepository;
-        this.doctorRepository = doctorRepository;
-    }
+    private  AppointmentService appointmentService;
 
     @PostMapping("/api/userhomepage/newappointment")
-    //@ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public Appointment newAppointment(@Valid @RequestBody AppointmentDto appointmentDto, Principal principal) {
-        Appointment appointment = new Appointment();
-        Patient patient = patientRepository.findByUsername(principal.getName());
-        Doctor doctor = doctorRepository.findById(appointmentDto.getDoctorId());
-        appointment.setPatient(patient);
-        appointment.setDoctor(doctor);
-        appointment.setComments(appointmentDto.getComments());
-        appointment.setIllness(appointmentDto.getIllness());
-        appointment.setTime(Time.valueOf(appointmentDto.getTime()));
-        appointment.setDate(Date.valueOf(appointmentDto.getDate()));
-        return appointmentRepository.save(appointment);
+        return appointmentService.createAppointment(appointmentDto, principal.getName());
     }
 
     @GetMapping("/api/userhomepage/searchappointment")
     public List<Appointment> searchAppointment(@RequestParam("specialtyId") Specialty specialtyId,
                                                @RequestParam("dateFrom") String dateFrom,
                                                @RequestParam("dateTo") String dateTo, Principal principal) {
-        Patient patient = patientRepository.findByUsername(principal.getName());
-        Date dateF = Date.valueOf(dateFrom);
-        Date dateT = Date.valueOf(dateTo);
-        int patientId = patient.getId();
-
-
-        return appointmentRepository.findByDateAndSpecialty(dateF, dateT, specialtyId, patientId);
+        return appointmentService.findAppointment(specialtyId, dateFrom, dateTo, principal.getName());
     }
 
     @GetMapping("/api/userhomepage/editappointment/edit")
     public List<Appointment> getAppointmentByPatient(Principal principal) {
-        Patient patient = patientRepository.findByUsername(principal.getName());
-        int patientId = patient.getId();
-        return appointmentRepository.findByPatientId(patientId);
+        return appointmentService.findAppointmentByPatient(principal.getName());
     }
 
     @PutMapping("/api/userhomepage/editappointment/edit")
     public Appointment updateAppointment(@RequestBody Appointment updatedAppointment) {
-        int id = updatedAppointment.getId();
-        return appointmentRepository.findById(id)
-                .map(appointment -> {
-                    appointment.setDoctor(updatedAppointment.getDoctor());
-                    appointment.setPatient(updatedAppointment.getPatient());
-                    appointment.setDate(updatedAppointment.getDate());
-                    appointment.setTime(updatedAppointment.getTime());
-                    appointment.setIllness(updatedAppointment.getIllness());
-                    appointment.setComments(updatedAppointment.getComments());
-                    return appointmentRepository.save(appointment);
-                })
-                .orElseThrow(() -> new AppointmentNotFoundException(id));
+        return appointmentService.updateAppointment(updatedAppointment);
     }
 
     @DeleteMapping("/api/userhomepage/editappointment/edit")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteAppointment(@RequestParam("id") int id) {
-        appointmentRepository.deleteById(id);
+        appointmentService.deleteAppointment(id);
     }
 
     @GetMapping("/api/doctorhomepage/searchappointments")
     public List<Appointment> searchDoctorsAppointment(@RequestParam("searchText") String searchText,
                                                       @RequestParam("dateFrom") String dateFrom,
                                                       @RequestParam("dateTo") String dateTo, Principal principal) {
-        Doctor doctor = doctorRepository.findByUsername(principal.getName());
-        Date dateF = Date.valueOf(dateFrom);
-        Date dateT = Date.valueOf(dateTo);
-        int doctorId = doctor.getId();
-
-        return appointmentRepository.findByDateAndIllness(dateF, dateT, searchText, doctorId);
+        return appointmentService.searchDoctorsAppointment( searchText,dateFrom,dateTo, principal.getName() );
     }
 }

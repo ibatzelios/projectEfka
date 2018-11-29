@@ -53,7 +53,7 @@ public class Patient implements User {
 
     @Column(name="phone", unique = true)
     @NotBlank(message = "$Phone cannot be empty$")
-    @Size(min=10, max=15, message = "$Amka must have 10 - 15 characters$")
+    @Size(min=10, max=15, message = "Phone must have 10 - 15 characters$")
     private String phone;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL )

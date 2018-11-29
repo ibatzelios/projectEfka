@@ -11,7 +11,6 @@ public class AppointmentDto {
     private String time;
     @NotBlank(message = "$Illness cannot be empty$")
     private String illness;
-    @NotBlank(message = "$Comments cannot be empty$")
     private String comments;
 
     public int getDoctorId() {
