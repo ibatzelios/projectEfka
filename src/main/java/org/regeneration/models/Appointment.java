@@ -17,6 +17,7 @@ public class Appointment implements Serializable {
 
     @Column(name = "date")
     private Date date;
+
     @Column(name = "time")
     private Time time;
 
