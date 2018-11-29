@@ -43,7 +43,6 @@ PatientController {
 
     @PostMapping("/api/register")
     public Patient newPatient(@Valid @RequestBody Patient patient) {
-
             patient.setPassword(passwordEncoder.encode(patient.getPassword()));
             return patientRepository.save(patient);
 
