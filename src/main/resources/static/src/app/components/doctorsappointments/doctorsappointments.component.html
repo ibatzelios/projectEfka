@@ -1,3 +1,4 @@
+<app-doctornavbar></app-doctornavbar>
 <div class="container jumbotron">
   <div class="panel-heading">
       <table>
@@ -23,6 +24,9 @@
           </table>
       </div>
   </div>
+  <div *ngIf="noResults" style="text-align:center; color:red;">
+        <h1>No Results</h1>
+    </div>
   <a [routerLink]="['/doctorhomepage']" class="btn btn-link">Cancel</a>
 
 </div>

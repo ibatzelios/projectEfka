@@ -1,29 +1,23 @@
-#navtext{
-	color: white;
-	text-align: right;
-}
 h5{
-	color: #006DF0;
-}
-#navbtn{
-	text-align: right;
+	color: lightgray;
 }
 #bodyimg{
 	border-radius: 100px;
 }
-#bottom-search-bar{
-	margin-top: 10%;
-	padding-top: 5px;
-	padding-bottom: 10px;
-	background: #1A2B3C;
+#search-bar{
+	margin-top: 50px;
 }
 #icon{
-	width: 60px; 
-	height: 60px;
+	width: 40px; 
+	height: 40px;
 }
 #search-date, #search-input, #search-button{
 	text-align: center;
+	float: left;
 }
-#search-date{
-	margin-left: 15%;
+#search-button{
+	margin-top: 2%;
+}
+.invalid-feedback{
+	text-align: left !important;
 }

@@ -7,6 +7,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PatientsdetailsModule } from 'src/app/dialogs/doctorsdialogs/patientsdetails/patientsdetails.module';
 import { AppointmentdetailsModule } from 'src/app/dialogs/doctorsdialogs/appointmentdetails/appointmentdetails.module';
+import { DoctornavbarModule } from 'src/app/navbars/doctornavbar/doctornavbar.module';
 
 
 
@@ -17,6 +18,7 @@ import { AppointmentdetailsModule } from 'src/app/dialogs/doctorsdialogs/appoint
 		NgbModule,
 		PatientsdetailsModule,
 		AppointmentdetailsModule,
+		DoctornavbarModule,
 		ModalModule.forRoot(),
 		RouterModule.forChild([{
 			path: '',

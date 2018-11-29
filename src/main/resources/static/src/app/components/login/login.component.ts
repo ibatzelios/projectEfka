@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
         }, 1000);
       } else {
         this.loading = false;
-        console.log('wrong inputs');
       }
     }, error => {
       this.loginErrorMessage = 'Wrong Inputs';
@@ -60,13 +59,11 @@ export class LoginComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
-        console.log(result.errorMessage);
         this.registerErrorMessage = result.errorMessage;
         this.message = result.status;
         this.alert = result.exists;
       } else {
         this.alert = false;
-        this.registerErrorMessage = result.errorMessage;
         console.log(result.errorMessage);
         console.log(this.registerErrorMessage);
       }

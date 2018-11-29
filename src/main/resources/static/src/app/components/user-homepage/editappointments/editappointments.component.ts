@@ -15,6 +15,7 @@ import { DeleteComponent } from 'src/app/dialogs/userdialogs/editappointment/del
   styleUrls: ['./editappointments.component.css']
 })
 export class EditappointmentsComponent implements OnInit {
+  noResults = false;
   modalRef: BsModalRef;
   datePickerConfig: Partial<BsDatepickerConfig>;
   selectedAppointment: any;
@@ -33,7 +34,7 @@ export class EditappointmentsComponent implements OnInit {
   openModal(template: TemplateRef<any>, appointment: any) {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     this.selectedAppointment = appointment;
-    console.log(this.selectedAppointment);
+    this.selectedAppointment.date = new Date(this.selectedAppointment.date);
     this.userService.getDoctorsSpecialtys().subscribe((data) => {
       this.docSpecialty = data;
     });
@@ -66,47 +67,50 @@ export class EditappointmentsComponent implements OnInit {
 
   }
   updateAppointment(updateForm: NgForm) {
-    console.log(this.selectedAppointment.date);
-    console.log(this.selectedAppointment.time);
-
-    this.selectedAppointment.date = dateAdjustment(this.selectedAppointment.date);
-    this.selectedAppointment.time = timeAdjustment(this.selectedAppointment.time);
-    let id;
-    for (let i = 0; i < this.docName.length; i++) {
-      if (this.selectedAppointment.doctor.lastName == this.docName[i].lastName) {
-        id = this.docName[i].id;
-      }
+    console.log(this.selectedAppointment.date instanceof Date);
+    if (!(this.selectedAppointment.date instanceof Date)) {
+      this.selectedAppointment.date = dateAdjustment(this.selectedAppointment.date);
     }
-    this.selectedAppointment.doctor.id = id;
+    if (this.selectedAppointment.time instanceof Object) {
+      this.selectedAppointment.time = timeAdjustment(this.selectedAppointment.time);
+    }
+    if (this.docName != undefined) {
+      let id;
+      for (let i = 0; i < this.docName.length; i++) {
+        if (this.selectedAppointment.doctor.lastName == this.docName[i].lastName) {
+          id = this.docName[i].id;
+        }
+      }
+      this.selectedAppointment.doctor.id = id;
+    }
     console.log(this.selectedAppointment);
     this.userService.updateAppointment(this.selectedAppointment).subscribe((data) => {
-      console.log('PANW ap to hide');
       this.modalRef.hide();
-      console.log('KATW ap to hide');
-
-      let updatedDate = dateAdjustment(this.selectedAppointment.appointmentDate);
-      let updatedTime = timeAdjustment(this.selectedAppointment.appointmentTime);
+      let updatedDate = dateAdjustment(this.selectedAppointment.date);
+      // let updatedTime = timeAdjustment(this.selectedAppointment.time);
 
       for (let i = 0; i < this.appointments.length; i++) {
         if (this.selectedAppointment.id == this.appointments[i].id) {
-          this.appointments[i].appointmentDate = updatedDate;
-          this.appointments[i].appointmentTime = updatedTime;
+          this.appointments[i].date = updatedDate;
+          // this.appointments[i].time = updatedTime;
         }
       }
     }, error => {
-      //this.modalRef.hide();
       this.appointments = this.staticAppointments;
       this.staticAppointments = JSON.parse(JSON.stringify(this.appointments));
+      this.modalRef.hide();
+
     });
 
   }
 
   ngOnInit() {
     this.userService.getAllAppointments().subscribe((data) => {
-      console.log(data);
+      if(Object.keys(data).length === 0 ){
+        this.noResults = true;
+      }
       this.appointments = data;
       this.staticAppointments = JSON.parse(JSON.stringify(this.appointments));
-      console.log(this.staticAppointments);
     });
 
   }

@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 })
 export class DoctorhomepageComponent implements OnInit {
   datePickerConfig: Partial<BsDatepickerConfig>;
-  username: any;
-  loggedUser: any;
+  
 
   constructor(private router: Router,private doctorservice: DoctorService) {
     this.datePickerConfig = Object.assign({}, {
@@ -27,15 +26,8 @@ export class DoctorhomepageComponent implements OnInit {
     console.log(searchAppointmentForm.value.illnessType + dateFrom + dateTo);
     this.router.navigate(['/doctorhomepage/searchappointments', dateFrom, dateTo, searchAppointmentForm.value.illnessType]);
   }
-  logout() {
-    sessionStorage.clear();
-    this.router.navigate(['/home']);
-  }
+  
   ngOnInit() {
-    this.doctorservice.getLastName().subscribe((data)=>{
-      this.username = data;
-      this.loggedUser = this.username.lastName;
-    });
   }
 
 }

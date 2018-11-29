@@ -1,10 +1,16 @@
 .form-check{
     margin-right: 20px;
  }
- #submit, .btn-link{
-    margin: 4px;
-    margin-top: 10px;
- }
  .container{
     margin-top: 10%;
  }
+.row{
+   height: 60px;
+}
+.top-buttons{
+   text-align: center;
+   margin-top: 40px;
+}
+.cancel{
+   float: right;
+}

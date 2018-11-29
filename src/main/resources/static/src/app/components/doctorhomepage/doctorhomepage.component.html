@@ -1,31 +1,8 @@
-<nav class="navbar navbar-dark bg-info container-fluid">
-  <div class="row container-fluid">
-    <div class="col-sm-7">
-      <a class="navbar-brand">
-        <img src="../../../assets/images/efka_logo.jpg" width="30%" height="30%" alt="">
-      </a>
-    </div>
-    <div class="col-sm-3">
-      <span id="navtext" class="navbar-text">
-        Welcome to EFKA , Dr {{loggedUser}}
-      </span>
-    </div>
-    <div class="col-sm-2">
-      <span>
-        <button id="navbtn" type="submit" class="btn btn-info" (click)="logout()">Logout</button>
-      </span>
-    </div>
-  </div>
-</nav>
-
-<div class="container">
-  <img id="bodyimg" src="../../../assets/images/doctorpage_cover.jpg" class="img-fluid">
-</div>
-<div class="fixed-bottom">
-  <div id="bottom-search-bar" class="row container-fluid mx-auto">
+<app-doctornavbar></app-doctornavbar>
+<div id="search-bar" class="container">
     <form #searchAppointmentForm="ngForm" name="form" (ngSubmit)="searchAppointmentForm.form.valid && searchAppointment(searchAppointmentForm)"
       novalidate>
-      <div class="row">
+      <div class="row container">
         <div id="search-date" class="col-md-4 edit">
           <label for="appointmentDate">
             <h5>Appointment Date</h5>
@@ -33,21 +10,22 @@
           <input autocomplete="off" class="form-control" id="appointmentDate" type="text" bsDaterangepicker [bsConfig]="datePickerConfig"
             placement="right" name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': searchAppointmentForm.submitted && appointmentDate.invalid}"
             ngModel required />
-          <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+          <div class="invalid-feedback">It is mandatory to provide a appointment date</div>
         </div>
 
         <div id="search-input" class="col-md-4 edit">
           <label for="illnessType">
             <h5>Illness Type</h5>
-          </label><br><br>
+          </label><br>
           <input type="text" name="illnessType" class="form-control" ngModel>
         </div>
 
         <div id="search-button" class="col-md-4 edit">
-          <img id="icon" src="../../../assets/images/search_icon.svg" class="img-fluid"><br>
-          <button class="btn btn-info btn-lg" type="submit">Search Appointments</button>
+          <button class="btn btn-info btn-lg" type="submit"><img id="icon" src="../../../assets/images/search_icon.svg" class="img-fluid">Search Appointments</button>
         </div>
       </div>
     </form>
   </div>
+<div class="container fixed-bottom">
+  <img id="bodyimg" src="../../../assets/images/doctorpage_cover.jpg" class="img-fluid">
 </div>

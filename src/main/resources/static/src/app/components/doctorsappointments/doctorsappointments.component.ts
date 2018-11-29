@@ -11,6 +11,7 @@ import { AppointmentdetailsComponent } from 'src/app/dialogs/doctorsdialogs/appo
   styleUrls: ['./doctorsappointments.component.css']
 })
 export class DoctorsappointmentsComponent implements OnInit {
+  noResults = false;
   sub: any;
   text: String;
   dateFrom: String;
@@ -41,10 +42,13 @@ export class DoctorsappointmentsComponent implements OnInit {
       this.dateFrom = params['datefrom'];
       this.dateTo = params['dateto'];
    });
-   console.log(this.text,  this.dateFrom,  this.dateTo);
     this.doctorservice.getFilteredAppointments(this.text, this.dateFrom, this.dateTo).subscribe((data) => {
-      console.log(data);
+      if(Object.keys(data).length === 0 ){
+        this.noResults = true;
+      }
       this.appointments = data;
+    }, error =>{
+      this.noResults = true;
     });
   }
 

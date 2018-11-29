@@ -1,9 +1,11 @@
 body{
     visibility: hidden;
 }
-h1{color: white;
+p{color: white;
     text-align: center;
     margin: 5%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 50pt;
  }
  .home-btn{
     width: 300px;

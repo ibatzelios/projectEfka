@@ -1,4 +1,4 @@
-<h1>Welcome to EFKA appointment booking!</h1>
+<p>Medical Appointment Booking</p>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-4" class="mx-auto d-block">
@@ -11,10 +11,10 @@
         <button (click)="openRegisterDialog()" class="btn btn-primary home-btn mx-auto d-block">Register</button>
         <div *ngIf="alert">
         <div *ngIf="!message">
-          <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(255, 0, 0)" disabled>Failed</button>
+          <button class="btn btn-danger alert mx-auto d-block" style="color:rgb(255, 255, 255)" disabled>Registration Failed !! {{registerErrorMessage}}</button>
         </div>
         <div *ngIf="message">
-          <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(0, 255, 34)" disabled>Success</button>
+          <button class="btn btn-success alert mx-auto d-block" style="color:rgb(255, 255, 255)" disabled>Registration Successful</button>
         </div>
       </div>
       </div>
