@@ -28,10 +28,9 @@ public class AppointmentService {
 
 
     public Appointment createAppointment(AppointmentDto appointmentDto,String patientName){
-
         Patient patient = patientRepository.findByUsername(patientName);
-        Appointment appointment = new Appointment();
         Doctor doctor = doctorRepository.findById(appointmentDto.getDoctorId());
+        Appointment appointment = new Appointment();
         appointment.setPatient(patient);
         appointment.setDoctor(doctor);
         appointment.setComments(appointmentDto.getComments());
@@ -43,18 +42,19 @@ public class AppointmentService {
 
     public List<Appointment> findAppointment(Specialty specialtyId, String dateFrom, String dateTo, String patientName){
         Patient patient = patientRepository.findByUsername(patientName);
+        int patientId = patient.getId();
         Date dateF = Date.valueOf(dateFrom);
         Date dateT = Date.valueOf(dateTo);
-        int patientId = patient.getId();
         return appointmentRepository.findByDateAndSpecialty(dateF, dateT, specialtyId, patientId);
     }
-    public List<Appointment> findAppointmentByPatient(String patientName){
 
+    public List<Appointment> findAppointmentByPatient(String patientName){
         Patient patient = patientRepository.findByUsername(patientName);
         int patientId = patient.getId();
         return appointmentRepository.findByPatientId(patientId);
     }
-    public Appointment updateAppointment( Appointment updatedAppointment){
+
+    public Appointment updateAppointment(Appointment updatedAppointment){
         int id = updatedAppointment.getId();
         return appointmentRepository.findById(id)
                 .map(appointment -> {
@@ -68,16 +68,16 @@ public class AppointmentService {
                 })
                 .orElseThrow(() -> new AppointmentNotFoundException(id));
     }
-    public void deleteAppointment(int id) {
 
+    public void deleteAppointment(int id) {
         appointmentRepository.deleteById(id);
     }
 
     public List<Appointment> searchDoctorsAppointment(String searchText, String dateFrom, String dateTo, String doctorName) {
         Doctor doctor = doctorRepository.findByUsername(doctorName);
+        int doctorId = doctor.getId();
         Date dateF = Date.valueOf(dateFrom);
         Date dateT = Date.valueOf(dateTo);
-        int doctorId = doctor.getId();
         return appointmentRepository.findByDateAndIllness(dateF, dateT, searchText, doctorId);
     }
 }
