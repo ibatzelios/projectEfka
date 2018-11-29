@@ -1,14 +1,8 @@
 package org.regeneration.controllers;
 
 import org.regeneration.dtos.AppointmentDto;
-import org.regeneration.exceptions.AppointmentNotFoundException;
 import org.regeneration.models.Appointment;
-import org.regeneration.models.Doctor;
-import org.regeneration.models.Patient;
 import org.regeneration.models.Specialty;
-import org.regeneration.repositories.AppointmentRepository;
-import org.regeneration.repositories.DoctorRepository;
-import org.regeneration.repositories.PatientRepository;
 import org.regeneration.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class AppointmentController {
@@ -60,6 +51,6 @@ public class AppointmentController {
     public List<Appointment> searchDoctorsAppointment(@RequestParam("searchText") String searchText,
                                                       @RequestParam("dateFrom") String dateFrom,
                                                       @RequestParam("dateTo") String dateTo, Principal principal) {
-        return appointmentService.searchDoctorsAppointment( searchText,dateFrom,dateTo, principal.getName() );
+        return appointmentService.searchDoctorsAppointment(searchText, dateFrom, dateTo, principal.getName());
     }
 }
