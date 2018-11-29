@@ -51,8 +51,7 @@
     <div *ngIf="noResults" style="text-align:center; color:red;">
             <h1>No Results</h1>
         </div>
-    <a [routerLink]="['/userhomepage']" class="btn btn-link">Cancel</a>
-
+        <button [routerLink]="['/userhomepage']" type="button" class="btn btn-primary">Back</button>
 </div>
 <!-- ----------------------------------------------------UPDATE APPOINTMENT MODAL----------------------------------------------------- -->
 <ng-template #updateAppointmentModal>
