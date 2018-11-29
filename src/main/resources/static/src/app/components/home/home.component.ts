@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   sub: any;
   message: any;
   alert = false;
- 
+  registerErrorMessage: any;
   constructor(private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(){
@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   
       dialogRef.afterClosed().subscribe(result => {
         if(result != null){
+        this.registerErrorMessage = result.errorMessage;
         this.message= result.status;
         this.alert = result.exists;
         } else {

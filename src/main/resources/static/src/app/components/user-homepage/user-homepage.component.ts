@@ -13,17 +13,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewappointmentdialogComponent } from 'src/app/dialogs/userdialogs/newappointmentdialog/newappointmentdialog.component';
 import { AlertdialogComponent } from 'src/app/dialogs/userdialogs/alertdialog/alertdialog.component';
 
-// interface DocSpecialty {
-//   name: String;
-// }
+
 
 @Component({
   selector: 'app-user-homepage',
   templateUrl: './user-homepage.component.html',
-  styleUrls: ['./user-homepage.component.css']
+  styleUrls: ['./user-homepage.component.css'],
 })
 export class UserHomepageComponent implements OnInit {
-  // mytime: Date;
+  noResults = false;
   loading = false;
   datePickerConfig: Partial<BsDatepickerConfig>;
 
@@ -36,9 +34,6 @@ export class UserHomepageComponent implements OnInit {
   modalRef: BsModalRef;
   appointment: any;
   searchAppointmentModel: searchAppointmentModel[] = [];
-  loggedUser: any;
-  username: any;
-  
 
   constructor(private router: Router, private modalService: BsModalService, private userService: UserService, public dialog: MatDialog) {
     this.datePickerConfig = Object.assign({}, {
@@ -68,7 +63,6 @@ export class UserHomepageComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
-  // Need testing and be added in the new appointment button && to the search appointment button
   setDoctorsSpecialtys() {
     this.userService.getDoctorsSpecialtys().subscribe((data) => {
       this.docSpecialty = data;
@@ -137,6 +131,9 @@ export class UserHomepageComponent implements OnInit {
     this.userService.getFilteredAppointments(searchAppointments.specialtyId,
       searchAppointments.dateFrom, searchAppointments.dateTo)
       .subscribe(data => {
+        if(Object.keys(data).length === 0 ){
+          this.noResults = true;
+        }
         this.appointment = data;
         this.loading = false;
 
@@ -147,16 +144,7 @@ export class UserHomepageComponent implements OnInit {
 
   }
 
-  logout() {
-    sessionStorage.clear();
-    this.router.navigate(['/home']);
-  }
-
   ngOnInit() {
-    this.userService.getLastName().subscribe((data)=>{
-      this.username = data;
-      this.loggedUser = this.username.lastName;
-    });
    }
 }
 

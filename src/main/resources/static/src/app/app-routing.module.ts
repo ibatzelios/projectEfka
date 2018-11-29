@@ -44,6 +44,11 @@ const routes: Routes = [{
 		canActivate: [DoctorAuthService]
 	},
 	{
+		path: 'doctorhomepage/searchappointments',
+		loadChildren: './components/doctorsappointments/doctorsappointments.module#DoctorsappointmentsModule',
+		canActivate: [DoctorAuthService]
+	},
+	{
 		path: 'register',
 		loadChildren: './components/register/register.module#RegisterModule',
 	},

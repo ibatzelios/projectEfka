@@ -7,6 +7,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DoctornavbarModule } from 'src/app/navbars/doctornavbar/doctornavbar.module';
 
 
 
@@ -16,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 		CommonModule,
 		FormsModule,
 		NgbModule,
+		DoctornavbarModule,
 		ModalModule.forRoot(),
 		BsDatepickerModule.forRoot(),
 		TimepickerModule.forRoot(),

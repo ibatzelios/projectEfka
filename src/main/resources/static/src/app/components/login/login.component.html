@@ -1,6 +1,18 @@
 <div class="container jumbotron col-md-4">
-  <div *ngIf="errorMessage" style="color:red; text-align: center;">
-    {{loginErrorMessage}}
+  <div *ngIf="alert">
+    <div *ngIf="!message">
+      <button class="btn btn-danger alert mx-auto d-block" style="color:rgb(255, 255, 255)" disabled>Registration
+        Failed !!
+        {{registerErrorMessage}}</button>
+    </div>
+    <div *ngIf="message">
+      <button class="btn btn-success alert mx-auto d-block" style="color:rgb(255, 255, 255)" disabled>Registration
+        Successful </button>
+    </div>
+  </div>
+  <div *ngIf="loginErrorMessage">
+    <button class="btn btn-danger alert mx-auto d-block" style="color:rgb(255, 255, 255)" disabled>
+      {{loginErrorMessage}}</button>
   </div>
   <form name="form" #loginForm="ngForm" (ngSubmit)="loginForm.form.valid && login(loginForm)" novalidate>
     <div class="form-group row">
@@ -47,18 +59,10 @@
         <a (click)="openRegisterDialog()" class="btn btn-link">Register</a>
       </div>
       <div class="col-sm-6">
-      <a [routerLink]="['/home']" class="btn btn-link cancel">Cancel</a>
-    </div>
-    </div>
-    <div *ngIf="alert">
-      <div *ngIf="!message">
-        <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(255, 0, 0)" disabled>Failed!!
-          {{registerErrorMessage}}</button>
-      </div>
-      <div *ngIf="message">
-        <button class="btn btn-secondary alert mx-auto d-block" style="color:rgb(0, 255, 34)" disabled>Success</button>
+        <a [routerLink]="['/home']" class="btn btn-link cancel">Cancel</a>
       </div>
     </div>
+
     <div class="loadWrapper" *ngIf="loading">
       <div class="loader"></div>
     </div>

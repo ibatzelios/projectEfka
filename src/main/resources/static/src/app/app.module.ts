@@ -15,7 +15,6 @@ import { DoctorAuthService } from './services/doctor-auth.service';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

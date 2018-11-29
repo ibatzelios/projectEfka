@@ -1,22 +1,4 @@
-<nav class="navbar navbar-dark bg-info container-fluid">
-  <div class="row container-fluid">
-    <div class="col-sm-7">
-      <a class="navbar-brand">
-        <img src="../../../assets/images/efka_logo.jpg" width="30%" height="30%" alt="">
-      </a>
-    </div>
-    <div class="col-sm-3">
-      <span id="navtext" class="navbar-text">
-        Welcome to EFKA , Dr {{loggedUser}}
-      </span>
-    </div>
-    <div class="col-sm-2">
-      <span>
-        <button id="navbtn" type="submit" class="btn btn-info" (click)="logout()">Logout</button>
-      </span>
-    </div>
-  </div>
-</nav>
+<app-doctornavbar></app-doctornavbar>
 <div id="search-bar" class="container">
     <form #searchAppointmentForm="ngForm" name="form" (ngSubmit)="searchAppointmentForm.form.valid && searchAppointment(searchAppointmentForm)"
       novalidate>
