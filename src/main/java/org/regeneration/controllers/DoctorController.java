@@ -22,7 +22,6 @@ public class DoctorController {
         } else {
             return doctorService.getLoggedInDoctor(principal.getName());
         }
-
     }
 
     @GetMapping("/api/userhomepage/newappointment/doctorsname")
