@@ -1,4 +1,4 @@
-<app-usernavbar></app-usernavbar>
+<app-user-template></app-user-template>
 <div class="container jumbotron">
     <div class="panel-heading">
         <table>
@@ -14,14 +14,13 @@
         </table>
         <div id="tablebox">
             <table id="editTable" class="table table-striped table-responsive">
-                    
+
                 <tbody>
                     <tr *ngFor="let app of appointments">
                         <td>
-                            <button class="btn btn-danger btn-sm" (click)="deleteAppointment(app)"><img id="icons"
-                                    src="../../../assets/images/delete_icon.svg"></button>
-                            <button class="btn btn-primary btn-sm" (click)="openModal(updateAppointmentModal, app)"><img
-                                    id="icons" src="../../../assets/images/update_icon.svg"></button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteAppointment(app)"><img id="icons" src="../../../assets/images/delete_icon.svg"></button>
+                            <button class="btn btn-primary btn-sm" (click)="updateAppointmentsDialog(app)"><img id="icons"
+                                    src="../../../assets/images/update_icon.svg"></button>
                         </td>
                         <td>{{app.doctor.specialty.name}}</td>
                         <td>{{app.doctor.lastName}}</td>
@@ -49,9 +48,9 @@
         </div>
     </div>
     <div *ngIf="noResults" style="text-align:center; color:red;">
-            <h1>No Results</h1>
-        </div>
-        <button [routerLink]="['/userhomepage']" type="button" class="btn btn-primary">Back</button>
+        <h1>No Results</h1>
+    </div>
+    <button [routerLink]="['/userhomepage']" type="button" class="btn btn-primary">Back</button>
 </div>
 <!-- ----------------------------------------------------UPDATE APPOINTMENT MODAL----------------------------------------------------- -->
 <ng-template #updateAppointmentModal>

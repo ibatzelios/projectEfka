@@ -16,7 +16,6 @@ import { UsernavbarModule } from 'src/app/navbars/usernavbar/usernavbar.module';
 		CommonModule,
 		FormsModule,
 		NgbModule,
-		UsernavbarModule,
 		NewappointmentdialogModule,
 		AlertdialogModule,
 		ModalModule.forRoot(),

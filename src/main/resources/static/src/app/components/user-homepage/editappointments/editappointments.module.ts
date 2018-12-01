@@ -8,16 +8,19 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { DeleteModule } from 'src/app/dialogs/userdialogs/editappointment/delete/delete.module';
-import {MatDialogModule} from '@angular/material/dialog';
-import { UsernavbarModule } from 'src/app/navbars/usernavbar/usernavbar.module';
-import { UsernavbarComponent } from 'src/app/navbars/usernavbar/usernavbar.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { UpdateComponent } from 'src/app/dialogs/userdialogs/editappointment/update/update.component';
+import { UpdateModule } from 'src/app/dialogs/userdialogs/editappointment/update/update.module';
+import { UserTemplateModule } from '../../templates/user-template/user-template.module';
 
 @NgModule({
   imports: [
     CommonModule,
     MatDialogModule,
     DeleteModule,
-    UsernavbarModule,
+    UpdateModule,
+    // UserTemplateModule,
+    //UsernavbarModule,
     NgbModule,
     FormsModule,
     ModalModule.forRoot(),
@@ -30,7 +33,7 @@ import { UsernavbarComponent } from 'src/app/navbars/usernavbar/usernavbar.compo
       }
     ])
   ],
-  declarations: [EditappointmentsComponent,
-    ]
+  declarations: [EditappointmentsComponent],
+  entryComponents: [UpdateComponent]
 })
 export class EditappointmentsModule { }

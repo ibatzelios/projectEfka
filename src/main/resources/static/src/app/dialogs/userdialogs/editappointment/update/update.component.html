@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="updateModalLabel">Update Appointment</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="dialogClose()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <form #updateAppointmentForm="ngForm" name="form" [ngFormOptions]="{ updateOn: 'submit' }" (ngSubmit)="updateAppointment(updateAppointmentForm)">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="doctorSpecialty">
+                        Doctor's Specialty
+                    </label>
+                    <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" (change)="selectedDoctorSpecialty($event)"
+                        #doctorSpecialty="ngModel" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && doctorSpecialty.invalid}"
+                        [(ngModel)]="selectedAppointment.doctor.specialty.name" required>
+                        <option *ngFor="let spe of docSpecialty" [value]="spe.name">{{spe.name}}</option>
+                    </select>
+                    <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="doctorName">
+                        Doctor's Name
+                    </label>
+                    <select class="form-control" id="doctorName" name="doctorName" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && doctorName.invalid}"
+                        [(ngModel)]="selectedAppointment.doctor.lastName" #doctorName="ngModel" required>
+                        <option disabled></option>
+                        <option *ngFor="let doc of docName" [value]="doc.lastName">{{doc.lastName}}</option>
+                    </select>
+                    <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="appointmentDate">
+                        Appointment Date
+                    </label>
+                    <input class="form-control" id="appointmentDate" type="text" bsDatepicker [bsConfig]="datePickerConfig"
+                        name="appointmentDate" #appointmentDate="ngModel" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && appointmentDate.invalid}"
+                        [(ngModel)]="selectedAppointment.date" #doctorNappointmentDate="ngModel" required />
+                    <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="appointmentTime">
+                        Appointment Time
+                    </label>
+                    <ngb-timepicker id="appointmentTime" name="appointmentTime" [ngClass]="{'is-invalid': updateAppointmentForm.submitted && appointmentTime.invalid}"
+                        [(ngModel)]="selectedAppointment.time" #appointmentTime="ngModel" required></ngb-timepicker>
+                    <!-- <div class="invalid-feedback">Είναι υποχρεωτικό</div> -->
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Short Description of Illness</label>
+                <textarea class="form-control" rows="4" id="description" name="description" #description="ngModel"
+                    [ngClass]="{'is-invalid': updateAppointmentForm.submitted && description.invalid}" [(ngModel)]="selectedAppointment.illness"
+                    required></textarea>
+                <div class="invalid-feedback">Είναι υποχρεωτικό</div>
+            </div>
+            <div class="form-group">
+                <label for="remarks">Other Remarks</label>
+                <textarea class="form-control" rows="4" id="remarks" name="remarks" [(ngModel)]="selectedAppointment.comments"></textarea>
+            </div>
+            <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

@@ -34,9 +34,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('token', 'true');
         this.router.navigate(['/userhomepage']);
         this.loading = false;
-        setTimeout(function () {
           loginForm.reset();
-        }, 1000);
       } else if (loginForm.value.exampleRadios == 'd') {
         sessionStorage.setItem('doctortoken', 'true');
         this.router.navigate(['/doctorhomepage']);
