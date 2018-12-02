@@ -9,7 +9,6 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewappointmentdialogModule } from 'src/app/dialogs/userdialogs/newappointmentdialog/newappointmentdialog.module';
 import { AlertdialogModule } from 'src/app/dialogs/userdialogs/alertdialog/alertdialog.module';
-import { UsernavbarModule } from 'src/app/navbars/usernavbar/usernavbar.module';
 
 @NgModule({
 	imports: [

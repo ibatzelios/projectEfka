@@ -81,36 +81,6 @@ export class UserHomepageComponent implements OnInit {
       this.docName = data;
     });
   }
-
-  // newAppointment(appointmentForm: NgForm) {
-  //   this.loading = true;
-  //   var id;
-  //   for (let i = 0; i < this.docName.length; i++) {
-  //     if (appointmentForm.value.doctorName == this.docName[i].lastName) {
-  //       id = this.docName[i].id;
-  //     }
-  //   }
-
-  //   var finalTime = timeAdjustment(appointmentForm.value.appointmentTime);
-  //   var finalDate = dateAdjustment(appointmentForm.value.appointmentDate);
-
-  //   let newAppointment: appointment = {
-  //     doctorId: id,
-  //     date: finalDate,
-  //     time: finalTime,
-  //     illness: appointmentForm.value.description,
-  //     comments: appointmentForm.value.remarks
-  //   };
-  //   this.userService.setNewAppointment(newAppointment).subscribe(res => {
-  //     this.loading = false;
-
-  //   }, error => {
-  //     this.loading = false;
-
-  //   });
-  //   appointmentForm.reset();
-  //   this.modalRef.hide();
-  // }
   searchAppointment(searchForm) {
     this.loading = true;
 

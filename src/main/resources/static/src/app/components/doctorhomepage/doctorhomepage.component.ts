@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 })
 export class DoctorhomepageComponent implements OnInit {
   datePickerConfig: Partial<BsDatepickerConfig>;
-  
 
-  constructor(private router: Router,private doctorservice: DoctorService) {
+
+  constructor(private router: Router, private doctorservice: DoctorService) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-blue',
       showWeekNumbers: false,
@@ -26,7 +26,7 @@ export class DoctorhomepageComponent implements OnInit {
     console.log(searchAppointmentForm.value.illnessType + dateFrom + dateTo);
     this.router.navigate(['/doctorhomepage/searchappointments', dateFrom, dateTo, searchAppointmentForm.value.illnessType]);
   }
-  
+
   ngOnInit() {
   }
 

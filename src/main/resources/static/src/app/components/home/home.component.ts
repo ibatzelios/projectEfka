@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router ,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { RegisterdialogComponent } from 'src/app/dialogs/registerdialog/registerdialog.component';
 
@@ -15,23 +15,23 @@ export class HomeComponent implements OnInit {
   registerErrorMessage: any;
   constructor(private router: Router, public dialog: MatDialog) { }
 
-  ngOnInit(){
-   };
-  
-  openRegisterDialog(){
-      const dialogRef = this.dialog.open(RegisterdialogComponent, {
-        width: '50%'
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        if(result != null){
+  ngOnInit() {
+  };
+
+  openRegisterDialog() {
+    const dialogRef = this.dialog.open(RegisterdialogComponent, {
+      width: '50%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null) {
         this.registerErrorMessage = result.errorMessage;
-        this.message= result.status;
+        this.message = result.status;
         this.alert = result.exists;
-        } else {
+      } else {
         this.alert = false;
-        }
-      });
-    }
+      }
+    });
   }
+}
 

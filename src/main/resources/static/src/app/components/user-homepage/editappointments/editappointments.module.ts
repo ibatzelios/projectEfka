@@ -11,7 +11,6 @@ import { DeleteModule } from 'src/app/dialogs/userdialogs/editappointment/delete
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpdateComponent } from 'src/app/dialogs/userdialogs/editappointment/update/update.component';
 import { UpdateModule } from 'src/app/dialogs/userdialogs/editappointment/update/update.module';
-import { UserTemplateModule } from '../../templates/user-template/user-template.module';
 
 @NgModule({
   imports: [
@@ -19,8 +18,6 @@ import { UserTemplateModule } from '../../templates/user-template/user-template.
     MatDialogModule,
     DeleteModule,
     UpdateModule,
-    // UserTemplateModule,
-    //UsernavbarModule,
     NgbModule,
     FormsModule,
     ModalModule.forRoot(),

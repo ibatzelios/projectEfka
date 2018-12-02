@@ -7,7 +7,6 @@ import { dateAdjustment } from '../../../helperFunctions/dateAdjustment';
 import { timeAdjustment } from '../../../helperFunctions/timeAdjustment';
 import { MatDialog } from '@angular/material';
 import { DeleteComponent } from 'src/app/dialogs/userdialogs/editappointment/delete/delete.component';
-import { timeToJSON } from 'src/app/helperFunctions/timeToJSON';
 import { UpdateComponent } from 'src/app/dialogs/userdialogs/editappointment/update/update.component';
 
 
@@ -33,17 +32,14 @@ export class EditappointmentsComponent implements OnInit {
       minDate: new Date()
     });
   }
-  // openModal(template: TemplateRef<any>, appointment: any) {
-  //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-  //   this.selectedAppointment = appointment;
-  //   this.selectedAppointment.date = new Date(this.selectedAppointment.date);
-  //   this.time = timeToJSON(this.selectedAppointment.time);
-  //   this.selectedAppointment.time = this.time;
-
-  //   this.userService.getDoctorsSpecialtys().subscribe((data) => {
-  //     this.docSpecialty = data;
-  //   });
-  // }
+  checkDate(date) {
+    let nowdate = new Date();
+    if (new Date(date) < nowdate) {
+      return false;
+    } else {
+      return true;
+    }
+  }
   selectedDoctorSpecialty(event: any) {
     var selectedSpe = event.target.value;
     var id;
@@ -117,12 +113,10 @@ export class EditappointmentsComponent implements OnInit {
     this.userService.updateAppointment(this.selectedAppointment).subscribe((data) => {
       this.modalRef.hide();
       let updatedDate = dateAdjustment(this.selectedAppointment.date);
-      // let updatedTime = timeAdjustment(this.selectedAppointment.time);
 
       for (let i = 0; i < this.appointments.length; i++) {
         if (this.selectedAppointment.id == this.appointments[i].id) {
           this.appointments[i].date = updatedDate;
-          // this.appointments[i].time = updatedTime;
         }
       }
     }, error => {

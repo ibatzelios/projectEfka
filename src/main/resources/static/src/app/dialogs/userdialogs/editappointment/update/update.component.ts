@@ -35,6 +35,7 @@ export class UpdateComponent implements OnInit {
     this.userService.getDoctorsSpecialtys().subscribe((data) => {
       this.docSpecialty = data;
     });
+
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-blue',
       showWeekNumbers: false,

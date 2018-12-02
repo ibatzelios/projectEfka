@@ -10,13 +10,15 @@
         <button [routerLink]="['/login']" class="btn btn-primary home-btn mx-auto d-block">Login</button>
         <button (click)="openRegisterDialog()" class="btn btn-primary home-btn mx-auto d-block">Register</button>
         <div *ngIf="alert">
-        <div *ngIf="!message">
-          <button class="btn btn-danger alert mx-auto d-block" style="color:rgb(255, 255, 255)" disabled>Registration Failed !! {{registerErrorMessage}}</button>
+          <div *ngIf="!message">
+            <button class="btn btn-danger alert mx-auto d-block" style="color:rgb(255, 255, 255)" disabled>Registration
+              Failed !! {{registerErrorMessage}}</button>
+          </div>
+          <div *ngIf="message">
+            <button class="btn btn-success alert mx-auto d-block" style="color:rgb(255, 255, 255)" disabled>Registration
+              Successful</button>
+          </div>
         </div>
-        <div *ngIf="message">
-          <button class="btn btn-success alert mx-auto d-block" style="color:rgb(255, 255, 255)" disabled>Registration Successful</button>
-        </div>
-      </div>
       </div>
     </div>
     <div id="login-cancel" class="col-md-4" class="mx-auto d-block">
