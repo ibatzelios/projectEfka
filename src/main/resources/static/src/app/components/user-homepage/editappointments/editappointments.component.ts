@@ -7,6 +7,7 @@ import { dateAdjustment } from '../../../helperFunctions/dateAdjustment';
 import { timeAdjustment } from '../../../helperFunctions/timeAdjustment';
 import { MatDialog } from '@angular/material';
 import { DeleteComponent } from 'src/app/dialogs/userdialogs/editappointment/delete/delete.component';
+import { UpdateComponent } from 'src/app/dialogs/userdialogs/editappointment/update/update.component';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class EditappointmentsComponent implements OnInit {
   appointments: any;
   docName: any;
   staticAppointments: any;
-
+  time: any;
   constructor(private userService: UserService, private modalService: BsModalService, public dialog: MatDialog) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-blue',
@@ -31,13 +32,13 @@ export class EditappointmentsComponent implements OnInit {
       minDate: new Date()
     });
   }
-  openModal(template: TemplateRef<any>, appointment: any) {
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    this.selectedAppointment = appointment;
-    this.selectedAppointment.date = new Date(this.selectedAppointment.date);
-    this.userService.getDoctorsSpecialtys().subscribe((data) => {
-      this.docSpecialty = data;
-    });
+  checkDate(date) {
+    let nowdate = new Date();
+    if (new Date(date) < nowdate) {
+      return false;
+    } else {
+      return true;
+    }
   }
   selectedDoctorSpecialty(event: any) {
     var selectedSpe = event.target.value;
@@ -66,6 +67,31 @@ export class EditappointmentsComponent implements OnInit {
     });
 
   }
+  updateAppointmentsDialog(appointment) {
+    const dialogRef = this.dialog.open(UpdateComponent, {
+      height: '900px',
+      width: '650px',
+      maxWidth: '98%',
+      maxHeight: '98%',
+      data: appointment
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.instaclose == true) {
+        this.appointments = this.staticAppointments;
+        this.staticAppointments = JSON.parse(JSON.stringify(this.appointments));
+      } else {
+        this.userService.getAllAppointments().subscribe((data) => {
+          if (Object.keys(data).length === 0) {
+            this.noResults = true;
+          }
+          this.appointments = data;
+          this.staticAppointments = JSON.parse(JSON.stringify(this.appointments));
+        });
+      }
+
+    });
+  }
   updateAppointment(updateForm: NgForm) {
     console.log(this.selectedAppointment.date instanceof Date);
     if (!(this.selectedAppointment.date instanceof Date)) {
@@ -87,12 +113,10 @@ export class EditappointmentsComponent implements OnInit {
     this.userService.updateAppointment(this.selectedAppointment).subscribe((data) => {
       this.modalRef.hide();
       let updatedDate = dateAdjustment(this.selectedAppointment.date);
-      // let updatedTime = timeAdjustment(this.selectedAppointment.time);
 
       for (let i = 0; i < this.appointments.length; i++) {
         if (this.selectedAppointment.id == this.appointments[i].id) {
           this.appointments[i].date = updatedDate;
-          // this.appointments[i].time = updatedTime;
         }
       }
     }, error => {
@@ -106,7 +130,7 @@ export class EditappointmentsComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getAllAppointments().subscribe((data) => {
-      if(Object.keys(data).length === 0 ){
+      if (Object.keys(data).length === 0) {
         this.noResults = true;
       }
       this.appointments = data;

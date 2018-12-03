@@ -59,7 +59,7 @@ export class NewappointmentdialogComponent implements OnInit {
         console.log(docid);
       }
     }
-
+console.log(appointmentForm.value.appointmentTime);
     var finalTime = timeAdjustment(appointmentForm.value.appointmentTime);
     var finalDate = dateAdjustment(appointmentForm.value.appointmentDate);
     console.log(finalTime);

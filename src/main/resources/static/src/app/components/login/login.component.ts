@@ -64,8 +64,6 @@ export class LoginComponent implements OnInit {
         this.alert = result.exists;
       } else {
         this.alert = false;
-        console.log(result.errorMessage);
-        console.log(this.registerErrorMessage);
       }
     });
   }

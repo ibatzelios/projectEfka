@@ -21,12 +21,10 @@ public class MyUserDetailsService implements UserDetailsService {
 
 
 
-
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
-
-        if(s.charAt(0)=='p') {
+        if (s.charAt(0) == 'p') {
             String username = s.substring(1, s.length());
             Patient patient = patientRepository.findByUsername(username);
 
@@ -34,7 +32,8 @@ public class MyUserDetailsService implements UserDetailsService {
                 throw new UsernameNotFoundException(username);
             }
             return new MyUserDetails(patient);
-        }else if(s.charAt(0)=='d'){
+
+        } else if (s.charAt(0) == 'd') {
             String username = s.substring(1, s.length());
             Doctor doctor = doctorRepository.findByUsername(username);
 
@@ -43,10 +42,9 @@ public class MyUserDetailsService implements UserDetailsService {
             }
             return new MyUserDetails(doctor);
 
-        }else{
+        } else {
             String username = s.substring(1, s.length());
             throw new UsernameNotFoundException(username);
         }
-
     }
 }

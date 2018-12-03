@@ -25,27 +25,15 @@ const routes: Routes = [{
 	},
 	{
 		path: 'userhomepage',
-		loadChildren: './components/user-homepage/user-homepage.module#UserhomepageModule',
+		loadChildren: './components/templates/user-template/user-template.module#UserTemplateModule',
+
 		canActivate: [UserhomepageAuthService]
 	},
-	{
-		path: 'userhomepage/edit',
-		loadChildren: './components/user-homepage/editappointments/editappointments.module#EditappointmentsModule',
-		canActivate: [UserhomepageAuthService]
-	},
+	
 	{
 		path: 'doctorhomepage',
-		loadChildren: './components/doctorhomepage/doctorhomepage.module#DoctorhomepageModule',
-		canActivate: [DoctorAuthService]
-	},
-	{
-		path: 'doctorhomepage/searchappointments/:datefrom/:dateto/:text',
-		loadChildren: './components/doctorsappointments/doctorsappointments.module#DoctorsappointmentsModule',
-		canActivate: [DoctorAuthService]
-	},
-	{
-		path: 'doctorhomepage/searchappointments',
-		loadChildren: './components/doctorsappointments/doctorsappointments.module#DoctorsappointmentsModule',
+		loadChildren: './components/templates/doctor-template/doctor-template.module#DoctorTemplateModule',
+
 		canActivate: [DoctorAuthService]
 	},
 	{

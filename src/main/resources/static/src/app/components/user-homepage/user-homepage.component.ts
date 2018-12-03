@@ -1,14 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, } from 'ngx-bootstrap';
-import { NgForm } from '@angular/forms';
-import { appointment } from '../../models/appointment';
 import { searchAppointmentModel } from '../../models/searchAppointmentModel';
-import { doctorModel } from '../../models/doctorModel';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { UserService } from 'src/app/services/user.service';
 import { dateAdjustment } from '../../helperFunctions/dateAdjustment';
-import { timeAdjustment } from '../../helperFunctions/timeAdjustment';
 import { MatDialog } from '@angular/material/dialog';
 import { NewappointmentdialogComponent } from 'src/app/dialogs/userdialogs/newappointmentdialog/newappointmentdialog.component';
 import { AlertdialogComponent } from 'src/app/dialogs/userdialogs/alertdialog/alertdialog.component';
@@ -45,13 +41,17 @@ export class UserHomepageComponent implements OnInit {
   
   openNewAppointmentDialog() {
     const dialogRef = this.dialog.open(NewappointmentdialogComponent, {
-      
+      height: '900px',
+      width: '650px',
+      maxWidth: '98%',
+      maxHeight: '98%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
         const dialogRef = this.dialog.open(AlertdialogComponent, {
           data: {
+            'color' : 'green',
             result: result
           }
         });
@@ -80,36 +80,6 @@ export class UserHomepageComponent implements OnInit {
     this.userService.getDoctorsNames(id).subscribe((data) => {
       this.docName = data;
     });
-  }
-
-  newAppointment(appointmentForm: NgForm) {
-    this.loading = true;
-    var id;
-    for (let i = 0; i < this.docName.length; i++) {
-      if (appointmentForm.value.doctorName == this.docName[i].lastName) {
-        id = this.docName[i].id;
-      }
-    }
-
-    var finalTime = timeAdjustment(appointmentForm.value.appointmentTime);
-    var finalDate = dateAdjustment(appointmentForm.value.appointmentDate);
-
-    let newAppointment: appointment = {
-      doctorId: id,
-      date: finalDate,
-      time: finalTime,
-      illness: appointmentForm.value.description,
-      comments: appointmentForm.value.remarks
-    };
-    this.userService.setNewAppointment(newAppointment).subscribe(res => {
-      this.loading = false;
-
-    }, error => {
-      this.loading = false;
-
-    });
-    appointmentForm.reset();
-    this.modalRef.hide();
   }
   searchAppointment(searchForm) {
     this.loading = true;

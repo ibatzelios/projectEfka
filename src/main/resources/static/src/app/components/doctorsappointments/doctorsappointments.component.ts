@@ -19,7 +19,7 @@ export class DoctorsappointmentsComponent implements OnInit {
   appointments: any;
   constructor(private doctorservice: DoctorService, private route: ActivatedRoute, public dialog: MatDialog) { }
 
-  seePatientsDetails(appointment){
+  seePatientsDetails(appointment) {
     const dialogRef = this.dialog.open(PatientsdetailsComponent, {
       data: appointment
     });
@@ -27,7 +27,7 @@ export class DoctorsappointmentsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-  seeAppointmentsDetails(appointment){
+  seeAppointmentsDetails(appointment) {
     const dialogRef = this.dialog.open(AppointmentdetailsComponent, {
       data: appointment
     });
@@ -38,16 +38,16 @@ export class DoctorsappointmentsComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.text = params['text']; 
+      this.text = params['text'];
       this.dateFrom = params['datefrom'];
       this.dateTo = params['dateto'];
-   });
+    });
     this.doctorservice.getFilteredAppointments(this.text, this.dateFrom, this.dateTo).subscribe((data) => {
-      if(Object.keys(data).length === 0 ){
+      if (Object.keys(data).length === 0) {
         this.noResults = true;
       }
       this.appointments = data;
-    }, error =>{
+    }, error => {
       this.noResults = true;
     });
   }

@@ -1,8 +1,6 @@
 package org.regeneration.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -38,15 +36,11 @@ public class Doctor implements User, Serializable {
 
     @ManyToOne
     @JoinColumn(name = "specialty_id")
-    //@JsonIgnoreProperties("doctor")
-    //@JsonManagedReference
     private Specialty specialty;
-
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Appointment> appointment;
-
 
     public int getId() {
         return id;
@@ -56,7 +50,6 @@ public class Doctor implements User, Serializable {
         this.id = id;
     }
 
-
     public String getLastName() {
         return lastName;
     }
@@ -64,7 +57,6 @@ public class Doctor implements User, Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -86,9 +78,7 @@ public class Doctor implements User, Serializable {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) { this.password = password; }
 
     public Specialty getSpecialty() {
         return specialty;

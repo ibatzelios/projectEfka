@@ -11,9 +11,11 @@ import java.io.IOException;
 
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
+
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
         response.getOutputStream().print("Error Message Goes Here");
         response.setStatus(403);
+
     }
 }
