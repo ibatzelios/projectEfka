@@ -14,14 +14,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
-    private final PatientRepository patientRepository;
-    private final DoctorRepository doctorRepository;
-
     @Autowired
-    public MyUserDetailsService(PatientRepository patientRepository, DoctorRepository doctorRepository) {
-        this.patientRepository = patientRepository;
-        this.doctorRepository = doctorRepository;
-    }
+    private  PatientRepository patientRepository;
+    @Autowired
+    private  DoctorRepository doctorRepository;
+
+
 
 
     @Override
